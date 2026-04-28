@@ -22,7 +22,7 @@ pip install -r requirements.txt
 
 **方式A: 环境变量（推荐）**
 ```bash
-# 妙搭API
+# DeepSeek API
 export OPENAI_API_KEY="your-api-key-here"
 export OPENAI_API_BASE="https://api.miaoda.net/v1"
 export OPENAI_MODEL="gpt-4o-mini"
