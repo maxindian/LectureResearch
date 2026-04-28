@@ -1,0 +1,131 @@
+{
+  "analysis_version": "1.0",
+  "paper_info": {
+    "title": "Directing CO2 electroreduction pathways for selective C2 product formation using single-site doped copper catalysts",
+    "authors": "Zhengyuan Li, Peng Wang, Xiang Lyu, et al.",
+    "year": 2024,
+    "journal": "Nature Energy / Nature Catalysis",
+    "doi": "待补充"
+  },
+  "reaction_steps": [
+    {
+      "step_number": 1,
+      "step_name_zh": "CO₂活化吸附",
+      "step_name_en": "CO₂ Activation and Adsorption",
+      "reaction_equation": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+      "site_structure": "Cu(100) 表面（具体涉及Cu位点，M-Cu催化剂中M = Rh, Ir, Ru, Pd, Ag, Au）",
+      "coordination_number": "未明确给出",
+      "reaction_energy": "未明确给出",
+      "activation_barrier": "未明确给出",
+      "adsorption_energy": "未明确给出",
+      "key_intermediates": ["*COOH"],
+      "notes": "文献提及C-C耦合前的*CO生成是RDS"
+    },
+    {
+      "step_number": 2,
+      "step_name_zh": "COOH还原为CO",
+      "step_name_en": "COOH Reduction to CO",
+      "reaction_equation": "*COOH + H⁺ + e⁻ → *CO + H₂O",
+      "site_structure": "Cu(100) 表面",
+      "coordination_number": "未明确给出",
+      "reaction_energy": "未明确给出",
+      "activation_barrier": "未明确给出",
+      "adsorption_energy": "CO的吸附能数据未在正文中以表格形式给出，但提及增强CO吸附有利于C-C耦合",
+      "key_intermediates": ["*CO"],
+      "notes": "Introduction部分"
+    },
+    {
+      "step_number": 3,
+      "step_name_zh": "C-C耦合（速率决定步骤RDS）",
+      "step_name_en": "C-C Coupling (Rate-Determining Step)",
+      "reaction_equation": "2*CO → *COCOH",
+      "site_structure": "Cu(100) 表面，M-Cu催化剂（M为单原子掺杂位点）",
+      "coordination_number": "未明确给出",
+      "reaction_energy": "未明确给出",
+      "activation_barrier": "未明确给出（仅提及这是RDS）",
+      "adsorption_energy": "未明确给出",
+      "key_intermediates": ["*COCOH"],
+      "notes": "C–C coupling, which is regarded as the rate-determining step (RDS)"
+    },
+    {
+      "step_number": 4,
+      "step_name_zh": "COCOH逐步质子-电子转移生成*CH₂CHO",
+      "step_name_en": "COCOH Progressive PCET to *CH₂CHO",
+      "reaction_equation": "*COCOH → [中间体1] → [中间体2] → [中间体3] → *CH₂CHO（经过四次PCET步骤）",
+      "site_structure": "Cu(100) 及 M-Cu 表面（Rh-Cu, Ir-Cu, Ru-Cu, Pd-Cu, Ag-Cu, Au-Cu）",
+      "coordination_number": "对于oxophilic M-Cu（Rh, Ir, Ru），*CH₂CHO吸附在Cu₃M位点；对于oxophobic M-Cu（Pd, Ag, Au），倾向于在纯Cu位点吸附",
+      "reaction_energy": "未明确给出各分步的自由能数据",
+      "activation_barrier": "未明确给出",
+      "adsorption_energy": "*CH₂CHO相对Cu的吸附能：Ru-Cu: -0.71 eV, Rh-Cu: -0.57 eV, Ir-Cu: -0.57 eV, Cu: 0 eV（基准）, Pd-Cu: +0.03 eV, Ag-Cu: +0.05 eV, Au-Cu: +0.06 eV",
+      "key_intermediates": ["*COCOH", "*CH₂CHO"],
+      "notes": "选择性决定中间体（SDI）"
+    },
+    {
+      "step_number": 5A,
+      "step_name_zh": "乙烯路径（C-O键断裂）",
+      "step_name_en": "Ethylene Pathway (C-O Bond Cleavage)",
+      "reaction_equation": "*CH₂CHO + H⁺ + e⁻ → C₂H₄(g) + *O",
+      "site_structure": "Cu(100) 及 M-Cu 表面，*O吸附在Cu₃M位点（oxophilic）或Cu₄位点（oxophobic）",
+      "coordination_number": "*O在Cu₄位点（纯Cu hollow site）或Cu₃M位点（掺杂原子参与）",
+      "reaction_energy": "自由能变化：Ru-Cu: -0.78 eV, Rh-Cu: 未明确给出, Ir-Cu: -0.72 eV, Cu: -0.60 eV",
+      "activation_barrier": "C-O键断裂能垒：Ru-Cu: 0.61 eV, Rh-Cu: 0.41 eV, Ir-Cu: 0.42 eV, Cu: 0.53 eV",
+      "adsorption_energy": "*O相对Cu的吸附能：Ru-Cu: -0.66 eV, Rh-Cu: 未明确给出, Ir-Cu: -0.28 eV, Cu: 0 eV（基准）, Pd-Cu: +0.03 eV, Ag-Cu: +0.05 eV, Au-Cu: +0.06 eV",
+      "key_intermediates": ["*O"],
+      "notes": "Fig. 1c-d, Fig. 4a-b"
+    },
+    {
+      "step_number": 5B,
+      "step_name_zh": "乙醇路径（C-O键保留）",
+      "step_name_en": "Ethanol Pathway (C-O Bond Preservation)",
+      "reaction_equation": "*CH₂CHO + H⁺ + e⁻ → *CH₃CHO（乙醛中间体，C-O键保留）",
+      "site_structure": "Cu(100) 及 M-Cu 表面，*CH₃CHO仍通过O原子吸附（Cu-O-C结构）",
+      "coordination_number": "未明确给出",
+      "reaction_energy": "自由能变化：Ru-Cu: -0.52 eV, Rh-Cu: -0.62 eV, Ir-Cu: -0.58 eV, Cu: -0.52 eV",
+      "activation_barrier": "未明确给出",
+      "adsorption_energy": "未明确给出",
+      "key_intermediates": ["*CH₃CHO"],
+      "notes": "Fig. 1c（C₂H₅OH pathway column）"
+    },
+    {
+      "step_number": 6,
+      "step_name_zh": "*O还原脱附",
+      "step_name_en": "*O Reduction and Desorption",
+      "reaction_equation": "*O + H⁺ + e⁻ → *OH → *OH + H⁺ + e⁻ → H₂O(l) + *",
+      "site_structure": "Cu(100) 及 M-Cu 表面",
+      "coordination_number": "同上（Cu₄或Cu₃M位点）",
+      "reaction_energy": "未明确给出",
+      "activation_barrier": "*O质子化能垒：Ru-Cu: 0.50 eV, Rh-Cu: 0.44 eV, Ir-Cu: 0.38 eV, Cu: 0.31 eV",
+      "adsorption_energy": "未明确给出*OH的单独吸附能",
+      "key_intermediates": ["*OH", "H₂O"],
+      "notes": "Rh dopant possesses an optimal oxygen affinity, balancing the activation energy barriers of C–O bond cleavage and *O protonation"
+    },
+    {
+      "step_number": 7,
+      "step_name_zh": "*CH₃CHO还原为乙醇",
+      "step_name_en": "*CH₃CHO Reduction to Ethanol",
+      "reaction_equation": "*CH₃CHO + 2H⁺ + 2e⁻ → C₂H₅OH(l) + *",
+      "site_structure": "Cu(100) 表面",
+      "coordination_number": "未明确给出",
+      "reaction_energy": "未明确给出",
+      "activation_barrier": "未明确给出",
+      "adsorption_energy": "未明确给出",
+      "key_intermediates": ["C₂H₅OH"],
+      "notes": "Fig. 1a示意图"
+    }
+  ],
+  "key_findings": {
+    "main_descriptor": "氧结合能 (Oxygen Binding Strength) 是控制C₂产物选择性的通用描述符",
+    "optimal_catalyst": "Rh-Cu",
+    "optimal_conditions": "-0.66 V vs RHE, 1 M KOH, flow cell",
+    "ethylene_fe": "61.2% (at -0.66 V)",
+    "ethanol_fe": "13.6% (at -0.66 V)",
+    "selectivity_ratio": "C₂H₄/C₂H₅OH = 4.51",
+    "partial_current_density": "j_C₂H₄ = 653 mA/cm²",
+    "stability": "35 hours at ~1000 mA/cm²"
+  },
+  "methodology": {
+    "dft_details": "VASP 5.4.4, PBE functional, PAW method, DFT-D3 correction, Cu(100) surface with 2×2 unit cell, 4-layer model",
+    "experimental_conditions": "Flow cell with 1 M KOH electrolyte, catholyte flow rate 2 ml/min, CO₂ flow rate 50 sccm, Ag/AgCl reference electrode"
+  },
+  "raw_summary": "本论文报道了一种通过单原子掺杂调控Cu表面氧亲和力来控制CO₂电催化还原产物选择性的策略。研究发现氧结合能是决定C₂产物（乙烯vs乙醇）选择性的通用描述符。强氧亲和力催化剂（Rh, Ir, Ru掺杂）促进C-O键断裂，有利于生成乙烯；弱氧亲和力催化剂（Au掺杂）保留C-O键，有利于生成乙醇。Rh-Cu具有最优的氧亲和力，在C-O键断裂和*O质子化之间取得最佳平衡，实现了61.2%的乙烯法拉第效率和4.51的乙烯/乙醇选择性比率。结合ZnO/Rh-Cu串联电极，全电池乙烯法拉第效率达到68.8%，电流密度超过1 A/cm²。"
+}
