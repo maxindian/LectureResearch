@@ -1,0 +1,3653 @@
+{
+  "schema_version": "1.0",
+  "name": "CO2RR Reaction Pathway Evaluation Set",
+  "description": "20-sample benchmark for structured extraction of electrochemical CO2/CO reduction pathways from annotated DOCX files.",
+  "created_at": "2026-05-28T16:07:11.832873+00:00",
+  "sample_count": 20,
+  "valid_sample_count": 19,
+  "samples": [
+    {
+      "id": "co2rr_eval_001",
+      "folder_id": 1,
+      "status": "ok",
+      "source": {
+        "folder": "1",
+        "docx_path": "1/新建 Microsoft Word 文档.docx",
+        "pdf_path": "1/Ting 等 - 2020 - Enhancing CO2 Electroreduction to Ethanol on Copper–Silver Composites by Opening an Alter.pdf",
+        "docx_sha256": "1ccc0a78633fe6e0add3572576a6842ba2d95ae45a4d5bf5192bb4c5df6b4596",
+        "raw_text_sha256": "3356c0b58db017f2e0f8686e366ad80ce887eab70c6d5bce2643972acaae920d"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n完整反应路径第一步：CO₂活化吸附• 反应：CO₂(g) → *COOH（无直接质子-电子转移描述）• 位点结构： Ag位点生成*CO*CO迁移至Cu边界（迁移能垒：0.17 eV• 能量数据：*CO在Ag位点的吸附能：未明确*CO迁移至Cu(111)的自由能下降：-0.39 eV第二步：COOH还原为CO• 反应：COOH → CO（未明确反应式）• 位点结构：Ag位点主导CO生成• 关键功能：Ag提供高CO覆盖度第三步：C-C耦合（RDS替代路径）• 反应：**CO + CHx → CHxCO（x=1,2）而非传统CO-*CO耦合• 位点结构：CuAg边界• 机制： Langmuir-Hinshelwood耦合（*CH+*CO优先）能垒对比： *CH+*CO：0.70 eV*CH₂+*CO：0.71 eV*CO-CO二聚：禁止性高能垒• 能量优势：比传统CO二聚路径低~0.37 eV第四步：CHxCO还原至CH₂CHO/乙醛中间体• 反应：*CHCO → … → *CH₃CHO（无详细子步骤• 位点结构：Cu(111)• 关键中间体：乙醛（*CH₃CHO）为乙醇前驱体乙醇生成路径• 反应：*CH₃CHO → C₂H₅OH• 位点结构：Cu位点• 实验验证：乙醛电解仅生成乙醇（无乙烯• 选择性：CuAg边界100%导向乙醇\n",
+        "excerpt_chars": 571
+      },
+      "ground_truth": {
+        "paper_title": "Ting 等 - 2020 - Enhancing CO2 Electroreduction to Ethanol on Copper–Silver Composites by Opening an Alter.pdf",
+        "catalyst_system": {
+          "materials": [
+            "Cu-Ag composite"
+          ],
+          "facets": [
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "Cu-Ag composite"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "第一步：CO₂活化吸附",
+              "reaction": "CO₂(g) → *COOH（无直接质子-电子转移描述）",
+              "site_structure": "Ag位点生成*CO*CO迁移至Cu边界（迁移",
+              "energetics": [
+                {
+                  "value": "0.17",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.39",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "第一步：CO₂活化吸附• 反应：CO₂(g) → *COOH（无直接质子-电子转移描述）• 位点结构： Ag位点生成*CO*CO迁移至Cu边界（迁移能垒：0.17 eV• 能量数据：*CO在Ag位点的吸附能：未明确*CO迁移至Cu(111)的自由能下降：-0.39 eV"
+            },
+            {
+              "step_index": 2,
+              "title": "第二步：COOH还原为CO",
+              "reaction": "COOH → CO（未明确反应式）",
+              "site_structure": "Ag位点主导CO生成",
+              "energetics": [],
+              "notes": "第二步：COOH还原为CO• 反应：COOH → CO（未明确反应式）• 位点结构：Ag位点主导CO生成• 关键功能：Ag提供高CO覆盖度"
+            },
+            {
+              "step_index": 3,
+              "title": "第三步：C-C耦合（RDS替代路径）",
+              "reaction": "**CO + CHx → CHxCO（x=1,2）而非传统CO-*CO耦合",
+              "site_structure": "CuAg边界",
+              "energetics": [
+                {
+                  "value": "0.70",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.71",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.37",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "第三步：C-C耦合（RDS替代路径）• 反应：**CO + CHx → CHxCO（x=1,2）而非传统CO-*CO耦合• 位点结构：CuAg边界• 机制： Langmuir-Hinshelwood耦合（*CH+*CO优先）能垒对比： *CH+*CO：0.70 eV*CH₂+*CO：0.71 eV*CO-CO二聚：禁止性高能垒• 能量优势：比传统CO二聚路径低~0.37 eV"
+            },
+            {
+              "step_index": 4,
+              "title": "第四步：CHxCO还原至CH₂CHO/乙醛中间体",
+              "reaction": "*CHCO → … → *CH₃CHO（无详细子步骤",
+              "site_structure": "Cu(111)",
+              "energetics": [],
+              "notes": "第四步：CHxCO还原至CH₂CHO/乙醛中间体• 反应：*CHCO → … → *CH₃CHO（无详细子步骤• 位点结构：Cu(111)• 关键中间体：乙醛（*CH₃CHO）为乙醇前驱体乙醇生成路径• 反应：*CH₃CHO → C₂H₅OH• 位点结构：Cu位点• 实验验证：乙醛电解仅生成乙醇（无乙烯• 选择性：CuAg边界100%导向乙醇"
+            }
+          ],
+          "step_count": 4
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CO",
+          "C₂H₅OH",
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.17",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.39",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.70",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.71",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.37",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "RDS替代路径）• 反应：**CO + CHx → CHxCO（x=1,2）而非传统CO-*CO耦合• 位点结构：CuAg边界• 机制： Langmuir-Hinshelwood耦合（*CH+*CO优先）能垒对比： *CH+*CO：0.70 eV",
+            "unit": "rds_description",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "3356c0b58db017f2e0f8686e366ad80ce887eab70c6d5bce2643972acaae920d",
+        "step_count": 4,
+        "product_count": 4
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "C₂H₅OH",
+              "乙烯",
+              "乙醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 4,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.17"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-0.39"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.70"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.71"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.37"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_002",
+      "folder_id": 2,
+      "status": "ok",
+      "source": {
+        "folder": "2",
+        "docx_path": "2/新建 Microsoft Word 文档.docx",
+        "pdf_path": "2/Zhang 等 - 2024 - Altering the CO2 Electroreduction Pathways Towards C1 or C2+ Produc.pdf",
+        "docx_sha256": "efee64cd5e0625ff5f1989bb38a097cb95fffff698280aacaac9ed998f1aea07",
+        "raw_text_sha256": "c9895216385e9e1c26e24c4f6d1f3ca816f126bc69913e5f1a58dbeb6708b493"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n催化剂材料C₄O₄-Cu（方酸铜配位聚合物）C₆O₆-Cu（环己六酮铜配位聚合物）晶面：Cu(111) 表面（经还原后形成的纳米颗粒主要暴露 (111) 晶面）完整反应路径第一步：CO₂活化吸附• 反应：CO₂(g) + * + H⁺ + e⁻ → *COOH• 位点结构： C₄O₄-Cu：金属铜位点（有机基质修饰）C₆O₆-Cu：金属铜位点（有机基质修饰）• 能量数据：反应能：未提供反应能垒：未提供*COOH吸附能：未提供• 出处：未直接说明（路径默认包含此步）。第二步：COOH还原为CO• 反应：*COOH → *CO + H₂O• 位点结构：同上• 能量数据： *CO在C₄O₄-Cu吸附能：-0.82 eV（弱吸附）*CO在C₆O₆-Cu吸附能：-1.09 eV（强吸附）• 出处：DFT计算确认吸附能力差异。第三步：C-C耦合（RDS）• 反应：*2*CO → COCHO（文献中明确为*COCHO中间体）• 位点结构：Cu(111) 表面• 能量数据： C₄O₄-Cu耦合能垒：0.45 eV（低能垒）C₆O₆-Cu耦合能垒：2.77 eV（高能垒，几乎禁止）• 出处：原位ATR-IR检测到*COCHO中间体；DFT计算耦合能垒。*第四步：COCHO质子化生成C₂⁺前驱体• 反应：*COCHO → … → C₂⁺前驱体（未明确中间体细节）• 位点结构：Cu(111) 表面• 能量数据： *COCHO在C₄O₄-Cu吸附能：-3.09 eV（强吸附）COCHO在C₆O₆-Cu吸附能：-1.14 eV（弱吸附）• 出处：原位ATR-IR检测到COCHO信号（C₄O₄-Cu强度更高）。产物分叉路径• C₂⁺路径（C₄O₄-Cu主导）： 最终产物：乙烯（C₂H₄）、乙醇（C₂H₅OH）、正丙醇（C₃H₇OH）总C₂⁺法拉第效率：65.8%（1.0 V vs. RHE）• C₁路径（C₆O₆-Cu主导）：最终产物：CO, HCOOH, CH₄总C₁法拉第效率：63.7%（0.6 V vs. RHE）• 关键控制因素：C₄O₄-Cu界面Cu-O键较弱 → 弱*CO吸附 → 促进C-C耦合C₆O₆-Cu界面Cu-O键较强 → 强*CO吸附 → 抑制C-C耦合，倾向C₁路径\n",
+        "excerpt_chars": 947
+      },
+      "ground_truth": {
+        "paper_title": "Zhang 等 - 2024 - Altering the CO2 Electroreduction Pathways Towards C1 or C2+ Produc.pdf",
+        "catalyst_system": {
+          "materials": [
+            "C₄O₄-Cu（方酸铜配位聚合物）C₆O₆-Cu（环己六酮铜配位聚合物）晶面：Cu(111) 表面（经还原后形成的纳米颗粒主要暴露 (111) 晶面）"
+          ],
+          "facets": [
+            "(111)",
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "C₄O₄-Cu（方酸铜配位聚合物）C₆O₆-Cu（环己六酮铜配位聚合物）晶面：Cu(111) 表面（经还原后形成的纳米颗粒主要暴露 (111) 晶面）"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "催化剂材料C₄O₄-Cu（方酸铜配位聚合物）C₆O₆-Cu（环己六酮铜配位聚合物",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "催化剂材料C₄O₄-Cu（方酸铜配位聚合物）C₆O₆-Cu（环己六酮铜配位聚合物）晶面：Cu(111) 表面（经还原后形成的纳米颗粒主要暴露 (111) 晶面）完整反应路径"
+            },
+            {
+              "step_index": 2,
+              "title": "第一步：CO₂活化吸附",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+              "site_structure": "C₄O₄-Cu：金属铜位点（有机基质修饰）C₆O₆-Cu：金属铜位点（有机基质修饰）",
+              "energetics": [],
+              "notes": "第一步：CO₂活化吸附• 反应：CO₂(g) + * + H⁺ + e⁻ → *COOH• 位点结构： C₄O₄-Cu：金属铜位点（有机基质修饰）C₆O₆-Cu：金属铜位点（有机基质修饰）• 能量数据：反应能：未提供反应能垒：未提供*COOH吸附能：未提供• 出处：未直接说明（路径默认包含此步）。"
+            },
+            {
+              "step_index": 3,
+              "title": "第二步：COOH还原为CO",
+              "reaction": "*COOH → *CO + H₂O",
+              "site_structure": "",
+              "energetics": [
+                {
+                  "value": "-0.82",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-1.09",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "第二步：COOH还原为CO• 反应：*COOH → *CO + H₂O• 位点结构：同上• 能量数据： *CO在C₄O₄-Cu吸附能：-0.82 eV（弱吸附）*CO在C₆O₆-Cu吸附能：-1.09 eV（强吸附）• 出处：DFT计算确认吸附能力差异。"
+            },
+            {
+              "step_index": 4,
+              "title": "第三步：C-C耦合（RDS）",
+              "reaction": "*2*CO → COCHO（文献中明确为*COCHO中间体）",
+              "site_structure": "Cu(111) 表面",
+              "energetics": [
+                {
+                  "value": "0.45",
+                  "unit": "eV"
+                },
+                {
+                  "value": "2.77",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "第三步：C-C耦合（RDS）• 反应：*2*CO → COCHO（文献中明确为*COCHO中间体）• 位点结构：Cu(111) 表面• 能量数据： C₄O₄-Cu耦合能垒：0.45 eV（低能垒）C₆O₆-Cu耦合能垒：2.77 eV（高能垒，几乎禁止）• 出处：原位ATR-IR检测到*COCHO中间体；DFT计算耦合能垒。*"
+            },
+            {
+              "step_index": 5,
+              "title": "第四步：COCHO质子化生成C₂⁺前驱体",
+              "reaction": "*COCHO → … → C₂⁺前驱体（未明确中间体细节）",
+              "site_structure": "Cu(111) 表面",
+              "energetics": [
+                {
+                  "value": "-3.09",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-1.14",
+                  "unit": "eV"
+                },
+                {
+                  "value": "1.0",
+                  "unit": "V_vs_RHE"
+                },
+                {
+                  "value": "0.6",
+                  "unit": "V_vs_RHE"
+                },
+                {
+                  "value": "65.8",
+                  "unit": "FE_percent"
+                },
+                {
+                  "value": "63.7",
+                  "unit": "FE_percent"
+                }
+              ],
+              "notes": "第四步：COCHO质子化生成C₂⁺前驱体• 反应：*COCHO → … → C₂⁺前驱体（未明确中间体细节）• 位点结构：Cu(111) 表面• 能量数据： *COCHO在C₄O₄-Cu吸附能：-3.09 eV（强吸附）COCHO在C₆O₆-Cu吸附能：-1.14 eV（弱吸附）• 出处：原位ATR-IR检测到COCHO信号（C₄O₄-Cu强度更高）。产物分叉路径• C₂⁺路径（C₄O₄-Cu主导）： 最终产物：乙烯（C₂H₄）、乙醇（C₂H₅OH）、正丙醇（C₃H₇OH）总C₂⁺法拉第效率：65.8%（1.0 V vs. RHE）• C₁路径（C₆O₆-Cu主导）：最终产物：CO, HCOOH, CH₄总C₁法拉第效率：63.7%（0.6 V vs. RHE）• 关键控制因素：C₄O₄-Cu界面Cu-O键较弱 → 弱*CO吸附 → 促进C-C耦合C₆O₆-Cu界面Cu-O键较强 → 强*CO吸附 → 抑制C-C耦合，倾向C₁路径"
+            }
+          ],
+          "step_count": 5
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CH₄",
+          "CO",
+          "C₂H₄",
+          "C₂H₅OH",
+          "C₃H₇OH",
+          "HCOOH",
+          "乙烯",
+          "乙醇",
+          "正丙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "-0.82",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-1.09",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.45",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "2.77",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-3.09",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-1.14",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "1.0",
+            "unit": "V_vs_RHE",
+            "context": ""
+          },
+          {
+            "value": "0.6",
+            "unit": "V_vs_RHE",
+            "context": ""
+          },
+          {
+            "value": "65.8",
+            "unit": "FE_percent",
+            "context": ""
+          },
+          {
+            "value": "63.7",
+            "unit": "FE_percent",
+            "context": ""
+          },
+          {
+            "value": "RDS）• 反应：*2*CO → COCHO（文献中明确为*COCHO中间体）• 位点结构：Cu(111) 表面• 能量数据： C₄O₄-Cu耦合能垒：0.45 eV（低能垒）C₆O₆-Cu耦合能垒：2.77 eV（高能垒，几乎禁止）• 出处：原",
+            "unit": "rds_description",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "c9895216385e9e1c26e24c4f6d1f3ca816f126bc69913e5f1a58dbeb6708b493",
+        "step_count": 5,
+        "product_count": 9
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CH₄",
+              "CO",
+              "C₂H₄",
+              "C₂H₅OH",
+              "C₃H₇OH",
+              "HCOOH",
+              "乙烯",
+              "乙醇",
+              "正丙醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 5,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "(111)"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-0.82"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-1.09"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.45"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "2.77"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-3.09"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_003",
+      "folder_id": 3,
+      "status": "ok",
+      "source": {
+        "folder": "3",
+        "docx_path": "3/新建 Microsoft Word 文档.docx",
+        "pdf_path": "3/Wang 等 - 2024 - Manipulating C-C coupling pathway in electrochemical CO2 reduction for selective ethylene and ethano.pdf",
+        "docx_sha256": "ff63b53ef6e80852f1e7db0b0340ff50a2d178c57ef066e5688d1d21d2ede376",
+        "raw_text_sha256": "505b8a920eed8875d57481fe3a630d7c8acc63145e1a1df05bbe54dca89d0419"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n催化剂材料Ag₁Cu NW（铜纳米线修饰单原子银）AgCu NW（铜纳米线修饰银纳米颗粒）晶面：未明确指定具体晶面，但活性位点为 相邻铜原子对（paired Cu atoms adjacent to single Ag atoms）1617完整反应路径1. 第一步：CO₂活化吸附反应：CO₂(g) + * + H⁺ + e⁻ → *COOH（未提供反应式细节）位点结构类型： Ag₁Cu NW：单原子Ag位点（促进水解离供H⁺）15AgCu NW：Ag纳米颗粒位点（促进*CO生成）16配位数：未提供反应能/能垒/吸附能：未提供数值1618出处：默认路径包含，无直接数据 16182. 第二步：COOH还原为CO反应：*COOH + H⁺ + e⁻ → *CO + H₂O（未提供反应式细节）位点结构类型： Ag₁Cu NW：单原子Ag位点AgCu NW：Ag纳米颗粒位点配位数：未提供反应能/能垒：未提供数值*CO吸附能差异： AgCu NW：CO覆盖度高（利于CO-*CO耦合）10Ag₁Cu NW：CO覆盖度较低（转向CHO生成）17出处：Operando ATR-SEIRAS检测到*CObridge/*COatop信号 103. 第三步：C-C耦合（RDS）反应（分两条路径）： AgCu NW（乙烯路径）：*2*CO → COCO（对称耦合）1618Ag₁Cu NW（乙醇路径）：***CO + CHO → COCHO（不对称耦合）1117位点结构类型： Ag₁Cu NW：单Ag原子相邻的成对Cu位点（HO-Ag₁-Cu-Cu）17AgCu NW：纯Cu位点配位数：未提供反应能垒： CO-CHO耦合（Ag₁Cu NW）：**显著低于CO-CO耦合（低~0.37 eV）18理论计算支持不对称耦合路径 [Fig. 5d]关键证据： Operando ATR-SEIRAS检测到 *COCO（AgCu NW, 1561 cm⁻¹）和 *COCHO（Ag₁Cu NW, 1400 cm⁻¹）1011出处：同位素标记实验确认乙醇中的-CH₂OH来自*HCHO 114. 第四步：中间体转化（分叉路径）乙醇路径（Ag₁Cu NW）： 反应：*COCHO → … → C₂H₅OH（未明确中间体）位点结构：HO-Ag₁-Cu-Cu位点 17乙烯路径（AgCu NW）： 反应：*COCO → … → C₂H₄（未明确中间体）配位数/反应能/能垒：未提供数值出处：产物分析（图2b, c）795. 分叉路径的能量调控机制Ag₁Cu NW（乙醇路径）： 单原子Ag促进 H₂O解离（能垒降低），释放H⁺生成*CHO 15*CO-*CHO耦合能垒低 → 乙醇选择性↑（FE=56.3%）17AgCu NW（乙烯路径）： Ag纳米颗粒增加 CO覆盖度 → 促进CO-*CO耦合 → 乙烯选择性↑（FE=54.9%）16选择性数据： 乙醇/乙烯比率：AgCu NW = 0.41 → Ag₁Cu NW = 4.26 [Fig. 2b]电流密度：乙醇路径达 172.8 mA cm⁻²（Ag₁Cu NW）7\n",
+        "excerpt_chars": 1300
+      },
+      "ground_truth": {
+        "paper_title": "Wang 等 - 2024 - Manipulating C-C coupling pathway in electrochemical CO2 reduction for selective ethylene and ethano.pdf",
+        "catalyst_system": {
+          "materials": [
+            "Ag₁Cu NW（铜纳米线修饰单原子银）AgCu NW（铜纳米线修饰银纳米颗粒）晶面：未明确指定具体晶面",
+            "但活性位点为 相邻铜原子对（paired Cu atoms adjacent to single Ag atoms）1617"
+          ],
+          "facets": [],
+          "active_sites": [],
+          "raw": "Ag₁Cu NW（铜纳米线修饰单原子银）AgCu NW（铜纳米线修饰银纳米颗粒）晶面：未明确指定具体晶面，但活性位点为 相邻铜原子对（paired Cu atoms adjacent to single Ag atoms）1617"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "催化剂材料Ag₁Cu NW（铜纳米线修饰单原子银）AgCu NW（铜纳米线修饰银",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "催化剂材料Ag₁Cu NW（铜纳米线修饰单原子银）AgCu NW（铜纳米线修饰银纳米颗粒）晶面：未明确指定具体晶面，但活性位点为 相邻铜原子对（paired Cu atoms adjacent to single Ag atoms）1617完整反应路径1."
+            },
+            {
+              "step_index": 2,
+              "title": "第一步：CO₂活化吸附反应：CO₂(g) + * + H⁺ + e⁻ → *COOH（未提供反应式细节）位点结构类型： Ag₁Cu NW：单原子Ag位点（促进水",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH（未提供反应式细节）",
+              "site_structure": "Ag₁Cu NW：单原子Ag位点（促进水解离供H⁺）15AgCu NW：Ag纳米颗粒位点（促进*CO生成）16配位数：未提供",
+              "energetics": [],
+              "notes": "第一步：CO₂活化吸附反应：CO₂(g) + * + H⁺ + e⁻ → *COOH（未提供反应式细节）位点结构类型： Ag₁Cu NW：单原子Ag位点（促进水解离供H⁺）15AgCu NW：Ag纳米颗粒位点（促进*CO生成）16配位数：未提供反应能/能垒/吸附能：未提供数值1618出处：默认路径包含，无直接数据 16182."
+            },
+            {
+              "step_index": 3,
+              "title": "第二步：COOH还原为CO反应：*COOH + H⁺ + e⁻ → *CO + H₂O（未提供反应式细节）位点结构类型： Ag₁Cu NW：单原子Ag位点AgC",
+              "reaction": "*COOH + H⁺ + e⁻ → *CO + H₂O（未提供反应式细节）",
+              "site_structure": "Ag₁Cu NW：单原子Ag位点AgCu NW：Ag纳米颗粒位点配位数：未提供",
+              "energetics": [],
+              "notes": "第二步：COOH还原为CO反应：*COOH + H⁺ + e⁻ → *CO + H₂O（未提供反应式细节）位点结构类型： Ag₁Cu NW：单原子Ag位点AgCu NW：Ag纳米颗粒位点配位数：未提供反应能/能垒：未提供数值*CO吸附能差异： AgCu NW：CO覆盖度高（利于CO-*CO耦合）10Ag₁Cu NW：CO覆盖度较低（转向CHO生成）17出处：Operando ATR-SEIRAS检测到*CObridge/*COatop信号 103."
+            },
+            {
+              "step_index": 4,
+              "title": "第三步：C-C耦合（RDS）反应（分两条路径）： AgCu NW（乙烯路径）：*2*CO → COCO（对称耦合）1618Ag₁Cu NW（乙醇路径）：***C",
+              "reaction": "",
+              "site_structure": "Ag₁Cu NW：单Ag原子相邻的成对Cu位点（HO-Ag₁-Cu-Cu）17AgCu NW：纯Cu位点配位数：未提供",
+              "energetics": [
+                {
+                  "value": "0.37",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "第三步：C-C耦合（RDS）反应（分两条路径）： AgCu NW（乙烯路径）：*2*CO → COCO（对称耦合）1618Ag₁Cu NW（乙醇路径）：***CO + CHO → COCHO（不对称耦合）1117位点结构类型： Ag₁Cu NW：单Ag原子相邻的成对Cu位点（HO-Ag₁-Cu-Cu）17AgCu NW：纯Cu位点配位数：未提供反应能垒： CO-CHO耦合（Ag₁Cu NW）：**显著低于CO-CO耦合（低~0.37 eV）18理论计算支持不对称耦合路径 [Fig. 5d]关键证据： Operando ATR-SEIRAS检测到 *COCO（AgCu NW, 1561 cm⁻¹）和 *COCHO（Ag₁Cu NW, 1400 cm⁻¹）1011出处：同位素标记实验确认乙醇中的-CH₂OH来自*HCHO 114."
+            },
+            {
+              "step_index": 5,
+              "title": "第四步：中间体转化（分叉路径）乙醇路径（Ag₁Cu NW）： 反应：*COCHO → … → C₂H₅OH（未明确中间体）位点结构：HO-Ag₁-Cu-Cu位点",
+              "reaction": "*COCHO → … → C₂H₅OH（未明确中间体）",
+              "site_structure": "HO-Ag₁-Cu-Cu位点 17乙烯路径（AgCu NW）：",
+              "energetics": [],
+              "notes": "第四步：中间体转化（分叉路径）乙醇路径（Ag₁Cu NW）： 反应：*COCHO → … → C₂H₅OH（未明确中间体）位点结构：HO-Ag₁-Cu-Cu位点 17乙烯路径（AgCu NW）： 反应：*COCO → … → C₂H₄（未明确中间体）配位数/反应能/能垒：未提供数值出处：产物分析（图2b, c）"
+            },
+            {
+              "step_index": 6,
+              "title": "5. 分叉路径的能量调控机制Ag₁Cu NW（乙醇路径）： 单原子Ag促进 H₂O解离",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [
+                {
+                  "value": "56.3",
+                  "unit": "FE_percent"
+                },
+                {
+                  "value": "54.9",
+                  "unit": "FE_percent"
+                },
+                {
+                  "value": "172.8",
+                  "unit": "current_density_mA_cm2"
+                }
+              ],
+              "notes": "5. 分叉路径的能量调控机制Ag₁Cu NW（乙醇路径）： 单原子Ag促进 H₂O解离（能垒降低），释放H⁺生成*CHO 15*CO-*CHO耦合能垒低 → 乙醇选择性↑（FE=56.3%）17AgCu NW（乙烯路径）： Ag纳米颗粒增加 CO覆盖度 → 促进CO-*CO耦合 → 乙烯选择性↑（FE=54.9%）16选择性数据： 乙醇/乙烯比率：AgCu NW = 0.41 → Ag₁Cu NW = 4.26 [Fig. 2b]电流密度：乙醇路径达 172.8 mA cm⁻²（Ag₁Cu NW）7"
+            }
+          ],
+          "step_count": 6
+        },
+        "branching_paths": [
+          {
+            "label": "分叉",
+            "description": "分叉路径）乙醇路径（Ag₁Cu NW）： 反应：*COCHO → … → C₂H₅OH（未明确中间体）位点结构：HO-Ag₁-Cu-Cu位点 17乙烯路径（AgCu NW）： 反应：*COCO → … → C₂H₄（未明确中间体）配位数/反应能/能垒：未提供数值出处：产物分析（图2b, c）795. 分叉路径的能量调控机制Ag₁Cu NW（乙醇路径）： 单原子Ag促进 H₂O解离（能垒降低），释放H⁺"
+          }
+        ],
+        "major_products": [
+          "CO",
+          "C₂H₄",
+          "C₂H₅OH",
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.37",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "56.3",
+            "unit": "FE_percent",
+            "context": ""
+          },
+          {
+            "value": "54.9",
+            "unit": "FE_percent",
+            "context": ""
+          },
+          {
+            "value": "172.8",
+            "unit": "current_density_mA_cm2",
+            "context": ""
+          },
+          {
+            "value": "RDS）反应（分两条路径）： AgCu NW（乙烯路径）：*2*CO → COCO（对称耦合）1618Ag₁Cu NW（乙醇路径）：***CO + CHO → COCHO（不对称耦合）1117位点结构类型： Ag₁Cu NW：单Ag原子相邻的成对",
+            "unit": "rds_description",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "505b8a920eed8875d57481fe3a630d7c8acc63145e1a1df05bbe54dca89d0419",
+        "step_count": 6,
+        "product_count": 5
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "C₂H₄",
+              "C₂H₅OH",
+              "乙烯",
+              "乙醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 6,
+            "tolerance": 2
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.37"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_004",
+      "folder_id": 4,
+      "status": "ok",
+      "source": {
+        "folder": "4",
+        "docx_path": "4/新建 Microsoft Word 文档.docx",
+        "pdf_path": "4/Karamad 等 - 2015 - Mechanistic Pathway in the Electrochemical Reduction of CO2 on RuO2.pdf",
+        "docx_sha256": "04b0564e98372f57b4321314388b1606b10eca31807cde182a9bd8686d164a8b",
+        "raw_text_sha256": "f5477929def3ae0b11fb98a204ac582d79332b19def95e24c0d6f43f3f46b855"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n核心研究对象催化剂：RuO₂(110) 晶面对比体系：Cu(211) 表面（催化路径对比）方法：密度泛函理论（DFT）+ 计算氢电极（CHE）模型关键发现表面稳定性与覆盖度调控 RuO₂(110) 在还原电位下部分还原，CO覆盖层是热力学稳定状态。CO覆盖度分两类： 0.25 ML CO（低覆盖）*：形成需电位 ≤ -0.02 V vs RHE。0.50 ML CO（高覆盖）*：形成需电位 ≤ -0.41 V vs RHE。覆盖度调控可改变催化活性与选择性。CO₂还原路径 产物以甲醇（CH₃OH）、甲烷（CH₄）和甲酸（HCOOH）为主。核心路径：CO₂ → 甲酸（HCOOH）* → 进一步还原为CH₃OH/CH₄。与Cu催化剂本质差异： Cu：烃类经 CO*路径 生成（高过电位 ~1 V）RuO₂：碳氢产物经 甲酸路径 生成（低过电位）。覆盖度对反应步骤的影响 0.25 ML CO（低覆盖）时*： 速控步骤：OCHO*（甲酸盐）→ HCOOH*（甲酸），需电位 -0.43 V vs RHE。0.50 ML CO（高覆盖）时*： 速控步骤：HCOOH* → H₂COOH*（质子化甲酸），需电位 -0.25 V vs RHE。CO覆盖升高抑制CO生成（COOH*形成吸热 0.7 eV）。选择性调控机制 甲酸质子化后生成CH₃O*，分叉为： 甲醇路径：CH₃O* → CH₃OH（热力学有利）甲烷路径：CH₃O* → CH₄实验观测：甲醇法拉第效率 > 甲烷（与热力学预测一致）。\n",
+        "excerpt_chars": 647
+      },
+      "ground_truth": {
+        "paper_title": "Karamad 等 - 2015 - Mechanistic Pathway in the Electrochemical Reduction of CO2 on RuO2.pdf",
+        "catalyst_system": {
+          "materials": [
+            "RuO₂(110) 晶面对比体系：Cu(211) 表面（催化"
+          ],
+          "facets": [
+            "(110)",
+            "Cu(211)"
+          ],
+          "active_sites": [],
+          "raw": "RuO₂(110) 晶面对比体系：Cu(211) 表面（催化"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "核心研究对象催化剂：RuO₂(110) 晶面对比体系：Cu(211) 表面（催化",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [
+                {
+                  "value": "0.7",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.02",
+                  "unit": "V_vs_RHE"
+                },
+                {
+                  "value": "-0.41",
+                  "unit": "V_vs_RHE"
+                },
+                {
+                  "value": "-0.43",
+                  "unit": "V_vs_RHE"
+                },
+                {
+                  "value": "-0.25",
+                  "unit": "V_vs_RHE"
+                }
+              ],
+              "notes": "核心研究对象催化剂：RuO₂(110) 晶面对比体系：Cu(211) 表面（催化路径对比）方法：密度泛函理论（DFT）+ 计算氢电极（CHE）模型关键发现表面稳定性与覆盖度调控 RuO₂(110) 在还原电位下部分还原，CO覆盖层是热力学稳定状态。CO覆盖度分两类： 0.25 ML CO（低覆盖）*：形成需电位 ≤ -0.02 V vs RHE。0.50 ML CO（高覆盖）*：形成需电位 ≤ -0.41 V vs RHE。覆盖度调控可改变催化活性与选择性。CO₂还原路径 产物以甲醇（CH₃OH）、甲烷（CH₄）和甲酸（HCOOH）为主。核心路径：CO₂ → 甲酸（HCOOH）* → 进一步还原为CH₃OH/CH₄。与Cu催化剂本质差异： Cu：烃类经 CO*路径 生成（高过电位 ~1 V）RuO₂：碳氢产物经 甲酸路径 生成（低过电位）。覆盖度对反应步骤的影响 0.25 ML CO（低覆盖）时*： 速控步骤：OCHO*（甲酸盐）→ HCOOH*（甲酸），需电位 -0.43 V vs RHE。0.50 ML CO（高覆盖）时*： 速控步骤：HCOOH* → H₂COOH*（质子化甲酸），需电位 -0.25 V vs RHE。CO覆盖升高抑制CO生成（COOH*形成吸热 0.7 eV）。选择性调控机制 甲酸质子化后生成CH₃O*，分叉为： 甲醇路径：CH₃O* → CH₃OH（热力学有利）甲烷路径：CH₃O* → CH₄实验观测：甲醇法拉第效率 > 甲烷（与热力学预测一致）。"
+            }
+          ],
+          "step_count": 1
+        },
+        "branching_paths": [
+          {
+            "label": "路径",
+            "description": "CO₂ → 甲酸（HCOOH）* → 进一步还原为CH₃OH/CH₄。与Cu催化剂本质差异： Cu：烃类经 CO*路径 生成（高过电位 ~1 V）RuO₂：碳氢产物经 甲酸路径 生成（低过电位）。覆盖度对反应步骤的影响 0.25 ML CO（低覆盖）时*： 速控步骤：OCHO*（甲酸盐）→ HCOOH*（甲酸），需电位 -0.43 V vs RHE。0.50 ML CO（高覆盖）时*： 速控步骤：HCOOH* → H₂COOH*（质子化甲酸），需电位 -0.25 V vs RHE。CO覆盖升高抑制CO生成（COOH*形成吸热 0.7 eV）。选择性调控机制 甲酸质子化后生成CH₃O*，分叉为："
+          },
+          {
+            "label": "路径",
+            "description": "CH₃O* → CH₃OH（热力学有利）甲烷路径：CH₃O* → CH₄实验观测：甲醇法拉第效率 > 甲烷（与热力学预测一致）。"
+          },
+          {
+            "label": "分叉",
+            "description": "分叉为： 甲醇路径：CH₃O* → CH₃OH（热力学有利）甲烷路径：CH₃O* → CH₄实验观测：甲醇法拉第效率 > 甲烷（与热力学预测一致）。"
+          }
+        ],
+        "major_products": [
+          "CH₃OH",
+          "CH₄",
+          "CO",
+          "HCOOH",
+          "甲烷",
+          "甲酸",
+          "甲醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.7",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.02",
+            "unit": "V_vs_RHE",
+            "context": ""
+          },
+          {
+            "value": "-0.41",
+            "unit": "V_vs_RHE",
+            "context": ""
+          },
+          {
+            "value": "-0.43",
+            "unit": "V_vs_RHE",
+            "context": ""
+          },
+          {
+            "value": "-0.25",
+            "unit": "V_vs_RHE",
+            "context": ""
+          },
+          {
+            "value": "速控步骤：OCHO*（甲酸盐）→ HCOOH*（甲酸），需电位 -0.43 V vs RHE",
+            "unit": "rds_description",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "f5477929def3ae0b11fb98a204ac582d79332b19def95e24c0d6f43f3f46b855",
+        "step_count": 1,
+        "product_count": 7
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CH₃OH",
+              "CH₄",
+              "CO",
+              "HCOOH",
+              "甲烷",
+              "甲酸",
+              "甲醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 1,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_(110)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "(110)"
+          },
+          {
+            "id": "facet_Cu(211)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(211)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.7"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_005",
+      "folder_id": 5,
+      "status": "ok",
+      "source": {
+        "folder": "5",
+        "docx_path": "5/新建 Microsoft Word 文档.docx",
+        "pdf_path": "5/Hu 等 - 2025 - Reaction Pathway Regulation for Gaseous and Liquid Products of Electrocatalytic CO2 Reduc.pdf",
+        "docx_sha256": "dee35db6125bdc1b25022d008793ad3e115c5953d6e3e836cea206d627ab7356",
+        "raw_text_sha256": "df05bd3aad350c47d9ecd1dff523814567219c8830ce91c26d452e7e7ff960be"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n催化剂材料与晶面催化剂：氯改性银铜复合材料（Cl-Ag/Cu，包含Cl-Ag/Cu-1.7/2.5/4.1系列）晶面结构：Cl-Ag(111) 和 Cl-Ag/Cu(111) 表面（DFT计算模型）结构特征： 核壳结构（Ag/AgCl核 + Cl掺杂Cu₂O壳）Cl原子掺杂占比：1.7–4.1%（调控Cu₂O电子结构）CO₂RR完整反应路径1. CO₂活化吸附（路径分叉起点）反应： 气态产物路径（CO）：CO₂(g) + * → *COOH（C-bound构型）液态产物路径（甲酸/乙醇）：CO₂(g) + * → *OCHO（O-bound构型）位点结构类型： Cl-Ag(111) 表面（促进*COOH形成）Cl-Ag/Cu(111) 界面（促进*OCHO形成）调控机制： Cl掺杂增强电子转移，*OCHO中间体横向吸附（lateral adsorbate）降低能垒反应能/能垒：未提供具体数值出处：正文第9–10段，图3g-h 2. 中间体转化（气态路径：CO生成）反应：*COOH + H⁺ + e⁻ → *CO + H₂O位点：Ag/AgCl表面（厚度优化为4.8 nm时活性最佳）性能数据： CO法拉第效率 > 95%部分电流密度：150 mA/cm²（流动池） [图4a]能垒机制： *COOH 形成的自由能降低（速率决速步，未提供具体值）1718出处：图5e 193. 中间体转化（液态路径：甲酸/乙醇生成）反应： 甲酸路径：*OCHO + H⁺ + e⁻ → HCOOH乙醇路径：*OCHO → 还原为乙醇（具体步骤未明确）位点：Cl-Ag/Cu(111) 界面（Cl掺杂量2.5%时最优） [图3d]性能数据： 甲酸法拉第效率 > 90%乙醇法拉第效率：13.2%总液态产物电流占比：83.1%（Cl-Ag/Cu-2.5） [图3h]关键中间体证据： 原位红外检测到*OCHO振动峰（1598 cm⁻¹） [图5a]出处：正文第11段，图4b 4. C₂产物（乙醇）形成与耦合机制反应路径推测（文献未完整描述）： 乙醇生成与*CO中间体相关：*CO → C-C耦合 → 乙醇Cl掺杂增强Cu位点氧亲和力，促进C-O键保留实验证据： 乙醇选择性依赖Ag/Cu界面Cl掺杂（非Cl掺杂体系无乙醇）*CO信号（1900–2200 cm⁻¹）在还原电位下出现 [图5b]吸附能/配位数：未提供出处：正文第10段，图S33 [S37]5. 速率决速步与能垒数据气态路径（CO）决速步：*COOH形成（ΔG未提供，模型显示降低0.12 eV）液态路径（甲酸）决速步：*H吸附形成（ΔG未提供，模型显示降低0.05 eV） [图5c-d]乙醇路径能垒：未提供具体数值调控机制： *OCHO横向吸附显著降低关键步骤自由能垒（图5e）\n",
+        "excerpt_chars": 1170
+      },
+      "ground_truth": {
+        "paper_title": "Hu 等 - 2025 - Reaction Pathway Regulation for Gaseous and Liquid Products of Electrocatalytic CO2 Reduc.pdf",
+        "catalyst_system": {
+          "materials": [
+            "与晶面催化剂：氯改性银铜复合材料（Cl-Ag/Cu",
+            "包含Cl-Ag/Cu-1.7/2.5/4.1系列）晶面结构：Cl-Ag(111) 和 Cl-Ag/Cu(111) 表面（DFT计算模型）结构特征： 核壳结构（Ag/AgCl核 + Cl掺杂Cu₂O壳）Cl原子掺杂占比：1.7–4.1%（调控"
+          ],
+          "facets": [
+            "(111)",
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "与晶面催化剂：氯改性银铜复合材料（Cl-Ag/Cu，包含Cl-Ag/Cu-1.7/2.5/4.1系列）晶面结构：Cl-Ag(111) 和 Cl-Ag/Cu(111) 表面（DFT计算模型）结构特征： 核壳结构（Ag/AgCl核 + Cl掺杂Cu₂O壳）Cl原子掺杂占比：1.7–4.1%（调控Cu₂O电子结构）CO₂RR"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "催化剂材料与晶面催化剂：氯改性银铜复合材料（Cl-Ag/Cu，包含Cl-Ag/C",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "催化剂材料与晶面催化剂：氯改性银铜复合材料（Cl-Ag/Cu，包含Cl-Ag/Cu-1.7/2.5/4.1系列）晶面结构：Cl-Ag(111) 和 Cl-Ag/Cu(111) 表面（DFT计算模型）结构特征： 核壳结构（Ag/AgCl核 + Cl掺杂Cu₂O壳）Cl原子掺杂占比：1.7–4.1%（调控Cu₂O电子结构）CO₂RR完整反应路径"
+            },
+            {
+              "step_index": 2,
+              "title": "1. CO₂活化吸附（路径分叉起点）反应： 气态产物路径（CO）：CO₂(g) + *",
+              "reaction": "气态产物路径（CO）：CO₂(g) + * → *COOH（C-bound构型）液态产物路径（甲酸/乙醇）：CO₂(g) + * → *OCHO（O-bound构型）",
+              "site_structure": "Cl-Ag(111) 表面（促进*COOH形成）Cl-Ag/Cu(111) 界面（促进*OCHO形成）调控机制： Cl掺杂增强电子转移，*OCHO中间体横向吸附（lateral adsorbate）降低",
+              "energetics": [],
+              "notes": "1. CO₂活化吸附（路径分叉起点）反应： 气态产物路径（CO）：CO₂(g) + * → *COOH（C-bound构型）液态产物路径（甲酸/乙醇）：CO₂(g) + * → *OCHO（O-bound构型）位点结构类型： Cl-Ag(111) 表面（促进*COOH形成）Cl-Ag/Cu(111) 界面（促进*OCHO形成）调控机制： Cl掺杂增强电子转移，*OCHO中间体横向吸附（lateral adsorbate）降低能垒反应能/能垒：未提供具体数值出处：正文第9–10段，图3g-h"
+            },
+            {
+              "step_index": 3,
+              "title": "2. 中间体转化（气态路径：CO生成）反应：*COOH + H⁺ + e⁻ → *CO",
+              "reaction": "*COOH + H⁺ + e⁻ → *CO + H₂O",
+              "site_structure": "Ag/AgCl表面（厚度优化为4.8 nm时活性最佳）性",
+              "energetics": [
+                {
+                  "value": "150",
+                  "unit": "current_density_mA_cm2"
+                }
+              ],
+              "notes": "2. 中间体转化（气态路径：CO生成）反应：*COOH + H⁺ + e⁻ → *CO + H₂O位点：Ag/AgCl表面（厚度优化为4.8 nm时活性最佳）性能数据： CO法拉第效率 > 95%部分电流密度：150 mA/cm²（流动池） [图4a]能垒机制： *COOH 形成的自由能降低（速率决速步，未提供具体值）1718出处：图5e"
+            },
+            {
+              "step_index": 4,
+              "title": "3. 中间体转化（液态路径：甲酸/乙醇生成）反应： 甲酸路径：*OCHO + H⁺ +",
+              "reaction": "甲酸路径：*OCHO + H⁺ + e⁻ → HCOOH乙醇路径：*OCHO → 还原为乙醇（具体步骤未明确）",
+              "site_structure": "Cl-Ag/Cu(111) 界面（Cl掺杂",
+              "energetics": [
+                {
+                  "value": "0.12",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.05",
+                  "unit": "eV"
+                },
+                {
+                  "value": "13.2",
+                  "unit": "FE_percent"
+                }
+              ],
+              "notes": "3. 中间体转化（液态路径：甲酸/乙醇生成）反应： 甲酸路径：*OCHO + H⁺ + e⁻ → HCOOH乙醇路径：*OCHO → 还原为乙醇（具体步骤未明确）位点：Cl-Ag/Cu(111) 界面（Cl掺杂量2.5%时最优） [图3d]性能数据： 甲酸法拉第效率 > 90%乙醇法拉第效率：13.2%总液态产物电流占比：83.1%（Cl-Ag/Cu-2.5） [图3h]关键中间体证据： 原位红外检测到*OCHO振动峰（1598 cm⁻¹） [图5a]出处：正文第11段，图4b 4. C₂产物（乙醇）形成与耦合机制反应路径推测（文献未完整描述）： 乙醇生成与*CO中间体相关：*CO → C-C耦合 → 乙醇Cl掺杂增强Cu位点氧亲和力，促进C-O键保留实验证据： 乙醇选择性依赖Ag/Cu界面Cl掺杂（非Cl掺杂体系无乙醇）*CO信号（1900–2200 cm⁻¹）在还原电位下出现 [图5b]吸附能/配位数：未提供出处：正文第10段，图S33 [S37]5. 速率决速步与能垒数据气态路径（CO）决速步：*COOH形成（ΔG未提供，模型显示降低0.12 eV）液态路径（甲酸）决速步：*H吸附形成（ΔG未提供，模型显示降低0.05 eV） [图5c-d]乙醇路径能垒：未提供具体数值调控机制： *OCHO横向吸附显著降低关键步骤自由能垒（图5e）"
+            }
+          ],
+          "step_count": 4
+        },
+        "branching_paths": [
+          {
+            "label": "路径",
+            "description": "CO生成）反应：*COOH + H⁺ + e⁻ → *CO + H₂O位点：Ag/AgCl表面（厚度优化为4.8 nm时活性最佳）性能数据： CO法拉第效率 > 95%部分电流密度：150 mA/cm²（流动池） [图4a]能垒机制： *COOH 形成的自由能降低（速率决速步，未提供具体值）1718出处：图5e 193. 中间体转化（液态路径：甲酸/乙醇生成）反应： 甲酸路径：*OCHO + H⁺ + e⁻ → HCOOH乙醇路径：*OCHO → 还原为乙醇（具体步骤未明确）位点：Cl-Ag/Cu(111) 界面（Cl掺杂量2.5%时最优） [图3d]性能数据： 甲酸法拉第效率 > 90%乙醇"
+          },
+          {
+            "label": "分叉",
+            "description": "分叉起点）反应： 气态产物路径（CO）：CO₂(g) + * → *COOH（C-bound构型）液态产物路径（甲酸/乙醇）：CO₂(g) + * → *OCHO（O-bound构型）位点结构类型： Cl-Ag(111) 表面（促进*COOH形成）Cl-Ag/Cu(111) 界面（促进*OCHO形成）调控机制： Cl掺杂增强电子转移，*OCHO中间体横向吸附（lateral adsorbate）降低能"
+          }
+        ],
+        "major_products": [
+          "CO",
+          "HCOOH",
+          "乙醇",
+          "甲酸"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.12",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.05",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "13.2",
+            "unit": "FE_percent",
+            "context": ""
+          },
+          {
+            "value": "150",
+            "unit": "current_density_mA_cm2",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "df05bd3aad350c47d9ecd1dff523814567219c8830ce91c26d452e7e7ff960be",
+        "step_count": 4,
+        "product_count": 4
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "HCOOH",
+              "乙醇",
+              "甲酸"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 4,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "(111)"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.12"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.05"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_006",
+      "folder_id": 6,
+      "status": "ok",
+      "source": {
+        "folder": "6",
+        "docx_path": "6/新建 Microsoft Word 文档.docx",
+        "pdf_path": "6/Garza 等 - 2018 - Mechanism of CO2 Reduction at Copper Surfaces Pathways to C2 Products.pdf",
+        "docx_sha256": "8f37206c20ba101a3369840a02b17ffb99aa7ed2c0c303f96ce125eafdfb0caa",
+        "raw_text_sha256": "3a47e07f5bccaadc9fef8834e7a095836c6af5c2a9d3898a6e82b90cb9fa3eaf"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n催化剂材料与晶面材料：纯铜（Cu）晶面： Cu(100)：高C₂产物选择性（开放表面结构）Cu(111)：低C₂产物选择性（紧密堆积表面）CO₂RR完整反应路径1. CO吸附起始（跳过CO₂活化）背景：文献确认CO₂先转化为*CO，后续还原路径与直接CO还原相同位点：Cu(100)表面（CO优先吸附于顶位）未提供数据：*CO吸附能2. CO还原为CHO（关键中间体生成）反应：*CO + H⁺ + e⁻ → *CHO位点：Cu(100)/Cu(111)自由能变化： CHE模型（U=0 V）：ΔG = +0.65 eV（最吸能步骤）CEP模型（U=-1 V）：ΔG = -0.29 eV16能垒机制：表面电荷促进反应（Cu(100)在负电位下更有利）3. C-C耦合（路径分叉点）路径A（Cu(100)主导）： 反应：2*CO → *COCO（二聚） → *COCHO位点：Cu(100)空穴位（方形对称促二聚）自由能（U=-0.5 V）：ΔG ≈ 0.05 eV（近热中性）热力学窗口：-0.65 V < U < -0.37 V路径B（Cu(111)/高电位）： 反应：*CO → *CHO → *COCHO位点：Cu(111)（二聚受阻）自由能：*CHO路径在U < -0.65 V时更稳定关键中间体：COCHO（比COCOH稳定0.43–0.75 eV）实验证据：IR信号1526/1291 cm⁻¹匹配*COCHO144. 分叉步骤：乙烯 vs 乙醇路径乙烯路径（通过*COCHOH）: 反应：*COCHO → *COCHOH (4a) → … → C₂H₄决速步能垒（U=-1 V）： ΔG‡ = 0.36 eV（*COCHO → 4a）后续步骤能量未提供乙醇路径（通过乙二醛）: 反应：*COCHO → 乙二醛 (4b) → 乙醛 → C₂H₅OH决速步能垒：ΔG‡ = 0.58 eV（高于乙烯路径）选择性比：CEP模型预测C₂H₄:C₂H₅OH ≈ 30:1（接近实验值5:1）5. 关键中间体与实验关联*CHO为共同中间体：解释Cu(111)和高电位Cu(100)上乙烯/甲烷共存乙二醛（glyoxal）：检测为次要产物，支持乙醇路径乙烯氧化物：还原仅得乙烯（非乙醇），否定部分路径\n",
+        "excerpt_chars": 951
+      },
+      "ground_truth": {
+        "paper_title": "Garza 等 - 2018 - Mechanism of CO2 Reduction at Copper Surfaces Pathways to C2 Products.pdf",
+        "catalyst_system": {
+          "materials": [
+            "与晶面材料：纯铜（Cu）晶面： Cu(100)：高C₂产物选择性（开放表面结构）Cu(111)：低C₂产物选择性（紧密堆积表面）CO₂RR"
+          ],
+          "facets": [
+            "Cu(100)",
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "与晶面材料：纯铜（Cu）晶面： Cu(100)：高C₂产物选择性（开放表面结构）Cu(111)：低C₂产物选择性（紧密堆积表面）CO₂RR"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "催化剂材料与晶面材料：纯铜（Cu）晶面： Cu(100)：高C₂产物选择性（开放",
+              "reaction": "*CO + H⁺ + e⁻ → *CHO",
+              "site_structure": "Cu(100)表面（CO优先吸附于顶位）未提供数据：*CO吸附",
+              "energetics": [
+                {
+                  "value": "0.65",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.29",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "催化剂材料与晶面材料：纯铜（Cu）晶面： Cu(100)：高C₂产物选择性（开放表面结构）Cu(111)：低C₂产物选择性（紧密堆积表面）CO₂RR完整反应路径1. CO吸附起始（跳过CO₂活化）背景：文献确认CO₂先转化为*CO，后续还原路径与直接CO还原相同位点：Cu(100)表面（CO优先吸附于顶位）未提供数据：*CO吸附能2. CO还原为CHO（关键中间体生成）反应：*CO + H⁺ + e⁻ → *CHO位点：Cu(100)/Cu(111)自由能变化： CHE模型（U=0 V）：ΔG = +0.65 eV（最吸能步骤）CEP模型（U=-1 V）：ΔG = -0.29 eV16能垒机制：表面电荷促进反应（Cu(100)在负电位下更有利）"
+            },
+            {
+              "step_index": 2,
+              "title": "3. C-C耦合（路径分叉点）路径A（Cu(100)主导）： 反应：2*CO → *C",
+              "reaction": "2*CO → *COCO（二聚） → *COCHO",
+              "site_structure": "Cu(100)空穴位（方形对称促二聚）自由",
+              "energetics": [
+                {
+                  "value": "0.05",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.75",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "3. C-C耦合（路径分叉点）路径A（Cu(100)主导）： 反应：2*CO → *COCO（二聚） → *COCHO位点：Cu(100)空穴位（方形对称促二聚）自由能（U=-0.5 V）：ΔG ≈ 0.05 eV（近热中性）热力学窗口：-0.65 V < U < -0.37 V路径B（Cu(111)/高电位）： 反应：*CO → *CHO → *COCHO位点：Cu(111)（二聚受阻）自由能：*CHO路径在U < -0.65 V时更稳定关键中间体：COCHO（比COCOH稳定0.43–0.75 eV）实验证据：IR信号1526/1291 cm⁻¹匹配*COCHO"
+            },
+            {
+              "step_index": 3,
+              "title": "4. 分叉步骤：乙烯 vs 乙醇路径乙烯路径（通过*COCHOH）: 反应：*COCH",
+              "reaction": "*COCHO → *COCHOH (4a) → … → C₂H₄决速步能垒（U=-1 V）： ΔG‡ = 0.36 eV（*COCHO → 4a）后续步骤能量未提供乙醇路径（通过乙二醛）: 反应：*COCHO → 乙二醛 (4b) → 乙醛 → C₂H₅OH决速步能垒：ΔG‡ = 0.58 eV（高于乙烯路径）选择性比：CEP模型预测C₂H₄:C₂H₅OH ≈ 30:1（接近实验值5:1）5. 关",
+              "site_structure": "",
+              "energetics": [
+                {
+                  "value": "0.36",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.58",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "4. 分叉步骤：乙烯 vs 乙醇路径乙烯路径（通过*COCHOH）: 反应：*COCHO → *COCHOH (4a) → … → C₂H₄决速步能垒（U=-1 V）： ΔG‡ = 0.36 eV（*COCHO → 4a）后续步骤能量未提供乙醇路径（通过乙二醛）: 反应：*COCHO → 乙二醛 (4b) → 乙醛 → C₂H₅OH决速步能垒：ΔG‡ = 0.58 eV（高于乙烯路径）选择性比：CEP模型预测C₂H₄:C₂H₅OH ≈ 30:1（接近实验值5:1）5. 关键中间体与实验关联*CHO为共同中间体：解释Cu(111)和高电位Cu(100)上乙烯/甲烷共存乙二醛（glyoxal）：检测为次要产物，支持乙醇路径乙烯氧化物：还原仅得乙烯（非乙醇），否定部分路径"
+            }
+          ],
+          "step_count": 3
+        },
+        "branching_paths": [
+          {
+            "label": "分叉",
+            "description": "分叉点）路径A（Cu(100)主导）： 反应：2*CO → *COCO（二聚） → *COCHO位点：Cu(100)空穴位（方形对称促二聚）自由能（U=-0.5 V）：ΔG ≈ 0.05 eV（近热中性）热力学窗口：-0.65 V < U < -0.37 V路径B（Cu(111)/高电位）： 反应：*CO → *CHO → *COCHO位点：Cu(111)（二聚受阻）自由能：*CHO路径在U < -0"
+          },
+          {
+            "label": "分叉",
+            "description": "分叉步骤：乙烯 vs 乙醇路径乙烯路径（通过*COCHOH）: 反应：*COCHO → *COCHOH (4a) → … → C₂H₄决速步能垒（U=-1 V）： ΔG‡ = 0.36 eV（*COCHO → 4a）后续步骤能量未提供乙醇路径（通过乙二醛）: 反应：*COCHO → 乙二醛 (4b) → 乙醛 → C₂H₅OH决速步能垒：ΔG‡ = 0.58 eV（高于乙烯路径）选择性比：CEP模型预"
+          }
+        ],
+        "major_products": [
+          "CO",
+          "C₂H₄",
+          "C₂H₅OH",
+          "乙烯",
+          "乙醇",
+          "甲烷"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.65",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.29",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.05",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.75",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.36",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.58",
+            "unit": "eV",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "3a47e07f5bccaadc9fef8834e7a095836c6af5c2a9d3898a6e82b90cb9fa3eaf",
+        "step_count": 3,
+        "product_count": 6
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "C₂H₄",
+              "C₂H₅OH",
+              "乙烯",
+              "乙醇",
+              "甲烷"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 3,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(100)"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.65"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-0.29"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.05"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.75"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.36"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_007",
+      "folder_id": 7,
+      "status": "missing_docx",
+      "source": {
+        "folder": "7",
+        "docx_path": null,
+        "pdf_path": null
+      },
+      "input": null,
+      "ground_truth": null,
+      "verification": {
+        "checks": [],
+        "min_pass_ratio": 0.0
+      }
+    },
+    {
+      "id": "co2rr_eval_008",
+      "folder_id": 8,
+      "status": "ok",
+      "source": {
+        "folder": "8",
+        "docx_path": "8/新建 Microsoft Word 文档.docx",
+        "pdf_path": "8/Zhong 等 - 2025 - Selective Electrochemical CO2 Reduction to Ethylene or Ethanol via Tuning OH Adsorption.pdf",
+        "docx_sha256": "4d4c14edff090c6461cff0401bc4f5648cac9661c597e74421f4122f7ab79b96",
+        "raw_text_sha256": "4dc46bd8511dc5607f0234bcbb7d0d8824f40409ad388b2374930307f7436bce"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n1. CO₂活化吸附反应：CO₂(g) + * + H⁺/e⁻ → *COOH位点：缺陷铜表面（非单一晶面）配位数：无明确数据反应能/能垒：文献仅提及\"快速转化为*CO\"（正文第6页），无具体数值中间体吸附能：无出处：正文第6页（“initial CO₂ activation steps”）2. COOH还原为CO反应：*COOH + H⁺/e⁻ → *CO + H₂O位点：缺陷铜表面（非单一晶面）配位数：无反应能/能垒：无具体数据（文献称该步骤快速）中间体吸附能： CO吸附未量化，但拉曼光谱显示Cu-3的CO覆盖率更高（正文第17段）出处：正文第6页3. CO生成至CH₂CHO（核心整合步骤）反应： *CO + H⁺/e⁻ → *CHO（推测步骤，未明确列出）*CHO + *CO → *CH₂CHO（C-C耦合后形成的SDI）位点： 强吸附位（非晶Cu-3）：低配位缺陷弱吸附位（晶界Cu-1）：中配位缺陷配位数：无明确数据反应能/能垒：无中间体吸附能： *CH₂CHO吸附能： Cu-3（非晶）：-0.71 eVCu-1（晶界）：+0.05 eV出处：正文第7页，Table 14. 分叉路径：乙烯（C-O断裂）vs 乙醇（C-O保留）路径A：乙烯生成反应： *CH₂CHO + H⁺/e⁻ → C₂H₄(g) + *O（C-O断裂）*O + 2H⁺ + 2e⁻ → H₂O（脱附）位点：非晶Cu-3（低配位缺陷）关键机制：强*OH吸附促进C-O断裂（拉曼光谱验证）反应能垒：*O脱附能垒=0.53 eV（正文第7页）性能： FE~77.5% (H-cell), 63.4% (MEA, 12.5A)出处：图4a, 图4h路径B：乙醇生成反应： *CH₂CHO + H⁺/e⁻ → *CH₃CHO（β-C质子化）*CH₃CHO + H⁺/e⁻ → C₂H₅OH(g)位点：晶界Cu-1（中配位缺陷）关键机制：弱*OH吸附促进β-C质子化（ATR-FTIR验证）反应能垒：无数据性能： FE~52.0% (H-cell)全电池能量效率29.0%出处：图4b, 正文第7页催化剂材料与结构参数Cu-1（乙醇路径）Cu-3（乙烯路径）材料类型晶界富集缺陷铜非晶富集缺陷铜制备方法快速还原CuO（-1.9V vs RHE）慢速还原CuO（-0.3V vs RHE）缺陷特征中配位晶界位点低配位非晶位点*OH吸附强度弱（拉曼位移低）强（拉曼位移高）晶面无单一主导晶面（缺陷调控）无单一主导晶面关键证据ATR-FTIR检测到*OC₂H₅信号拉曼显示强*CH₂CHO吸附\n",
+        "excerpt_chars": 1085
+      },
+      "ground_truth": {
+        "paper_title": "Zhong 等 - 2025 - Selective Electrochemical CO2 Reduction to Ethylene or Ethanol via Tuning OH Adsorption.pdf",
+        "catalyst_system": {
+          "materials": [
+            "与结构参数Cu-1（乙醇"
+          ],
+          "facets": [],
+          "active_sites": [],
+          "raw": "与结构参数Cu-1（乙醇"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "1. CO₂活化吸附反应：CO₂(g) + * + H⁺/e⁻ → *COOH位点：缺",
+              "reaction": "CO₂(g) + * + H⁺/e⁻ → *COOH",
+              "site_structure": "缺陷铜表面（非单一晶面）配位数：无明确数据",
+              "energetics": [],
+              "notes": "1. CO₂活化吸附反应：CO₂(g) + * + H⁺/e⁻ → *COOH位点：缺陷铜表面（非单一晶面）配位数：无明确数据反应能/能垒：文献仅提及\"快速转化为*CO\"（正文第6页），无具体数值中间体吸附能：无出处：正文第6页（“initial CO₂ activation steps”）"
+            },
+            {
+              "step_index": 2,
+              "title": "2. COOH还原为CO反应：*COOH + H⁺/e⁻ → *CO + H₂O位点：",
+              "reaction": "*COOH + H⁺/e⁻ → *CO + H₂O",
+              "site_structure": "缺陷铜表面（非单一晶面）配位数：无",
+              "energetics": [
+                {
+                  "value": "-0.71",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.05",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "2. COOH还原为CO反应：*COOH + H⁺/e⁻ → *CO + H₂O位点：缺陷铜表面（非单一晶面）配位数：无反应能/能垒：无具体数据（文献称该步骤快速）中间体吸附能： CO吸附未量化，但拉曼光谱显示Cu-3的CO覆盖率更高（正文第17段）出处：正文第6页3. CO生成至CH₂CHO（核心整合步骤）反应： *CO + H⁺/e⁻ → *CHO（推测步骤，未明确列出）*CHO + *CO → *CH₂CHO（C-C耦合后形成的SDI）位点： 强吸附位（非晶Cu-3）：低配位缺陷弱吸附位（晶界Cu-1）：中配位缺陷配位数：无明确数据反应能/能垒：无中间体吸附能： *CH₂CHO吸附能： Cu-3（非晶）：-0.71 eVCu-1（晶界）：+0.05 eV出处：正文第7页，Table"
+            },
+            {
+              "step_index": 3,
+              "title": "4. 分叉路径：乙烯（C-O断裂）vs 乙醇（C-O保留）路径A：乙烯生成反应： *C",
+              "reaction": "*CH₂CHO + H⁺/e⁻ → C₂H₄(g) + *O（C-O断裂）*O + 2H⁺ + 2e⁻ → H₂O（脱附）",
+              "site_structure": "非晶Cu-3（低配位缺陷）关键机制：强*OH吸附促进C-O断裂（拉曼光谱验证）",
+              "energetics": [
+                {
+                  "value": "0.53",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-1.9",
+                  "unit": "V_vs_RHE"
+                },
+                {
+                  "value": "-0.3",
+                  "unit": "V_vs_RHE"
+                }
+              ],
+              "notes": "4. 分叉路径：乙烯（C-O断裂）vs 乙醇（C-O保留）路径A：乙烯生成反应： *CH₂CHO + H⁺/e⁻ → C₂H₄(g) + *O（C-O断裂）*O + 2H⁺ + 2e⁻ → H₂O（脱附）位点：非晶Cu-3（低配位缺陷）关键机制：强*OH吸附促进C-O断裂（拉曼光谱验证）反应能垒：*O脱附能垒=0.53 eV（正文第7页）性能： FE~77.5% (H-cell), 63.4% (MEA, 12.5A)出处：图4a, 图4h路径B：乙醇生成反应： *CH₂CHO + H⁺/e⁻ → *CH₃CHO（β-C质子化）*CH₃CHO + H⁺/e⁻ → C₂H₅OH(g)位点：晶界Cu-1（中配位缺陷）关键机制：弱*OH吸附促进β-C质子化（ATR-FTIR验证）反应能垒：无数据性能： FE~52.0% (H-cell)全电池能量效率29.0%出处：图4b, 正文第7页催化剂材料与结构参数Cu-1（乙醇路径）Cu-3（乙烯路径）材料类型晶界富集缺陷铜非晶富集缺陷铜制备方法快速还原CuO（-1.9V vs RHE）慢速还原CuO（-0.3V vs RHE）缺陷特征中配位晶界位点低配位非晶位点*OH吸附强度弱（拉曼位移低）强（拉曼位移高）晶面无单一主导晶面（缺陷调控）无单一主导晶面关键证据ATR-FTIR检测到*OC₂H₅信号拉曼显示强*CH₂CHO吸附"
+            }
+          ],
+          "step_count": 3
+        },
+        "branching_paths": [
+          {
+            "label": "路径",
+            "description": "乙烯（C-O断裂）vs 乙醇（C-O保留）路径A：乙烯生成反应： *CH₂CHO + H⁺/e⁻ → C₂H₄(g) + *O（C-O断裂）*O + 2H⁺ + 2e⁻ → H₂O（脱附）位点：非晶Cu-3（低配位缺陷）关键机制：强*OH吸附促进C-O断裂（拉曼光谱验证）反应能垒：*O脱附能垒=0.53 eV（正文第7页）性能： FE~77.5% (H-cell), 63.4% (MEA, 12.5A)出处：图4a, 图4h路径B：乙醇生成反应： *CH₂CHO + H⁺/e⁻ → *CH₃CHO（β-C质子化）*CH₃CHO + H⁺/e⁻ → C₂H₅OH(g)位点：晶界Cu-1（中配位缺"
+          },
+          {
+            "label": "分叉",
+            "description": "分叉路径：乙烯（C-O断裂）vs 乙醇（C-O保留）路径A：乙烯生成反应： *CH₂CHO + H⁺/e⁻ → C₂H₄(g) + *O（C-O断裂）*O + 2H⁺ + 2e⁻ → H₂O（脱附）位点：非晶Cu-3（低配位缺陷）关键机制：强*OH吸附促进C-O断裂（拉曼光谱验证）反应能垒：*O脱附能垒=0.53 eV（正文第7页）性能： FE~77.5% (H-cell), 63.4% (MEA, "
+          }
+        ],
+        "major_products": [
+          "CO",
+          "C₂H₄",
+          "C₂H₅OH",
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "-0.71",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.05",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.53",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-1.9",
+            "unit": "V_vs_RHE",
+            "context": ""
+          },
+          {
+            "value": "-0.3",
+            "unit": "V_vs_RHE",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "4dc46bd8511dc5607f0234bcbb7d0d8824f40409ad388b2374930307f7436bce",
+        "step_count": 3,
+        "product_count": 5
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "C₂H₄",
+              "C₂H₅OH",
+              "乙烯",
+              "乙醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 3,
+            "tolerance": 2
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-0.71"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.05"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.53"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_009",
+      "folder_id": 9,
+      "status": "ok",
+      "source": {
+        "folder": "9",
+        "docx_path": "9/新建 Microsoft Word 文档.docx",
+        "pdf_path": "9/Zheng 等 - 2019 - Understanding the Roadmap for Electrochemical Reduction of CO2 to Multi-Carbon Oxygenates.pdf",
+        "docx_sha256": "2172242e2f3956d47e7feac7ce61b7c3a9931f143e4bcba2a722d815cf5eea8d",
+        "raw_text_sha256": "0ac555298071dde5b0c49f4c5d7da638d995a414a61cbae3570382bd0467227e"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n催化剂材料：Cu及掺杂金属的Cu基催化剂（M = Rh, Ir, Ru, Pd, Ag, Au）主要晶面：Cu(100)表面（优先促进C-C耦合）路径总览CO₂活化吸附 反应：CO₂(g) + * + H⁺ + e⁻ → *COOH位点结构：Cu(100)表面（未明确M-Cu位点配位数）能量数据：反应自由能、能垒及*COOH吸附能均未明确给出［3］[4］*COOH还原为CO 反应：*COOH + H⁺ + e⁻ → *CO + H₂O位点结构：Cu(100)表面（*CO吸附增强利于C-C耦合）能量数据：未明确给出，但文献强调*CO覆盖率对C₂产物选择性关键［3］[6］C-C耦合（速率决定步骤，RDS） 反应：2*CO → *CO-CO⁻（或 *CO-COH）位点结构：Cu(100)表面（低过电位下优先发生）能量数据： 活化能垒：Cu(100)表面*CO二聚能垒低于Cu(111)［8］关键证据：原位FTIR证实*CO-COH中间体（2080-1800 cm⁻¹振动峰）［4][8］*CO-COH逐步还原至*CH₂CHO（选择性决定中间体，SDI） 反应：*CO-COH + 4(H⁺ + e⁻) → *CH₂CHO位点结构： 亲氧M-Cu（Rh/Ir/Ru）：*CH₂CHO吸附于Cu₃M位点（M掺杂原子参与）疏氧M-Cu（Pd/Ag/Au）：*CH₂CHO吸附于纯Cu位点（Cu₄）吸附能（*CH₂CHO相对纯Cu）： M掺杂吸附能 (eV)Ru-0.71Rh-0.57Ir-0.57Cu0（基准）Pd+0.03Ag/Au+0.05/+0.06出处：Fig. 1b，补充材料Table 1［5][6］分叉路径A. 乙烯路径（C-O键断裂）*CH₂CHO → C₂H₄ 反应：*CH₂CHO + H⁺ + e⁻ → C₂H₄(g) + *O位点结构： *O吸附于Cu₃M位点（M = Rh/Ir/Ru）或Cu₄位点（M = Pd/Ag/Au）能量数据： 催化剂反应自由能 (eV)活化能垒 (eV)Ru-Cu-0.780.61Rh-Cu-0.740.41（最低）Ir-Cu-0.720.42Cu-0.600.53出处：Fig. 1c-d, Fig. 4a-b［6][10］*O还原脱附 反应：*O + H⁺ + e⁻ → *OH → H₂O + *活化能垒（*O质子化）： M掺杂能垒 (eV)Rh0.44（最优）Ir0.38Cu0.31说明：Rh掺杂平衡C-O断裂与*O质子化能垒（正文第7页）B. 乙醇路径（C-O键保留）*CH₂CHO → *CH₃CHO 反应：*CH₂CHO + H⁺ + e⁻ → *CH₃CHO位点结构：*CH₃CHO通过O原子吸附（Cu-O-C结构）反应自由能（eV）： Rh-Cu: -0.62 | Ir-Cu: -0.58 | Ru/Cu: -0.52出处：Fig. 1c［6］*CH₃CHO → C₂H₅OH 反应：*CH₃CHO + 2H⁺ + 2e⁻ → C₂H₅OH(l) + *关键限制：比乙烯路径高~0.2 eV能垒［7］，Cu(100)表面乙醇选择性低［6］\n",
+        "excerpt_chars": 1308
+      },
+      "ground_truth": {
+        "paper_title": "Zheng 等 - 2019 - Understanding the Roadmap for Electrochemical Reduction of CO2 to Multi-Carbon Oxygenates.pdf",
+        "catalyst_system": {
+          "materials": [
+            "：Cu及掺杂金属的Cu基催化剂（M = Rh",
+            "Au）主要晶面：Cu(100)表面（优先促进C-C耦合）"
+          ],
+          "facets": [
+            "Cu(100)",
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "：Cu及掺杂金属的Cu基催化剂（M = Rh, Ir, Ru, Pd, Ag, Au）主要晶面：Cu(100)表面（优先促进C-C耦合）"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "催化剂材料：Cu及掺杂金属的Cu基催化剂（M = Rh, Ir, Ru, Pd,",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+              "site_structure": "Cu(100)表面（未明确M-Cu位点配位数）",
+              "energetics": [
+                {
+                  "value": "0.2",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "催化剂材料：Cu及掺杂金属的Cu基催化剂（M = Rh, Ir, Ru, Pd, Ag, Au）主要晶面：Cu(100)表面（优先促进C-C耦合）路径总览CO₂活化吸附 反应：CO₂(g) + * + H⁺ + e⁻ → *COOH位点结构：Cu(100)表面（未明确M-Cu位点配位数）能量数据：反应自由能、能垒及*COOH吸附能均未明确给出［3］[4］*COOH还原为CO 反应：*COOH + H⁺ + e⁻ → *CO + H₂O位点结构：Cu(100)表面（*CO吸附增强利于C-C耦合）能量数据：未明确给出，但文献强调*CO覆盖率对C₂产物选择性关键［3］[6］C-C耦合（速率决定步骤，RDS） 反应：2*CO → *CO-CO⁻（或 *CO-COH）位点结构：Cu(100)表面（低过电位下优先发生）能量数据： 活化能垒：Cu(100)表面*CO二聚能垒低于Cu(111)［8］关键证据：原位FTIR证实*CO-COH中间体（2080-1800 cm⁻¹振动峰）［4][8］*CO-COH逐步还原至*CH₂CHO（选择性决定中间体，SDI） 反应：*CO-COH + 4(H⁺ + e⁻) → *CH₂CHO位点结构： 亲氧M-Cu（Rh/Ir/Ru）：*CH₂CHO吸附于Cu₃M位点（M掺杂原子参与）疏氧M-Cu（Pd/Ag/Au）：*CH₂CHO吸附于纯Cu位点（Cu₄）吸附能（*CH₂CHO相对纯Cu）： M掺杂吸附能 (eV)Ru-0.71Rh-0.57Ir-0.57Cu0（基准）Pd+0.03Ag/Au+0.05/+0.06出处：Fig. 1b，补充材料Table 1［5][6］分叉路径A. 乙烯路径（C-O键断裂）*CH₂CHO → C₂H₄ 反应：*CH₂CHO + H⁺ + e⁻ → C₂H₄(g) + *O位点结构： *O吸附于Cu₃M位点（M = Rh/"
+            }
+          ],
+          "step_count": 1
+        },
+        "branching_paths": [
+          {
+            "label": "分叉",
+            "description": "分叉路径A. 乙烯路径（C-O键断裂）*CH₂CHO → C₂H₄ 反应：*CH₂CHO + H⁺ + e⁻ → C₂H₄(g) + *O位点结构： *O吸附于Cu₃M位点（M = Rh/Ir/Ru）或Cu₄位点（M = Pd/Ag/Au）能量数据： 催化剂反应自由能 (eV)活化能垒 (eV)Ru-Cu-0.780.61Rh-Cu-0.740.41（最低）Ir-Cu-0.720.42Cu-0.600"
+          }
+        ],
+        "major_products": [
+          "CO",
+          "C₂H₄",
+          "C₂H₅OH",
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.2",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "速率决定步骤，RDS） 反应：2*CO → *CO-CO⁻（或 *CO-COH）位点结构：Cu(100)表面（低过电位下优先发生）能量数据： 活化能垒：Cu(100)表面*CO二聚能垒低于Cu(111)［8］关键证据：原位FTIR证实*CO-COH中间",
+            "unit": "rds_description",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "0ac555298071dde5b0c49f4c5d7da638d995a414a61cbae3570382bd0467227e",
+        "step_count": 1,
+        "product_count": 5
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "C₂H₄",
+              "C₂H₅OH",
+              "乙烯",
+              "乙醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 1,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(100)"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.2"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_010",
+      "folder_id": 10,
+      "status": "ok",
+      "source": {
+        "folder": "10",
+        "docx_path": "10/新建 Microsoft Word 文档.docx",
+        "pdf_path": "10/Zhang 等 - 2024 - Facet-switching of rate-determining step on copper in CO2 -to-ethylene electroreduction.pdf",
+        "docx_sha256": "6f54132c2525caf6ae06457c85c0d827ae785a89113a6dbde3d28c9d5ecd68b1",
+        "raw_text_sha256": "e95016f238f5d1f0b4e3422bb7d47546d0426f87cc60efad2c4940166b98069d"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n文章中使用的催化剂材料：p-Cu（oxide-derived Cu with Cu(100)-dominant facets）：优先暴露Cu(100)晶面，促进C-C耦合。o-Cu（with Cu(111)-dominant facets）：优先暴露Cu(111)晶面，其RDS涉及*CO的质子化。核心材料为铜基（Cu），无其他金属掺杂（如Rh, Ir, Ru等）；催化剂通过电化学还原氧化铜前驱体制备。主要晶面：Cu(100)面（在p-Cu中主导）：低配位表面，吸附*CO能力强，有利于C-C耦合。Cu(111)面（在o-Cu中主导）：紧密堆积表面，CO吸附较弱，催化性能较差。1. 第一步：CO₂活化吸附（如从CO₂起始）•反应：CO₂(g) + * + H⁺ + e⁻ → *COOH（或写作 CO₂ + H⁺/e⁻ → *COOH）•位点结构类型：Cu(100) 表面（具体涉及Cu位点，M-Cu催化剂中M = Rh, Ir, Ru, Pd, Ag, Au）•配位数：文献未明确给出COOH的具体配位数，仅提及O在Cu₄或Cu₃M位点吸附•反应能：文献未直接提供该步骤的自由能数据•反应能垒：文献未直接提供该步骤的活化能数据•中间体吸附能：文献未明确给出*COOH的吸附能数值•出处：正文第5页（提及C-C耦合前的*CO生成是RDS），补充材料未明确给出此步骤能量数据2. 第二步：COOH还原为CO（如从CO₂起始）•反应：*COOH + H⁺ + e⁻ → *CO + H₂O•位点结构类型：Cu(100) 表面•配位数：未明确给出•反应能：未明确给出具体数值•反应能垒：未明确给出•中间体吸附能：CO的吸附能数据未在正文中以表格形式给出，但提及增强CO吸附有利于C-C耦合•出处：正文第5页（Introduction部分）3. 第三步：C-C耦合（速率决定步骤 RDS）•反应：2*CO → *COCOH（或 *CO + *CO + H⁺/e⁻ → COCOH，具体为两个CO的耦合）•位点结构类型：Cu(100) 表面，M-Cu催化剂（M为单原子掺杂位点）•配位数：未明确给出*COCOH的配位数•反应能：文献未明确给出该步骤的具体自由能变化数值•反应能垒：文献未明确给出具体能垒数值，仅提及这是RDS•中间体吸附能：未明确给出•出处：正文第3页（\"C–C coupling, which is regarded as the rate-determining step (RDS)\"）4. 第四步：COCOH逐步质子-电子转移生成CH₂CHO（选择性决定中间体SDI前体）•反应：*COCOH 经过四次连续的质子-电子转移（PCET）步骤生成 *CH₂CHO•具体子步骤（文献未明确列出每一步的单独能量数据，仅说明共四步）：o*COCOH → [中间体1] → [中间体2] → [中间体3] → *CH₂CHO•位点结构类型：Cu(100) 及 M-Cu 表面（Rh-Cu, Ir-Cu, Ru-Cu, Pd-Cu, Ag-Cu, Au-Cu）•配位数：对于oxophilic M-Cu（Rh, Ir, Ru），*CH₂CHO吸附在Cu₃M位点（1个掺杂原子+3个Cu原子）；对于oxophobic M-Cu（Pd, Ag, Au），倾向于在纯Cu位点吸附•反应能：未明确给出各分步的自由能数据•反应能垒：未明确给出•中间体吸附能（*CH₂CHO相对Cu的吸附能）：oRu-Cu: -0.71 eVoRh-Cu: -0.57 eVoIr-Cu: -0.57 eVoCu: 0 eV（基准）oPd-Cu: +0.03 eVoAg-Cu: +0.05 eVoAu-Cu: +0.06 eV•出处：正文第5-6页，Fig. 1b，补充材料Table 1（C-O键长数据）5. 第五步（分叉步骤A）：乙烯路径（C-O键断裂）•反应：*CH₂CHO + H⁺ + e⁻ → C₂H₄(g) + *O•位点结构类型：Cu(100) 及 M-Cu 表面，*O吸附在Cu₃M位点（oxophilic）或Cu₄位点（oxophobic）•配位数：*O在Cu₄位点（纯Cu hollow site）或Cu₃M位点（掺杂原子参与）•反应能（自由能变化）：oRu-Cu: -0.78 eVoRh-Cu: -0.74 eVoIr-Cu: -0.72 eVoCu: -0.60 eV•反应能垒（活化能）：oRu-Cu: 0.61 eVoRh-Cu: 0.41 eVoIr-Cu: 0.42 eVoCu: 0.53 eV•中间体吸附能（*O相对Cu的吸附能）：oRu-Cu: -0.66 eVoRh-Cu: -0.25 eVoIr-Cu: -0.28 eVoCu: 0 eV（基准）oPd-Cu: +0.03 eVoAg-Cu: +0.05 eVoAu-Cu: +0.06 eV•出处：正文第6-7页，Fig. 1c-d，Fig. 4a-b6. 第五步后续（乙烯路径续）：*O还原脱附•反应1：*O + H⁺ + e⁻ → *OH•反应2：*OH + H⁺ + e⁻ → H₂O(l) + *•位点结构类型：Cu(100) 及 M-Cu 表面•配位数：同上（Cu₄或Cu₃M位点）•反应能：未明确给出具体数值•反应能垒（*O质子化能垒）：oRu-Cu: 0.50 eVoRh-Cu: 0.44 eVoIr-Cu: 0.38 eVoCu: 0.31 eV•中间体吸附能：未明确给出*OH的单独吸附能•出处：正文第7页（\"The Rh dopant possesses an optimal oxygen affinity, balancing the activation energy barriers of C–O bond cleavage and *O protonation\"），Fig. 1d7. 第五步（分叉步骤B）：乙醇路径（C-O键保留）•反应1：*CH₂CHO + H⁺ + e⁻ → *CH₃CHO（乙醛中间体，C-O键保留）•位点结构类型：Cu(100) 及 M-Cu 表面，*CH₃CHO仍通过O原子吸附（Cu-O-C结构）•配位数：未明确给出*CH₃CHO的配位数•反应能（自由能变化）：oRu-Cu: -0.52 eV（更正：根据Fig. 1c，Ru-Cu的C₂H₅OH路径自由能约为-0.52 eV，但需核对）oRh-Cu: -0.62 eVoIr-Cu: -0.58 eVoCu: -0.52 eV•反应能垒：文献未明确给出该步骤的具体能垒数值（仅给出最终产物选择性数据）•中间体吸附能：未明确给出*CH₃CHO的单独吸附能数据•出处：正文第6页，Fig. 1c（C₂H₅OH pathway column）8. 第六步（乙醇路径续）：*CH₃CHO还原为乙醇•反应：*CH₃CHO + 2H⁺ + 2e⁻ → C₂H₅OH(l) + *•位点结构类型：Cu(100) 表面•配位数：未明确给出•反应能：未明确给出具体数值•反应能垒：未明确给出•中间体吸附能：未明确给出•出处：正文第5页（Fig. 1a示意图）请你学习这种模式，在打开的文章中查询，首先是否是CO2RR，其中是否写出了反应路径的内容。如果没有则直接写无。如果是的话，那就给出类似以上的从CO2/CO吸附开始，直到生成最终产物的路径内容，并且给出文章的催化剂材料、晶面。\n",
+        "excerpt_chars": 3079
+      },
+      "ground_truth": {
+        "paper_title": "Zhang 等 - 2024 - Facet-switching of rate-determining step on copper in CO2 -to-ethylene electroreduction.pdf",
+        "catalyst_system": {
+          "materials": [
+            "：p-Cu（oxide-derived Cu with Cu(100)-dominant facets）：优先暴露Cu(100)晶面",
+            "促进C-C耦合。o-Cu（with Cu(111)-dominant facets）：优先暴露Cu(111)晶面",
+            "其RDS涉及*CO的质子化。核心材料为铜基（Cu）",
+            "无其他金属掺杂（如Rh",
+            "Ru等）",
+            "催化剂通过电化学还原氧化铜前驱体制备。主要晶面：Cu(100)面（在p-Cu中主导）：低配位表面"
+          ],
+          "facets": [
+            "Cu(100)",
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "：p-Cu（oxide-derived Cu with Cu(100)-dominant facets）：优先暴露Cu(100)晶面，促进C-C耦合。o-Cu（with Cu(111)-dominant facets）：优先暴露Cu(111)晶面，其RDS涉及*CO的质子化。核心材料为铜基（Cu），无其他金属掺杂（如Rh, Ir, Ru等）；催化剂通过电化学还原氧化铜前驱体制备。主要晶面：Cu(100)面（在p-Cu中主导）：低配位表面，吸附*CO能力强，有利于C-C耦合。Cu(111)面（在o-Cu中主导）：紧密堆积表面，CO吸附较弱，催化性能较差。1. 第一步：CO₂活化吸附（如从CO₂起始）•"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "文章中使用的催化剂材料：p-Cu（oxide-derived Cu with C",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "文章中使用的催化剂材料：p-Cu（oxide-derived Cu with Cu(100)-dominant facets）：优先暴露Cu(100)晶面，促进C-C耦合。o-Cu（with Cu(111)-dominant facets）：优先暴露Cu(111)晶面，其RDS涉及*CO的质子化。核心材料为铜基（Cu），无其他金属掺杂（如Rh, Ir, Ru等）；催化剂通过电化学还原氧化铜前驱体制备。主要晶面：Cu(100)面（在p-Cu中主导）：低配位表面，吸附*CO能力强，有利于C-C耦合。Cu(111)面（在o-Cu中主导）：紧密堆积表面，CO吸附较弱，催化性能较差。1."
+            },
+            {
+              "step_index": 2,
+              "title": "第一步：CO₂活化吸附（如从CO₂起始）",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH（或写作 CO₂ + H⁺/e⁻ → *COOH）",
+              "site_structure": "Cu(100) 表面（具体涉及Cu位点，M-Cu催化剂中M = Rh, Ir, Ru, Pd, Ag, Au）",
+              "energetics": [],
+              "notes": "第一步：CO₂活化吸附（如从CO₂起始）•反应：CO₂(g) + * + H⁺ + e⁻ → *COOH（或写作 CO₂ + H⁺/e⁻ → *COOH）•位点结构类型：Cu(100) 表面（具体涉及Cu位点，M-Cu催化剂中M = Rh, Ir, Ru, Pd, Ag, Au）•配位数：文献未明确给出COOH的具体配位数，仅提及O在Cu₄或Cu₃M位点吸附•反应能：文献未直接提供该步骤的自由能数据•反应能垒：文献未直接提供该步骤的活化能数据•中间体吸附能：文献未明确给出*COOH的吸附能数值•出处：正文第5页（提及C-C耦合前的*CO生成是RDS），补充材料未明确给出此步骤能量数据2."
+            },
+            {
+              "step_index": 3,
+              "title": "第二步：COOH还原为CO（如从CO₂起始）",
+              "reaction": "*COOH + H⁺ + e⁻ → *CO + H₂O",
+              "site_structure": "Cu(100) 表面",
+              "energetics": [],
+              "notes": "第二步：COOH还原为CO（如从CO₂起始）•反应：*COOH + H⁺ + e⁻ → *CO + H₂O•位点结构类型：Cu(100) 表面•配位数：未明确给出•反应能：未明确给出具体数值•反应能垒：未明确给出•中间体吸附能：CO的吸附能数据未在正文中以表格形式给出，但提及增强CO吸附有利于C-C耦合•出处：正文第5页（Introduction部分）3."
+            },
+            {
+              "step_index": 4,
+              "title": "第三步：C-C耦合（速率决定步骤 RDS）",
+              "reaction": "2*CO → *COCOH（或 *CO + *CO + H⁺/e⁻ → COCOH，具体为两个CO的耦合）",
+              "site_structure": "Cu(100) 表面，M-Cu催化剂（M为单原子掺杂位点）",
+              "energetics": [],
+              "notes": "第三步：C-C耦合（速率决定步骤 RDS）•反应：2*CO → *COCOH（或 *CO + *CO + H⁺/e⁻ → COCOH，具体为两个CO的耦合）•位点结构类型：Cu(100) 表面，M-Cu催化剂（M为单原子掺杂位点）•配位数：未明确给出*COCOH的配位数•反应能：文献未明确给出该步骤的具体自由能变化数值•反应能垒：文献未明确给出具体能垒数值，仅提及这是RDS•中间体吸附能：未明确给出•出处：正文第3页（\"C–C coupling, which is regarded as the rate-determining step (RDS)\"）4."
+            },
+            {
+              "step_index": 5,
+              "title": "第四步：COCOH逐步质子-电子转移生成CH₂CHO（选择性决定中间体SDI前体）",
+              "reaction": "*COCOH 经过四次连续的质子-电子转移（PCET）步骤生成 *CH₂CHO",
+              "site_structure": "Cu(100) 及 M-Cu 表面（Rh-Cu, Ir-Cu, Ru-Cu, Pd-Cu, Ag-Cu, Au-Cu）",
+              "energetics": [
+                {
+                  "value": "-0.71",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.57",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.57",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.03",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.05",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.06",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "第四步：COCOH逐步质子-电子转移生成CH₂CHO（选择性决定中间体SDI前体）•反应：*COCOH 经过四次连续的质子-电子转移（PCET）步骤生成 *CH₂CHO•具体子步骤（文献未明确列出每一步的单独能量数据，仅说明共四步）：o*COCOH → [中间体1] → [中间体2] → [中间体3] → *CH₂CHO•位点结构类型：Cu(100) 及 M-Cu 表面（Rh-Cu, Ir-Cu, Ru-Cu, Pd-Cu, Ag-Cu, Au-Cu）•配位数：对于oxophilic M-Cu（Rh, Ir, Ru），*CH₂CHO吸附在Cu₃M位点（1个掺杂原子+3个Cu原子）；对于oxophobic M-Cu（Pd, Ag, Au），倾向于在纯Cu位点吸附•反应能：未明确给出各分步的自由能数据•反应能垒：未明确给出•中间体吸附能（*CH₂CHO相对Cu的吸附能）：oRu-Cu: -0.71 eVoRh-Cu: -0.57 eVoIr-Cu: -0.57 eVoCu: 0 eV（基准）oPd-Cu: +0.03 eVoAg-Cu: +0.05 eVoAu-Cu: +0.06 eV•出处：正文第5-6页，Fig. 1b，补充材料Table 1（C-O键长数据）5."
+            },
+            {
+              "step_index": 6,
+              "title": "第五步（分叉步骤A）：乙烯路径（C-O键断裂）",
+              "reaction": "*CH₂CHO + H⁺ + e⁻ → C₂H₄(g) + *O",
+              "site_structure": "Cu(100) 及 M-Cu 表面，*O吸附在Cu₃M位点（oxophilic）或Cu₄位点（oxophobic）",
+              "energetics": [
+                {
+                  "value": "-0.78",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.74",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.72",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.60",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.61",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.41",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.42",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.53",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.66",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.25",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.28",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.03",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.05",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.06",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "第五步（分叉步骤A）：乙烯路径（C-O键断裂）•反应：*CH₂CHO + H⁺ + e⁻ → C₂H₄(g) + *O•位点结构类型：Cu(100) 及 M-Cu 表面，*O吸附在Cu₃M位点（oxophilic）或Cu₄位点（oxophobic）•配位数：*O在Cu₄位点（纯Cu hollow site）或Cu₃M位点（掺杂原子参与）•反应能（自由能变化）：oRu-Cu: -0.78 eVoRh-Cu: -0.74 eVoIr-Cu: -0.72 eVoCu: -0.60 eV•反应能垒（活化能）：oRu-Cu: 0.61 eVoRh-Cu: 0.41 eVoIr-Cu: 0.42 eVoCu: 0.53 eV•中间体吸附能（*O相对Cu的吸附能）：oRu-Cu: -0.66 eVoRh-Cu: -0.25 eVoIr-Cu: -0.28 eVoCu: 0 eV（基准）oPd-Cu: +0.03 eVoAg-Cu: +0.05 eVoAu-Cu: +0.06 eV•出处：正文第6-7页，Fig. 1c-d，Fig. 4a-b6."
+            },
+            {
+              "step_index": 7,
+              "title": "第五步后续（乙烯路径续）：*O还原脱附",
+              "reaction": "",
+              "site_structure": "Cu(100) 及 M-Cu 表面",
+              "energetics": [
+                {
+                  "value": "0.50",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.44",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.38",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.31",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "第五步后续（乙烯路径续）：*O还原脱附•反应1：*O + H⁺ + e⁻ → *OH•反应2：*OH + H⁺ + e⁻ → H₂O(l) + *•位点结构类型：Cu(100) 及 M-Cu 表面•配位数：同上（Cu₄或Cu₃M位点）•反应能：未明确给出具体数值•反应能垒（*O质子化能垒）：oRu-Cu: 0.50 eVoRh-Cu: 0.44 eVoIr-Cu: 0.38 eVoCu: 0.31 eV•中间体吸附能：未明确给出*OH的单独吸附能•出处：正文第7页（\"The Rh dopant possesses an optimal oxygen affinity, balancing the activation energy barriers of C–O bond cleavage and *O protonation\"），Fig. 1d7."
+            },
+            {
+              "step_index": 8,
+              "title": "第五步（分叉步骤B）：乙醇路径（C-O键保留）",
+              "reaction": "",
+              "site_structure": "Cu(100) 及 M-Cu 表面，*CH₃CHO仍通过O原子吸附（Cu-O-C结构）",
+              "energetics": [
+                {
+                  "value": "-0.52",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.52",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.62",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.58",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.52",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "第五步（分叉步骤B）：乙醇路径（C-O键保留）•反应1：*CH₂CHO + H⁺ + e⁻ → *CH₃CHO（乙醛中间体，C-O键保留）•位点结构类型：Cu(100) 及 M-Cu 表面，*CH₃CHO仍通过O原子吸附（Cu-O-C结构）•配位数：未明确给出*CH₃CHO的配位数•反应能（自由能变化）：oRu-Cu: -0.52 eV（更正：根据Fig. 1c，Ru-Cu的C₂H₅OH路径自由能约为-0.52 eV，但需核对）oRh-Cu: -0.62 eVoIr-Cu: -0.58 eVoCu: -0.52 eV•反应能垒：文献未明确给出该步骤的具体能垒数值（仅给出最终产物选择性数据）•中间体吸附能：未明确给出*CH₃CHO的单独吸附能数据•出处：正文第6页，Fig. 1c（C₂H₅OH pathway column）8."
+            },
+            {
+              "step_index": 9,
+              "title": "第六步（乙醇路径续）：*CH₃CHO还原为乙醇",
+              "reaction": "*CH₃CHO + 2H⁺ + 2e⁻ → C₂H₅OH(l) + *",
+              "site_structure": "Cu(100) 表面",
+              "energetics": [],
+              "notes": "第六步（乙醇路径续）：*CH₃CHO还原为乙醇•反应：*CH₃CHO + 2H⁺ + 2e⁻ → C₂H₅OH(l) + *•位点结构类型：Cu(100) 表面•配位数：未明确给出•反应能：未明确给出具体数值•反应能垒：未明确给出•中间体吸附能：未明确给出•出处：正文第5页（Fig. 1a示意图）请你学习这种模式，在打开的文章中查询，首先是否是CO2RR，其中是否写出了反应路径的内容。如果没有则直接写无。如果是的话，那就给出类似以上的从CO2/CO吸附开始，直到生成最终产物的路径内容，并且给出文章的催化剂材料、晶面。"
+            }
+          ],
+          "step_count": 9
+        },
+        "branching_paths": [
+          {
+            "label": "分叉",
+            "description": "分叉步骤A）：乙烯路径（C-O键断裂）"
+          },
+          {
+            "label": "分叉",
+            "description": "分叉步骤B）：乙醇路径（C-O键保留）"
+          }
+        ],
+        "major_products": [
+          "CO",
+          "C₂H₄",
+          "C₂H₅OH",
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "-0.71",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.57",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.57",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.03",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.05",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.06",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.78",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.74",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.72",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.60",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.61",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.41",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.42",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.53",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.66",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.25",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.28",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.03",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.05",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.06",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.50",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.44",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.38",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.31",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.52",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.52",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.62",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.58",
+            "unit": "eV",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "e95016f238f5d1f0b4e3422bb7d47546d0426f87cc60efad2c4940166b98069d",
+        "step_count": 9,
+        "product_count": 5
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "C₂H₄",
+              "C₂H₅OH",
+              "乙烯",
+              "乙醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 9,
+            "tolerance": 3
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(100)"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-0.71"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-0.57"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-0.57"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.03"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_011",
+      "folder_id": 11,
+      "status": "ok",
+      "source": {
+        "folder": "11",
+        "docx_path": "11/新建 Microsoft Word 文档.docx",
+        "pdf_path": "11/Jiao 等 - 2024 - Steering the Reaction Pathway of CO2 Electroreduction by Tuning the Coordination Number o.pdf",
+        "docx_sha256": "68172046c6ae8e6fcc19e110ae509c2a5860bd05b1b6051a84f75cee27b4185f",
+        "raw_text_sha256": "d638d4d70887176a244c82805f5b713289470359d8b96b977835b9b0e5d927da"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n催化剂材料与晶面材料：纯铜催化剂（单组分Cu），通过电化学还原CuO前驱体制备： 高CN催化剂：Pot-Cu（恒电位电解制备），Cyc-Cu（循环伏安法）低CN催化剂：Pul(3)-Cu（脉冲电解制备，CN最低）晶面： DFT计算基于Cu(111)表面56，但实验催化剂为氧化物衍生铜（OD-Cu），未限定单一晶面（涉及多晶表面）[7][12]。高CN Cu（如Pot-Cu） 呈现片状多孔结构79，低CN Cu（如Pul(3)-Cu） 为解离的纳米结构[7][10]。CO₂RR反应路径总结文献仅关注*CO中间体后的路径分叉（CH₄或C₂₊），未涉及CO₂初始活化（COOH）。以下路径从CO吸附开始：*第一步：CO吸附（核心中间体） 反应：CO₂(g) → CO（路径未详述，文献聚焦CO的作用）215位点结构类型：Cu表面（高CN或低CN位点）配位数：CN均值范围8.6（高CN）→6.1（低CN），但位点局部构型未提供811中间体吸附能（*CO）： 关键结论：CN↓ → *CO吸附能↑（低CN Pul(3)-Cu吸附最强）514实验证据： 原位拉曼：*CO在低CN Cu的Stark斜率更高（强吸附）14CO剥离实验：低CN Cu氧化峰电位更正（强吸附）14DFT数据：CN↓ → *CO吸附能↑（图1c）5出处：正文251415分叉路径A：C₂₊产物路径（C-C耦合主导） 反应：2*CO → *OCCHO（C-C耦合中间体）612位点结构类型：高CN Cu（如Pot-Cu）配位数：未提供（仅提CN均值高）反应能（DFT计算）： ΔGOCCHO值：高CN Cu的ΔGOCCHO更负（热力学有利）6选择性描述符：ΔGCHO — ΔGOCCHO > 0（高CN有利）6反应能垒：未提供具体数值（仅提及高CN Cu耦合能垒低）12微观环境影响： 高CN表面富集OH⁻（原位拉曼中Cu-OH峰更强）→促进*CO二聚1214最终产物：C₂H₄（乙烯）、EtOH（乙醇）1112出处：正文6111214*分叉路径B：CH₄产物路径（CO质子化主导） 反应：*CO → *CHO → … → CH₄（质子化路径）215位点结构类型：低CN Cu（如Pul(3)-Cu）配位数：未提供反应能（DFT计算）： ΔGCHO值：低CN Cu的ΔGCHO更负（热力学有利）6选择性描述符：ΔGCHO — ΔGOCCHO < 0（低CN有利）6反应能垒：未提供（文献称强*CO吸附促质子化）15微观环境影响： 低CN表面富集H⁺（原位拉曼中HCO₃⁻峰显著）→促进*CO氢化1214最终产物：CH₄（甲烷）1112出处：正文6111214\n",
+        "excerpt_chars": 1113
+      },
+      "ground_truth": {
+        "paper_title": "Jiao 等 - 2024 - Steering the Reaction Pathway of CO2 Electroreduction by Tuning the Coordination Number o.pdf",
+        "catalyst_system": {
+          "materials": [
+            "与晶面材料：纯铜催化剂（单组分Cu）",
+            "通过电化学还原CuO前驱体制备： 高CN催化剂：Pot-Cu（恒电位电解制备）",
+            "Cyc-Cu（循环伏安法）低CN催化剂：Pul(3)-Cu（脉冲电解制备",
+            "CN最低）晶面： DFT计算基于Cu(111)表面56",
+            "但实验催化剂为氧化物衍生铜（OD-Cu）",
+            "未限定单一晶面（涉及多晶表面）[7][12]。高CN Cu（如Pot-Cu） 呈现片状多孔结构79"
+          ],
+          "facets": [
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "与晶面材料：纯铜催化剂（单组分Cu），通过电化学还原CuO前驱体制备： 高CN催化剂：Pot-Cu（恒电位电解制备），Cyc-Cu（循环伏安法）低CN催化剂：Pul(3)-Cu（脉冲电解制备，CN最低）晶面： DFT计算基于Cu(111)表面56，但实验催化剂为氧化物衍生铜（OD-Cu），未限定单一晶面（涉及多晶表面）[7][12]。高CN Cu（如Pot-Cu） 呈现片状多孔结构79，低CN Cu（如Pul(3)-Cu） 为解离的纳米结构[7][10]。CO₂RR"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "催化剂材料与晶面材料：纯铜催化剂（单组分Cu），通过电化学还原CuO前驱体制备：",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "催化剂材料与晶面材料：纯铜催化剂（单组分Cu），通过电化学还原CuO前驱体制备： 高CN催化剂：Pot-Cu（恒电位电解制备），Cyc-Cu（循环伏安法）低CN催化剂：Pul(3)-Cu（脉冲电解制备，CN最低）晶面： DFT计算基于Cu(111)表面56，但实验催化剂为氧化物衍生铜（OD-Cu），未限定单一晶面（涉及多晶表面）[7][12]。高CN Cu（如Pot-Cu） 呈现片状多孔结构79，低CN Cu（如Pul(3)-Cu） 为解离的纳米结构[7][10]。CO₂RR反应路径总结文献仅关注*CO中间体后的路径分叉（CH₄或C₂₊），未涉及CO₂初始活化（COOH）。以下路径从CO吸附开始：*"
+            },
+            {
+              "step_index": 2,
+              "title": "第一步：CO吸附（核心中间体） 反应：CO₂(g) → CO（路径未详述，文献聚焦CO的作用）215位点结构类型：Cu表面（高CN或低CN位点）配位数：CN均值",
+              "reaction": "CO₂(g) → CO（路径未详述，文献聚焦CO的作用）215",
+              "site_structure": "Cu表面（高CN或低CN位点）配位数：CN均值范围8.6（高CN）→6.1（低CN），但位点局部构型未提供811中间体吸附",
+              "energetics": [],
+              "notes": "第一步：CO吸附（核心中间体） 反应：CO₂(g) → CO（路径未详述，文献聚焦CO的作用）215位点结构类型：Cu表面（高CN或低CN位点）配位数：CN均值范围8.6（高CN）→6.1（低CN），但位点局部构型未提供811中间体吸附能（*CO）： 关键结论：CN↓ → *CO吸附能↑（低CN Pul(3)-Cu吸附最强）514实验证据： 原位拉曼：*CO在低CN Cu的Stark斜率更高（强吸附）14CO剥离实验：低CN Cu氧化峰电位更正（强吸附）14DFT数据：CN↓ → *CO吸附能↑（图1c）5出处：正文251415分叉路径A：C₂₊产物路径（C-C耦合主导） 反应：2*CO → *OCCHO（C-C耦合中间体）612位点结构类型：高CN Cu（如Pot-Cu）配位数：未提供（仅提CN均值高）反应能（DFT计算）： ΔGOCCHO值：高CN Cu的ΔGOCCHO更负（热力学有利）6选择性描述符：ΔGCHO — ΔGOCCHO > 0（高CN有利）6反应能垒：未提供具体数值（仅提及高CN Cu耦合能垒低）12微观环境影响： 高CN表面富集OH⁻（原位拉曼中Cu-OH峰更强）→促进*CO二聚1214最终产物：C₂H₄（乙烯）、EtOH（乙醇）1112出处：正文6111214*分叉路径B：CH₄产物路径（CO质子化主导） 反应：*CO → *CHO → … → CH₄（质子化路径）215位点结构类型：低CN Cu（如Pul(3)-Cu）配位数：未提供反应能（DFT计算）： ΔGCHO值：低CN Cu的ΔGCHO更负（热力学有利）6选择性描述符：ΔGCHO — ΔGOCCHO < 0（低CN有利）6反应能垒：未提供（文献称强*CO吸附促质子化）15微观环境影响： 低CN表面富集H⁺（原位拉曼中HCO₃⁻峰显著）→促进*CO氢化1214最终产物：CH₄（甲烷）1112出处"
+            }
+          ],
+          "step_count": 2
+        },
+        "branching_paths": [
+          {
+            "label": "路径A",
+            "description": "C₂₊产物路径（C-C耦合主导） 反应：2*CO → *OCCHO（C-C耦合中间体）612位点结构类型：高CN Cu（如Pot-Cu）配位数：未提供（仅提CN均值高）反应能（DFT计算）： ΔGOCCHO值：高CN Cu的ΔGOCCHO更负（热力学有利）6选择性描述符：ΔGCHO — ΔGOCCHO > 0（高CN有利）6反应能垒：未提供具体数值（仅提及高CN Cu耦合能垒低）12微观环境影响： 高CN表面富集OH⁻（原位拉曼中Cu-OH峰更强）→促进*CO二聚1214最终产物：C₂H₄（乙烯）、EtOH（乙醇）1112出处：正文6111214*分叉路径B：CH₄产物路径（CO质子化主导）"
+          },
+          {
+            "label": "分叉",
+            "description": "分叉（CH₄或C₂₊），未涉及CO₂初始活化（COOH）。以下路径从CO吸附开始：*第一步：CO吸附（核心中间体） 反应：CO₂(g) → CO（路径未详述，文献聚焦CO的作用）215位点结构类型：Cu表面（高CN或低CN位点）配位数：CN均值范围8.6（高CN）→6.1（低CN），但位点局部构型未提供811中间体吸附能（*CO）： 关键结论：CN↓ → *CO吸附能↑（低CN Pul(3)-Cu吸附"
+          },
+          {
+            "label": "分叉",
+            "description": "分叉路径A：C₂₊产物路径（C-C耦合主导） 反应：2*CO → *OCCHO（C-C耦合中间体）612位点结构类型：高CN Cu（如Pot-Cu）配位数：未提供（仅提CN均值高）反应能（DFT计算）： ΔGOCCHO值：高CN Cu的ΔGOCCHO更负（热力学有利）6选择性描述符：ΔGCHO — ΔGOCCHO > 0（高CN有利）6反应能垒：未提供具体数值（仅提及高CN Cu耦合能垒低）12微观环"
+          },
+          {
+            "label": "分叉",
+            "description": "分叉路径B：CH₄产物路径（CO质子化主导） 反应：*CO → *CHO → … → CH₄（质子化路径）215位点结构类型：低CN Cu（如Pul(3)-Cu）配位数：未提供反应能（DFT计算）： ΔGCHO值：低CN Cu的ΔGCHO更负（热力学有利）6选择性描述符：ΔGCHO — ΔGOCCHO < 0（低CN有利）6反应能垒：未提供（文献称强*CO吸附促质子化）15微观环境影响： 低CN表面富"
+          }
+        ],
+        "major_products": [
+          "CH₄",
+          "CO",
+          "C₂H₄",
+          "乙烯",
+          "乙醇",
+          "甲烷"
+        ],
+        "key_energetics": []
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "d638d4d70887176a244c82805f5b713289470359d8b96b977835b9b0e5d927da",
+        "step_count": 2,
+        "product_count": 6
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CH₄",
+              "CO",
+              "C₂H₄",
+              "乙烯",
+              "乙醇",
+              "甲烷"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 2,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_012",
+      "folder_id": 12,
+      "status": "ok",
+      "source": {
+        "folder": "12",
+        "docx_path": "12/新建 Microsoft Word 文档.docx",
+        "pdf_path": "12/Zhao 等 - 2022 - Charting C–C coupling pathways in electrochemical CO2 reduction on Cu(111) using embedded.pdf",
+        "docx_sha256": "feddfaaa381dde3adec4029c194ab8826317411a51eb2f50f962638c337cebe6",
+        "raw_text_sha256": "c67ced7a411383b07f409695e0a1cf1250906f13ddc463839c79c246fad87ba3"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n催化剂材料与晶面催化剂: 纯铜（Cu）晶面: (111) 反应路径关键步骤（从*CO起始）*起始：CO生成（前置步骤，文中未提供能量数据） 反应: CO₂(g) + * → *COOH → *CO（质子-电子转移细节未量化）位点: *CO吸附于atop位*CO加氢生成C₁中间体 反应: *CO + H⁺ + e⁻ → *CHO（吸附于bidentate atop位）或 *CO + H⁺ + e⁻ → *COH（吸附于hcp hollow位）能垒: ~0.6 eV（应用电压0.9 V vs. RHE时）共存性: CHO和COH可在Cu(111)表面稳定共存（覆盖率≤0.5 ML）C-C耦合（核心步骤） **路径1：*CHO + COH → COH-CHO（最优路径） 反应: *CHO + *COH → *COH-CHO位点: *CHO: bidentate atop, *COH: hcp hollow*COH-CHO产物: bridge位（图2G）能垒: 0.31 eV（emb-CASPT2）反应能: -1.46 eV（强放热）**路径2：*COH + *COH → COH-COH 位点: fcc-hcp位（图2E）能垒: 0.46 eV（emb-CASPT2）反应能: -1.24 eV **路径3：*CHO + *CHO → OCH-OCH 位点: fcc-hcp位（图2F）能垒: 0.51 eV（emb-CASPT2）反应能: -2.45 eV（强放热，可能生成乙烯前体）后续加氢生成C₂产物 文中未提供*COH-CHO等中间体加氢至乙烯/乙醇的详细路径及能量数据。关键结论: C-C耦合非决速步，CO加氢至CHO/*COH控制总速率 Cu(111)倾向于生成甲烷（与*CHO/*COH加氢竞争有关）\n",
+        "excerpt_chars": 761
+      },
+      "ground_truth": {
+        "paper_title": "Zhao 等 - 2022 - Charting C–C coupling pathways in electrochemical CO2 reduction on Cu(111) using embedded.pdf",
+        "catalyst_system": {
+          "materials": [
+            "与晶面催化剂: 纯铜（Cu）晶面: (111)"
+          ],
+          "facets": [
+            "(111)",
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "与晶面催化剂: 纯铜（Cu）晶面: (111)"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "催化剂材料与晶面催化剂: 纯铜（Cu）晶面: (111) 反应路径关键步骤（从*",
+              "reaction": "CO₂(g) + * → *COOH → *CO（质子-电子转移细节未量化）",
+              "site_structure": "*CO吸附于atop位*CO加氢生成C₁中间体",
+              "energetics": [
+                {
+                  "value": "0.6",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.31",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-1.46",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.46",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-1.24",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.51",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-2.45",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.9",
+                  "unit": "V_vs_RHE"
+                }
+              ],
+              "notes": "催化剂材料与晶面催化剂: 纯铜（Cu）晶面: (111) 反应路径关键步骤（从*CO起始）*起始：CO生成（前置步骤，文中未提供能量数据） 反应: CO₂(g) + * → *COOH → *CO（质子-电子转移细节未量化）位点: *CO吸附于atop位*CO加氢生成C₁中间体 反应: *CO + H⁺ + e⁻ → *CHO（吸附于bidentate atop位）或 *CO + H⁺ + e⁻ → *COH（吸附于hcp hollow位）能垒: ~0.6 eV（应用电压0.9 V vs. RHE时）共存性: CHO和COH可在Cu(111)表面稳定共存（覆盖率≤0.5 ML）C-C耦合（核心步骤） **路径1：*CHO + COH → COH-CHO（最优路径） 反应: *CHO + *COH → *COH-CHO位点: *CHO: bidentate atop, *COH: hcp hollow*COH-CHO产物: bridge位（图2G）能垒: 0.31 eV（emb-CASPT2）反应能: -1.46 eV（强放热）**路径2：*COH + *COH → COH-COH 位点: fcc-hcp位（图2E）能垒: 0.46 eV（emb-CASPT2）反应能: -1.24 eV **路径3：*CHO + *CHO → OCH-OCH 位点: fcc-hcp位（图2F）能垒: 0.51 eV（emb-CASPT2）反应能: -2.45 eV（强放热，可能生成乙烯前体）后续加氢生成C₂产物 文中未提供*COH-CHO等中间体加氢至乙烯/乙醇的详细路径及能量数据。关键结论: C-C耦合非决速步，CO加氢至CHO/*COH控制总速率 Cu(111)倾向于生成甲烷（与*CHO/*COH加氢竞争有关）"
+            }
+          ],
+          "step_count": 1
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CO",
+          "乙烯",
+          "乙醇",
+          "甲烷"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.6",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.31",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-1.46",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.46",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-1.24",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.51",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-2.45",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.9",
+            "unit": "V_vs_RHE",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "c67ced7a411383b07f409695e0a1cf1250906f13ddc463839c79c246fad87ba3",
+        "step_count": 1,
+        "product_count": 4
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "乙烯",
+              "乙醇",
+              "甲烷"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 1,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "(111)"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.6"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.31"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-1.46"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.46"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-1.24"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_013",
+      "folder_id": 13,
+      "status": "ok",
+      "source": {
+        "folder": "13",
+        "docx_path": "13/新建 Microsoft Word 文档.docx",
+        "pdf_path": "13/Zhu 等 - 2026 - Pre-Protonation Reaction Pathway for CO2 Electrolysis to n-Propanol.pdf",
+        "docx_sha256": "acfdafb36c87caee422f6b43b1ede07d27dc43384e4374f351d768b669b69f24",
+        "raw_text_sha256": "fab7c5a9fb9fdd770c6722294b1743338b2bb50b78a87bae825b025f37b936cc"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n催化剂材料：混合配位铜催化剂（MCN-Cu） 高配位铜（HCN-Cu）：由CuO衍生，主要负责生成CO低配位铜（LCN-Cu）：由CuI衍生，含阶梯结构（Cu(100)/Cu(111)晶面），促进C-C耦合晶面：低配位铜位点含Cu(100)和Cu(111)阶梯结构（正文9段）产物：n-丙醇（C₃H₇OH）路径创新点：通过预质子化路径替代传统*CO−*CO耦合，降低C-C耦合能垒（从1.63 eV→0.98 eV）2. 完整CO₂RR反应路径（从CO₂吸附至n-丙醇）步骤1：CO₂吸附与活化（文献1217段）反应： HCN-Cu位点：CO₂(g) + H⁺ + e⁻ → *COOH → *CO → CO(g)（快速脱附）作用：通过溢出效应（spillover）向LCN-Cu位点提供*CO富集环境位点类型： HCN-Cu（弱*CO吸附）LCN-Cu（强*CO吸附）能量数据：未直接提供步骤2：CO预质子化形成COH（关键创新步骤）（正文1417段）反应：*CO + H⁺ + e⁻ → *COH位点类型：LCN-Cu位点 特性：低配位数（阶梯结构）、高水解离能力反应能垒：0.98 eV（DFT计算，LCN-Cu vs. HCN-Cu的1.21 eV）关键证据： 原位拉曼（SERS）检测到*COH信号（1132 cm⁻¹）14*CO覆盖度↑（5/24 ML）使能垒降至0.81 eV（图4b）步骤3：C-C耦合（非速率决定步骤）（正文1518段）反应：*COH + *CO → *OCCOH位点类型：LCN-Cu阶梯位点（Cu(100)/Cu(111)）反应能垒：*显著低于传统*CO−CO耦合（传统路径1.63 eV→预质子化路径0.98 eV为RDS）关键证据： DFT计算显示*OCCOH稳定性增强（图4e）原位拉曼检测到OCCOH（1233 cm⁻¹）和OCHCH₂（1444 cm⁻¹）15步骤4：C₂中间体深度加氢（正文1518段）反应： *OCCOH → [加氢步骤] → *OCHCH₂*OCHCH₂ → [加氢步骤] → C₃中间体位点类型：LCN-Cu位点关键证据： 原位拉曼确认*OCHCH₂信号（1444 cm⁻¹）15OCHCH₂进一步与CO耦合生成C₃中间体（图3f）步骤5：n-丙醇生成（摘要及正文519段）反应：C₃中间体 → n-C₃H₇OH(g)选择性关键：预质子化路径抑制C₂产物竞争 n-丙醇法拉第效率：17.6%（-0.8 V vs. RHE）部分电流密度：78.5 mA cm⁻²\n",
+        "excerpt_chars": 1066
+      },
+      "ground_truth": {
+        "paper_title": "Zhu 等 - 2026 - Pre-Protonation Reaction Pathway for CO2 Electrolysis to n-Propanol.pdf",
+        "catalyst_system": {
+          "materials": [
+            "：混合配位铜催化剂（MCN-Cu） 高配位铜（HCN-Cu）：由CuO衍生",
+            "主要负责生成CO低配位铜（LCN-Cu）：由CuI衍生",
+            "含阶梯结构（Cu(100)/Cu(111)晶面）",
+            "促进C-C耦合晶面：低配位铜位点含Cu(100)和Cu(111)阶梯结构（正文9段）产物：n-丙醇（C₃H₇OH）"
+          ],
+          "facets": [
+            "Cu(100)",
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "：混合配位铜催化剂（MCN-Cu） 高配位铜（HCN-Cu）：由CuO衍生，主要负责生成CO低配位铜（LCN-Cu）：由CuI衍生，含阶梯结构（Cu(100)/Cu(111)晶面），促进C-C耦合晶面：低配位铜位点含Cu(100)和Cu(111)阶梯结构（正文9段）产物：n-丙醇（C₃H₇OH）"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "催化剂材料：混合配位铜催化剂（MCN-Cu） 高配位铜（HCN-Cu）：由CuO",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [
+                {
+                  "value": "1.63",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.98",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "催化剂材料：混合配位铜催化剂（MCN-Cu） 高配位铜（HCN-Cu）：由CuO衍生，主要负责生成CO低配位铜（LCN-Cu）：由CuI衍生，含阶梯结构（Cu(100)/Cu(111)晶面），促进C-C耦合晶面：低配位铜位点含Cu(100)和Cu(111)阶梯结构（正文9段）产物：n-丙醇（C₃H₇OH）路径创新点：通过预质子化路径替代传统*CO−*CO耦合，降低C-C耦合能垒（从1.63 eV→0.98 eV）2. 完整CO₂RR反应路径（从CO₂吸附至n-丙醇）"
+            },
+            {
+              "step_index": 2,
+              "title": "步骤1：CO₂吸附与活化（文献1217段）反应： HCN-Cu位点：CO₂(g)",
+              "reaction": "",
+              "site_structure": "CO₂(g) + H⁺ + e⁻ → *COOH → *CO → CO(g)（快速脱附）作用：通过溢",
+              "energetics": [],
+              "notes": "步骤1：CO₂吸附与活化（文献1217段）反应： HCN-Cu位点：CO₂(g) + H⁺ + e⁻ → *COOH → *CO → CO(g)（快速脱附）作用：通过溢出效应（spillover）向LCN-Cu位点提供*CO富集环境位点类型： HCN-Cu（弱*CO吸附）LCN-Cu（强*CO吸附）能量数据：未直接提供"
+            },
+            {
+              "step_index": 3,
+              "title": "步骤2：CO预质子化形成COH（关键创新步骤）（正文1417段）反应：*CO +",
+              "reaction": "*CO + H⁺ + e⁻ → *COH",
+              "site_structure": "",
+              "energetics": [
+                {
+                  "value": "0.98",
+                  "unit": "eV"
+                },
+                {
+                  "value": "1.21",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.81",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "步骤2：CO预质子化形成COH（关键创新步骤）（正文1417段）反应：*CO + H⁺ + e⁻ → *COH位点类型：LCN-Cu位点 特性：低配位数（阶梯结构）、高水解离能力反应能垒：0.98 eV（DFT计算，LCN-Cu vs. HCN-Cu的1.21 eV）关键证据： 原位拉曼（SERS）检测到*COH信号（1132 cm⁻¹）14*CO覆盖度↑（5/24 ML）使能垒降至0.81 eV（图4b）"
+            },
+            {
+              "step_index": 4,
+              "title": "步骤3：C-C耦合（非速率决定步骤）（正文1518段）反应：*COH + *CO",
+              "reaction": "*COH + *CO → *OCCOH",
+              "site_structure": "",
+              "energetics": [
+                {
+                  "value": "1.63",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.98",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "步骤3：C-C耦合（非速率决定步骤）（正文1518段）反应：*COH + *CO → *OCCOH位点类型：LCN-Cu阶梯位点（Cu(100)/Cu(111)）反应能垒：*显著低于传统*CO−CO耦合（传统路径1.63 eV→预质子化路径0.98 eV为RDS）关键证据： DFT计算显示*OCCOH稳定性增强（图4e）原位拉曼检测到OCCOH（1233 cm⁻¹）和OCHCH₂（1444 cm⁻¹）15"
+            },
+            {
+              "step_index": 5,
+              "title": "步骤4：C₂中间体深度加氢（正文1518段）反应： *OCCOH → [加氢步骤",
+              "reaction": "*OCCOH → [加氢步骤] → *OCHCH₂*OCHCH₂ → [加氢步骤] → C₃中间体",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "步骤4：C₂中间体深度加氢（正文1518段）反应： *OCCOH → [加氢步骤] → *OCHCH₂*OCHCH₂ → [加氢步骤] → C₃中间体位点类型：LCN-Cu位点关键证据： 原位拉曼确认*OCHCH₂信号（1444 cm⁻¹）15OCHCH₂进一步与CO耦合生成C₃中间体（图3f）"
+            },
+            {
+              "step_index": 6,
+              "title": "步骤5：n-丙醇生成（摘要及正文519段）反应：C₃中间体 → n-C₃H₇OH",
+              "reaction": "C₃中间体 → n-C₃H₇OH(g)选择性关键：预质子化路径抑制C₂产物竞争 n-丙醇法拉第效率：17.6%（-0.8 V vs. RHE）部分电流密度：78.5 mA cm⁻²",
+              "site_structure": "",
+              "energetics": [
+                {
+                  "value": "-0.8",
+                  "unit": "V_vs_RHE"
+                },
+                {
+                  "value": "17.6",
+                  "unit": "FE_percent"
+                },
+                {
+                  "value": "78.5",
+                  "unit": "current_density_mA_cm2"
+                }
+              ],
+              "notes": "步骤5：n-丙醇生成（摘要及正文519段）反应：C₃中间体 → n-C₃H₇OH(g)选择性关键：预质子化路径抑制C₂产物竞争 n-丙醇法拉第效率：17.6%（-0.8 V vs. RHE）部分电流密度：78.5 mA cm⁻²"
+            }
+          ],
+          "step_count": 6
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CO",
+          "C₃H₇OH",
+          "n-丙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "1.63",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.98",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.98",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "1.21",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.81",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "1.63",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.98",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "-0.8",
+            "unit": "V_vs_RHE",
+            "context": ""
+          },
+          {
+            "value": "17.6",
+            "unit": "FE_percent",
+            "context": ""
+          },
+          {
+            "value": "78.5",
+            "unit": "current_density_mA_cm2",
+            "context": ""
+          },
+          {
+            "value": "速率决定步骤）（正文1518段）反应：*COH + *CO → *OCCOH位点类型：LCN-Cu阶梯位点（Cu(100)/Cu(111)）反应能垒：*显著低于传统*CO−CO耦合（传统路径1.63 eV→预质子化路径0.98 eV为RDS）关键证据：",
+            "unit": "rds_description",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "fab7c5a9fb9fdd770c6722294b1743338b2bb50b78a87bae825b025f37b936cc",
+        "step_count": 6,
+        "product_count": 3
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "C₃H₇OH",
+              "n-丙醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 6,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(100)"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "1.63"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.98"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.98"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "1.21"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.81"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_014",
+      "folder_id": 14,
+      "status": "ok",
+      "source": {
+        "folder": "14",
+        "docx_path": "14/新建 Microsoft Word 文档.docx",
+        "pdf_path": "14/Tong 等 - 2025 - Switching CO2 Electroreduction Pathways between Ethylene and Ethanol via Tuning Microenvi.pdf",
+        "docx_sha256": "f93612a162f87f1be292566f25a78c146fa159fc21e533c848af0d608f9116e0",
+        "raw_text_sha256": "507b8166a2e7bd4d952a4022372d816c6875458e02de8e8309975f2036c6a69f"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n催化剂材料：铜基纳米纤维表面涂有导电聚吡咯（polypyrrole），分为两种类型： Cu/Cu₂⁺₁O/SHNC：使用聚乙烯吡咯烷酮（PVP）模板制备，具有超疏水表面（water contact angle: 154°），优先生成乙醇。Cu/Cu₂⁺₁O/NC：无PVP模板制备，仅疏水表面（water contact angle: 139°），优先生成乙烯。两者均含有Cu⁺和Cu⁺混合价态（XANES/XPS证实）49，但无特定纳米结构（如晶格）描述。晶面：未明确指定（文献中未提及具体晶面如Cu(100)或Cu(111)；仅描述为纳米纤维结构，且通过STEM/HRTEM观察，但文本未讨论晶面信息。可能因涂层影响表面结构而非暴露特定晶面）。CO₂RR完整反应路径（从CO₂吸附到乙烯/乙醇产物生成）步骤1：CO₂活化吸附（起始步骤）反应：CO₂(g) + H⁺ + e⁻ → *COOH（未直接写出） → *CO 解释：文献未直接给出CO₂ → COOH的详细反应式，但原位拉曼检测到CO信号（2000–2100 cm⁻¹），暗示CO₂吸附还原形成CO中间体（可能是经由COOH，但未明确）。位点结构类型：铜纳米纤维表面（Cu/Cu₂⁺₁O，两种催化剂均涉及）。无特定位点（如M-Cu掺杂），但*CO吸附依赖表面微观环境。配位数：未明确给出（文献无描述）。反应能：未提供具体数值。反应能垒：未提供具体数值（提及*CO形成是初始步骤，但未量化）。中间体吸附能：未明确给出（如COOH或CO吸附能）；但有证据显示，在超疏水表面（SHNC）中*CO吸附更强（拉曼峰值更高）。出处：正文第8段（原位拉曼证据）。**步骤2：CO还原（CO中间体形成）反应：从COOH → CO + H₂O 或直接CO吸附形成（文献未区分该步）。核心是CO作为关键中间体。 解释：文献聚焦CO在后续耦合中的作用，未单独描述COOH还原步骤，但ATR-IR检测到*CObridge（桥接吸附CO）。位点结构类型：铜表面（Cu/Cu₂⁺₁O）。对于SHNC，*CO吸附在双铜原子位点（*CObridge，检测到1750–1900 cm⁻¹）。配位数：未明确给出（文献无描述）。反应能：未提供具体数值。反应能垒：未提供具体数值。中间体吸附能：未明确给出；但超疏水表面（SHNC）增强*CO吸附覆盖度（覆盖率更高），影响后续路径。出处：正文第10段（ATR-IR证据）。步骤3：C-C耦合（关键步骤，影响路径分叉）反应：分两条路径（乙烯 vs 乙醇），基于催化剂类型： 对于乙烯路径（Cu/Cu₂⁺₁O/NC）：2*CO → *CCH（乙烯最终中间体） 机理：两个CO中间体通过Langmuir-Hinshelwood机制耦合（依赖pCO增加，且与疏水表面增强H覆盖相关）。对于乙醇路径（Cu/Cu₂⁺₁O/SHNC）： 起始耦合：CO + CHO → CHCHOH（乙醇路径中间体）子反应：可能涉及CO + CHO 形成，其中CHO来源于CO加氢（但未详细写出步骤）。检测到OC2H5中间体（1370 cm⁻¹），支持乙醇路径。位点结构类型：铜表面（Cu/Cu₂⁺₁O）。无特定晶面，但表面微观环境影响： NC催化剂（疏水）: 增强H覆盖，促进CO-*CO耦合。SHNC催化剂（超疏水）: 高CO覆盖，促进CO-*CHO耦合。配位数：未明确给出（如CCH或CHCHOH配位数；但对于*OC2H5，未描述）。反应能： 未提供具体数值（无自由能变化数据）。但提及：超疏水表面（SHNC）“reduces the reaction energy for the formation of CHCHOH (ethanol path)”比较CCH（ethylene path）。反应能垒： 未提供具体能垒数值。但提及C-C耦合是速率影响步骤；Tafel斜率为： NC催化剂: 130 mV dec⁻¹ (支持*CO-*CO耦合作为乙烯路径)。SHNC催化剂: 61 mV dec⁻¹ 解释：*CO-*CHO耦合能垒较低。中间体吸附能：未明确给出（如CHCHOH或CCH吸附能）。出处：正文第16段（动力学模型和Tafel斜率），第18段（能量比较）18，和第10段（*OC2H5检测）。步骤4：后续到最终产物途径（分叉路径）反应： 乙烯路径（Cu/Cu₂⁺₁O/NC）： *CCH → *CHCH或其他还原步骤 → C₂H₄(g)未详细写出步骤数：文献仅概括性描述路径，无具体PCET步骤计数。乙醇路径（Cu/Cu₂⁺₁O/SHNC）： *CHCHOH → *OC2H5（检测到的关键中间体） → C₂H₅OH(l)未写出具体质子化步骤数：文中提及“*CHCHOH 中间体”，但未定义子步数。最终：*OC2H5还原 → C₂H₅OH（通过ATR-IR检测）。位点结构类型：铜表面（Cu/Cu₂⁺₁O）。SHNC中，吸附*OH有助于乙醇路径。配位数：未明确给出（任何中间体无描述）。反应能：未提供具体数值（各分步无自由能数据）。反应能垒：未提供具体数值。中间体吸附能： 未提供数值（如*OC2H5吸附能）。但提及超疏水表面增强氧中间体吸附（如*OH），促进乙醇生成。出处：正文第10段（*OC2H5检测）、第16-18段（路径模型）、图4c（IR证据）。\n",
+        "excerpt_chars": 2208
+      },
+      "ground_truth": {
+        "paper_title": "Tong 等 - 2025 - Switching CO2 Electroreduction Pathways between Ethylene and Ethanol via Tuning Microenvi.pdf",
+        "catalyst_system": {
+          "materials": [
+            "：铜基纳米纤维表面涂有导电聚吡咯（polypyrrole）",
+            "分为两种类型： Cu/Cu₂⁺₁O/SHNC：使用聚乙烯吡咯烷酮（PVP）模板制备",
+            "具有超疏水表面（water contact angle: 154°）",
+            "优先生成乙醇。Cu/Cu₂⁺₁O/NC：无PVP模板制备",
+            "仅疏水表面（water contact angle: 139°）",
+            "优先生成乙烯。两者均含有Cu⁺和Cu⁺混合价态（XANES/XPS证实）49"
+          ],
+          "facets": [
+            "Cu(100)",
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "：铜基纳米纤维表面涂有导电聚吡咯（polypyrrole），分为两种类型： Cu/Cu₂⁺₁O/SHNC：使用聚乙烯吡咯烷酮（PVP）模板制备，具有超疏水表面（water contact angle: 154°），优先生成乙醇。Cu/Cu₂⁺₁O/NC：无PVP模板制备，仅疏水表面（water contact angle: 139°），优先生成乙烯。两者均含有Cu⁺和Cu⁺混合价态（XANES/XPS证实）49，但无特定纳米结构（如晶格）描述。晶面：未明确指定（文献中未提及具体晶面如Cu(100)或Cu(111)；仅描述为纳米纤维结构，且通过STEM/HRTEM观察，但文本未讨论晶面信息。可能因涂层影响表面结构而非暴露特定晶面）。CO₂RR"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "催化剂材料：铜基纳米纤维表面涂有导电聚吡咯（polypyrrole），分为两种类",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "催化剂材料：铜基纳米纤维表面涂有导电聚吡咯（polypyrrole），分为两种类型： Cu/Cu₂⁺₁O/SHNC：使用聚乙烯吡咯烷酮（PVP）模板制备，具有超疏水表面（water contact angle: 154°），优先生成乙醇。Cu/Cu₂⁺₁O/NC：无PVP模板制备，仅疏水表面（water contact angle: 139°），优先生成乙烯。两者均含有Cu⁺和Cu⁺混合价态（XANES/XPS证实）49，但无特定纳米结构（如晶格）描述。晶面：未明确指定（文献中未提及具体晶面如Cu(100)或Cu(111)；仅描述为纳米纤维结构，且通过STEM/HRTEM观察，但文本未讨论晶面信息。可能因涂层影响表面结构而非暴露特定晶面）。CO₂RR完整反应路径（从CO₂吸附到乙烯/乙醇产物生成）"
+            },
+            {
+              "step_index": 2,
+              "title": "步骤1：CO₂活化吸附（起始步骤）反应：CO₂(g) + H⁺ + e⁻ → *",
+              "reaction": "CO₂(g) + H⁺ + e⁻ → *COOH（未直接写",
+              "site_structure": "铜纳米纤维表面（Cu/Cu₂⁺₁O，两种催化剂均涉及）。无特定位点（如M-Cu掺杂），但*CO吸附依赖表面微观环境。配位数：未明确给",
+              "energetics": [],
+              "notes": "步骤1：CO₂活化吸附（起始步骤）反应：CO₂(g) + H⁺ + e⁻ → *COOH（未直接写出） → *CO 解释：文献未直接给出CO₂ → COOH的详细反应式，但原位拉曼检测到CO信号（2000–2100 cm⁻¹），暗示CO₂吸附还原形成CO中间体（可能是经由COOH，但未明确）。位点结构类型：铜纳米纤维表面（Cu/Cu₂⁺₁O，两种催化剂均涉及）。无特定位点（如M-Cu掺杂），但*CO吸附依赖表面微观环境。配位数：未明确给出（文献无描述）。反应能：未提供具体数值。反应能垒：未提供具体数值（提及*CO形成是初始步骤，但未量化）。中间体吸附能：未明确给出（如COOH或CO吸附能）；但有证据显示，在超疏水表面（SHNC）中*CO吸附更强（拉曼峰值更高）。出处：正文第8段（原位拉曼证据）。**"
+            },
+            {
+              "step_index": 3,
+              "title": "步骤2：CO还原（CO中间体形成）反应：从COOH → CO + H₂O 或直接",
+              "reaction": "从COOH → CO + H₂O 或直接CO吸附形成（文献未区分该步）。核心是CO作为关键中间体。 解释：文献聚焦CO在后续耦合中的作用，未单独描述COOH还原步骤，但ATR-IR检测到*CObridge（桥接吸附CO）。",
+              "site_structure": "铜表面（Cu/Cu₂⁺₁O）。对于SHNC，*CO吸附在双铜原子位点（*CObridge，检测到1750–1900 cm⁻¹）。配位数：未明确给",
+              "energetics": [],
+              "notes": "步骤2：CO还原（CO中间体形成）反应：从COOH → CO + H₂O 或直接CO吸附形成（文献未区分该步）。核心是CO作为关键中间体。 解释：文献聚焦CO在后续耦合中的作用，未单独描述COOH还原步骤，但ATR-IR检测到*CObridge（桥接吸附CO）。位点结构类型：铜表面（Cu/Cu₂⁺₁O）。对于SHNC，*CO吸附在双铜原子位点（*CObridge，检测到1750–1900 cm⁻¹）。配位数：未明确给出（文献无描述）。反应能：未提供具体数值。反应能垒：未提供具体数值。中间体吸附能：未明确给出；但超疏水表面（SHNC）增强*CO吸附覆盖度（覆盖率更高），影响后续路径。出处：正文第10段（ATR-IR证据）。"
+            },
+            {
+              "step_index": 4,
+              "title": "步骤3：C-C耦合（关键步骤，影响路径分叉）反应：分两条路径（乙烯 vs 乙醇）",
+              "reaction": "分两条路径（乙烯 vs 乙醇），基于催化剂类型： 对于乙烯路径（Cu/Cu₂⁺₁O/NC）：2*CO → *CCH（乙烯最终中间体） 机理：两个CO中间体通过Langmuir-Hinshelwood机制耦合（依赖pCO增加，且与疏水表面增强H覆盖相关）。对于乙醇路径（Cu/Cu₂⁺₁O/SHNC）： 起始耦合：CO + CHO → CHCHOH（乙醇路径中间体）子反应：可能涉及CO + CHO 形",
+              "site_structure": "铜表面（Cu/Cu₂⁺₁O）。无特定晶面，但表面微观环境影响： NC催化剂（疏水）: 增强H覆盖，促进CO-*CO耦合。SHNC催化剂（超疏水）: 高CO覆盖，促进CO-*CHO耦合。配位数：未明确给",
+              "energetics": [],
+              "notes": "步骤3：C-C耦合（关键步骤，影响路径分叉）反应：分两条路径（乙烯 vs 乙醇），基于催化剂类型： 对于乙烯路径（Cu/Cu₂⁺₁O/NC）：2*CO → *CCH（乙烯最终中间体） 机理：两个CO中间体通过Langmuir-Hinshelwood机制耦合（依赖pCO增加，且与疏水表面增强H覆盖相关）。对于乙醇路径（Cu/Cu₂⁺₁O/SHNC）： 起始耦合：CO + CHO → CHCHOH（乙醇路径中间体）子反应：可能涉及CO + CHO 形成，其中CHO来源于CO加氢（但未详细写出步骤）。检测到OC2H5中间体（1370 cm⁻¹），支持乙醇路径。位点结构类型：铜表面（Cu/Cu₂⁺₁O）。无特定晶面，但表面微观环境影响： NC催化剂（疏水）: 增强H覆盖，促进CO-*CO耦合。SHNC催化剂（超疏水）: 高CO覆盖，促进CO-*CHO耦合。配位数：未明确给出（如CCH或CHCHOH配位数；但对于*OC2H5，未描述）。反应能： 未提供具体数值（无自由能变化数据）。但提及：超疏水表面（SHNC）“reduces the reaction energy for the formation of CHCHOH (ethanol path)”比较CCH（ethylene path）。反应能垒： 未提供具体能垒数值。但提及C-C耦合是速率影响步骤；Tafel斜率为： NC催化剂: 130 mV dec⁻¹ (支持*CO-*CO耦合作为乙烯路径)。SHNC催化剂: 61 mV dec⁻¹ 解释：*CO-*CHO耦合能垒较低。中间体吸附能：未明确给出（如CHCHOH或CCH吸附能）。出处：正文第16段（动力学模型和Tafel斜率），第18段（能量比较）18，和第10段（*OC2H5检测）。"
+            },
+            {
+              "step_index": 5,
+              "title": "步骤4：后续到最终产物途径（分叉路径）反应： 乙烯路径（Cu/Cu₂⁺₁O/NC",
+              "reaction": "乙烯路径（Cu/Cu₂⁺₁O/NC）： *CCH → *CHCH或其他还原步骤 → C₂H₄(g)未详细写",
+              "site_structure": "铜表面（Cu/Cu₂⁺₁O）。SHNC中，吸附*OH有助于乙醇路径。配位数：未明确给",
+              "energetics": [],
+              "notes": "步骤4：后续到最终产物途径（分叉路径）反应： 乙烯路径（Cu/Cu₂⁺₁O/NC）： *CCH → *CHCH或其他还原步骤 → C₂H₄(g)未详细写出步骤数：文献仅概括性描述路径，无具体PCET步骤计数。乙醇路径（Cu/Cu₂⁺₁O/SHNC）： *CHCHOH → *OC2H5（检测到的关键中间体） → C₂H₅OH(l)未写出具体质子化步骤数：文中提及“*CHCHOH 中间体”，但未定义子步数。最终：*OC2H5还原 → C₂H₅OH（通过ATR-IR检测）。位点结构类型：铜表面（Cu/Cu₂⁺₁O）。SHNC中，吸附*OH有助于乙醇路径。配位数：未明确给出（任何中间体无描述）。反应能：未提供具体数值（各分步无自由能数据）。反应能垒：未提供具体数值。中间体吸附能： 未提供数值（如*OC2H5吸附能）。但提及超疏水表面增强氧中间体吸附（如*OH），促进乙醇生成。出处：正文第10段（*OC2H5检测）、第16-18段（路径模型）、图4c（IR证据）。"
+            }
+          ],
+          "step_count": 5
+        },
+        "branching_paths": [
+          {
+            "label": "分叉",
+            "description": "分叉）反应：分两条路径（乙烯 vs 乙醇），基于催化剂类型： 对于乙烯路径（Cu/Cu₂⁺₁O/NC）：2*CO → *CCH（乙烯最终中间体） 机理：两个CO中间体通过Langmuir-Hinshelwood机制耦合（依赖pCO增加，且与疏水表面增强H覆盖相关）。对于乙醇路径（Cu/Cu₂⁺₁O/SHNC）： 起始耦合：CO + CHO → CHCHOH（乙醇路径中间体）子反应：可能涉及CO + C"
+          },
+          {
+            "label": "分叉",
+            "description": "分叉路径）反应： 乙烯路径（Cu/Cu₂⁺₁O/NC）： *CCH → *CHCH或其他还原步骤 → C₂H₄(g)未详细写出步骤数：文献仅概括性描述路径，无具体PCET步骤计数。乙醇路径（Cu/Cu₂⁺₁O/SHNC）： *CHCHOH → *OC2H5（检测到的关键中间体） → C₂H₅OH(l)未写出具体质子化步骤数：文中提及“*CHCHOH 中间体”，但未定义子步数。最终：*OC2H5还原 →"
+          }
+        ],
+        "major_products": [
+          "CO",
+          "C₂H₄",
+          "C₂H₅OH",
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": []
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "507b8166a2e7bd4d952a4022372d816c6875458e02de8e8309975f2036c6a69f",
+        "step_count": 5,
+        "product_count": 5
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "C₂H₄",
+              "C₂H₅OH",
+              "乙烯",
+              "乙醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 5,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(100)"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_015",
+      "folder_id": 15,
+      "status": "ok",
+      "source": {
+        "folder": "15",
+        "docx_path": "15/新建 Microsoft Word 文档.docx",
+        "pdf_path": "15/Long 等 - 2023 - Regulating reconstruction of oxide-derived Cu for electrochemical CO2 reduction toward n-.pdf",
+        "docx_sha256": "14144525a60a0e5b6400cfe5c3d8c079e3293f40ab8347454d7555bba7662123",
+        "raw_text_sha256": "0f7b89d6b6fec388e7a43a6e8c6c1c184d49ff156e1be321bc8bafb5d33138db"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n催化剂材料CuO衍生的铜（CuOD-Cu）：通过剧烈脱氧重构形成丰富低配位Cu位点（配位数≈9.1）Cu₂O衍生的铜（Cu₂OD-Cu）：重构后配位较高（≈10.2），低配位位点较少晶面特征未暴露特定晶面：电化学OH吸附测试表明，两种催化剂均存在Cu(100)、Cu(110)、Cu(111)共存的多晶表面，无单一晶面占主导具体反应路径步骤步骤1：CO₂活化吸附（起始步骤）反应：CO₂(g) + * + H⁺ + e⁻ → COOH （未直接写出，经CO中间体）位点结构类型：低配位Cu₇C位点（主要存在于CuOD-Cu）配位数：针对活性位点（Cu₇C：CN≈9.1），未明确*COOH具体配位数反应能&能垒：未明确给出中间体吸附能：未明确提供COOH吸附能，但强调CO在低配位点吸附增强710出处：正文第9-10段（原位拉曼与理论计算），图4A-B步骤2：COOH还原为CO反应：*COOH + H⁺ + e⁻ → *CO + H₂O （未直接写出）位点结构类型：低配位Cu₇C位点（CuOD-Cu）配位数：未明确给出反应能&能垒：未明确给出中间体吸附能：*CO吸附增强（CuOD-Cu表面拉曼信号更强）出处：正文第10段（*CO为关键中间体），图4A步骤3：C-C耦合（关键步骤，影响C₂/C₃路径）反应： C₂路径（传统）：2*CO → C₂中间体（如CCH₂）C₃路径主导（CuOD-Cu）：*CO + *C₂ → *C₃中间体（CO与HOCCOH耦合）位点结构类型：Cu₇C位点（低配位Cu）配位数：活化位点CN≈9.1（CuOD-Cu）反应能： *CO + *HOCCOH 耦合能 = -1.13 eV（理论计算）710反应能垒：未明确给出，但C-C耦合是速率影响步骤中间体吸附能：*HOCCOH在Cu₇C的吸附增强出处：正文第7、10段（理论耦合能）*步骤4：C₃中间体逐步质子化生成正丙醇反应：*HOCCOH → ⋯ → n-C₃H₇OH（具体子步骤未详述）位点结构类型：低配位Cu₇C位点（CuOD-Cu）配位数：未明确中间体配位数反应能&能垒：未明确给出分步数据中间体吸附能：未明确给出关键证据： CuOD-Cu上C₃路径占主导，检测到*HOCCOH中间体Cu₂OD-Cu无C₃路径，仅生成甲酸盐出处：正文第10段（路径机制），图4D\n",
+        "excerpt_chars": 978
+      },
+      "ground_truth": {
+        "paper_title": "Long 等 - 2023 - Regulating reconstruction of oxide-derived Cu for electrochemical CO2 reduction toward n-.pdf",
+        "catalyst_system": {
+          "materials": [
+            "CuO衍生的铜（CuOD-Cu）：通过剧烈脱氧重构形成丰富低配位Cu位点（配位数≈9.1）Cu₂O衍生的铜（Cu₂OD-Cu）：重构后配位较高（≈10.2）",
+            "低配位位点较少晶面特征未暴露特定晶面：电化学OH吸附测试表明",
+            "两种催化剂均存在Cu(100)",
+            "Cu(110)",
+            "Cu(111)共存的多晶表面",
+            "无单一晶面占主导具体"
+          ],
+          "facets": [
+            "Cu(100)",
+            "Cu(110)",
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "CuO衍生的铜（CuOD-Cu）：通过剧烈脱氧重构形成丰富低配位Cu位点（配位数≈9.1）Cu₂O衍生的铜（Cu₂OD-Cu）：重构后配位较高（≈10.2），低配位位点较少晶面特征未暴露特定晶面：电化学OH吸附测试表明，两种催化剂均存在Cu(100)、Cu(110)、Cu(111)共存的多晶表面，无单一晶面占主导具体"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "催化剂材料CuO衍生的铜（CuOD-Cu）：通过剧烈脱氧重构形成丰富低配位Cu位",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "催化剂材料CuO衍生的铜（CuOD-Cu）：通过剧烈脱氧重构形成丰富低配位Cu位点（配位数≈9.1）Cu₂O衍生的铜（Cu₂OD-Cu）：重构后配位较高（≈10.2），低配位位点较少晶面特征未暴露特定晶面：电化学OH吸附测试表明，两种催化剂均存在Cu(100)、Cu(110)、Cu(111)共存的多晶表面，无单一晶面占主导具体反应路径步骤"
+            },
+            {
+              "step_index": 2,
+              "title": "步骤1：CO₂活化吸附（起始步骤）反应：CO₂(g) + * + H⁺ + e⁻",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → COOH （未直接写",
+              "site_structure": "低配位Cu₇C位点（主要存在于CuOD-Cu）配位数：针对活性位点（Cu₇C：CN≈9.1），未明确*COOH具体配位数",
+              "energetics": [],
+              "notes": "步骤1：CO₂活化吸附（起始步骤）反应：CO₂(g) + * + H⁺ + e⁻ → COOH （未直接写出，经CO中间体）位点结构类型：低配位Cu₇C位点（主要存在于CuOD-Cu）配位数：针对活性位点（Cu₇C：CN≈9.1），未明确*COOH具体配位数反应能&能垒：未明确给出中间体吸附能：未明确提供COOH吸附能，但强调CO在低配位点吸附增强710出处：正文第9-10段（原位拉曼与理论计算），图4A-B"
+            },
+            {
+              "step_index": 3,
+              "title": "步骤2：COOH还原为CO反应：*COOH + H⁺ + e⁻ → *CO +",
+              "reaction": "*COOH + H⁺ + e⁻ → *CO + H₂O （未直接写",
+              "site_structure": "低配位Cu₇C位点（CuOD-Cu）配位数：未明确给",
+              "energetics": [],
+              "notes": "步骤2：COOH还原为CO反应：*COOH + H⁺ + e⁻ → *CO + H₂O （未直接写出）位点结构类型：低配位Cu₇C位点（CuOD-Cu）配位数：未明确给出反应能&能垒：未明确给出中间体吸附能：*CO吸附增强（CuOD-Cu表面拉曼信号更强）出处：正文第10段（*CO为关键中间体），图4A"
+            },
+            {
+              "step_index": 4,
+              "title": "步骤3：C-C耦合（关键步骤，影响C₂/C₃路径）反应： C₂路径（传统）：2*",
+              "reaction": "C₂路径（传统）：2*CO → C₂中间体（如CCH₂）C₃路径主导（CuOD-Cu）：*CO + *C₂ → *C₃中间体（CO与HOCCOH耦合）",
+              "site_structure": "Cu₇C位点（低配位Cu）配位数：活化位点CN≈9.1（CuOD-Cu）",
+              "energetics": [
+                {
+                  "value": "-1.13",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "步骤3：C-C耦合（关键步骤，影响C₂/C₃路径）反应： C₂路径（传统）：2*CO → C₂中间体（如CCH₂）C₃路径主导（CuOD-Cu）：*CO + *C₂ → *C₃中间体（CO与HOCCOH耦合）位点结构类型：Cu₇C位点（低配位Cu）配位数：活化位点CN≈9.1（CuOD-Cu）反应能： *CO + *HOCCOH 耦合能 = -1.13 eV（理论计算）710反应能垒：未明确给出，但C-C耦合是速率影响步骤中间体吸附能：*HOCCOH在Cu₇C的吸附增强出处：正文第7、10段（理论耦合能）*"
+            },
+            {
+              "step_index": 5,
+              "title": "步骤4：C₃中间体逐步质子化生成正丙醇反应：*HOCCOH → ⋯ → n-C₃",
+              "reaction": "*HOCCOH → ⋯ → n-C₃H₇OH（具体子步骤未详述）",
+              "site_structure": "低配位Cu₇C位点（CuOD-Cu）配位数：未明确中间体配位数",
+              "energetics": [],
+              "notes": "步骤4：C₃中间体逐步质子化生成正丙醇反应：*HOCCOH → ⋯ → n-C₃H₇OH（具体子步骤未详述）位点结构类型：低配位Cu₇C位点（CuOD-Cu）配位数：未明确中间体配位数反应能&能垒：未明确给出分步数据中间体吸附能：未明确给出关键证据： CuOD-Cu上C₃路径占主导，检测到*HOCCOH中间体Cu₂OD-Cu无C₃路径，仅生成甲酸盐出处：正文第10段（路径机制），图4D"
+            }
+          ],
+          "step_count": 5
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CO",
+          "C₃H₇OH",
+          "正丙醇",
+          "甲酸"
+        ],
+        "key_energetics": [
+          {
+            "value": "-1.13",
+            "unit": "eV",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "0f7b89d6b6fec388e7a43a6e8c6c1c184d49ff156e1be321bc8bafb5d33138db",
+        "step_count": 5,
+        "product_count": 4
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "C₃H₇OH",
+              "正丙醇",
+              "甲酸"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 5,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(100)"
+          },
+          {
+            "id": "facet_Cu(110)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(110)"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "-1.13"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_016",
+      "folder_id": 16,
+      "status": "ok",
+      "source": {
+        "folder": "16",
+        "docx_path": "16/新建 Microsoft Word 文档.docx",
+        "pdf_path": "16/Zhang 等 - 2025 - Switching CO-to-Acetate Electroreduction on Cu Atomic Ensembles.pdf",
+        "docx_sha256": "b32de69b2235c543a88664b96cc650a0d9e358a07eaef3e49ec5fc50bbc8d970",
+        "raw_text_sha256": "f80e467b341b85aca440cffe6e75747d2397727e9ebe31de6179d504ccd3a0e8"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n核心催化剂 Cu 原子团簇（Cu Atomic Ensembles, Cu AEs）： 由高负载量Cu单原子（N配位）在电化学条件下动态重构形成位点结构：Cu-Cu原子间距≈2.6 Å，N配位环境（标记为(CuN4)2.6Å）对比催化剂： Cu纳米颗粒（Cu NPs）：传统Cu(111) 晶面主导孤立Cu单原子（Cu SAs）：Cu-Cu间距>14.8 Å CO至乙酸的完整反应路径步骤1：CO吸附活化反应：CO(g) + * → *CO位点结构类型： Cu AEs: (CuN4)2.6Å 团簇位点（双Cu协同吸附）Cu NPs: Cu(111) 表面多种位点（桥位/顶位）配位数：未明确给出反应能 & 能垒: 未明确给出中间体吸附能： *CO 在 Cu AEs 吸附更强（PDOS显示强Cu3d-C2p轨道杂化）出处：图1e, 原位红外检测到多种*CO吸附构型步骤2：C-C耦合（速率决定步骤, RDS）反应：*CO + *CO → *OCCO（或 *OCCOH） 机制差异： Cu AEs：直接*CO-*CO耦合 Cu NPs：*CO + *CO → *CHO-COH（需预质子化）位点结构类型： Cu AEs: (CuN4)2.6Å 双原子位点 6反应能： *CO-*CO 在 (CuN4)2.6Å 的吉布斯自由能垒最低（图1c-d）反应能垒 & 中间体吸附能：未明确数值出处：正文反应路径分析，图1c-d关键分支点：*OCCOH 的选择性转化反应: *OCCOH → *CCO（乙酸路径）或 *HOCCOH（乙醇/乙烯路径）位点调控机制： 催化剂主导路径能量优势Cu AEs*OCCOH → *CCO自由能降低 0.33 eV（热力学有利）Cu NPs*OCCOH → *HOCCOH能垒低 0.31 eV（动力学有利）关键证据： 原位红外：Cu AEs 检测到 酮烯中间体 *CCO（2120/2170 cm-1）DFT计算：*CCO 在 Cu-N 位点更强吸附（Bader电荷转移 0.84|e|）出处：图1g, 图4a, 机理部分 步骤3：酮烯路径生成乙酸反应：*CCO + H+ + e- → *CHCO → … → CH3COO-位点结构类型：Cu AEs 的 (CuN4)2.6Å 团簇反应能 & 能垒: 自由能连续下降（图4e），无热力学障碍 中间体吸附能：未明确给出分步数据氧源验证：H218O 同位素实验证实乙酸的氧原子源自水出处：反应路径图（图1a/4e）, 同位素实验\n",
+        "excerpt_chars": 1051
+      },
+      "ground_truth": {
+        "paper_title": "Zhang 等 - 2025 - Switching CO-to-Acetate Electroreduction on Cu Atomic Ensembles.pdf",
+        "catalyst_system": {
+          "materials": [
+            "Cu 原子团簇（Cu Atomic Ensembles",
+            "Cu AEs）： 由高负载量Cu单原子（N配位）在电化学条件下动态重构形成位点结构：Cu-Cu原子间距≈2.6 Å",
+            "N配位环境（标记为(CuN4)2.6Å）对比催化剂： Cu纳米颗粒（Cu NPs）：传统Cu(111) 晶面主导孤立Cu单原子（Cu SAs）：Cu-Cu间距>14.8 Å CO至乙酸的"
+          ],
+          "facets": [
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "Cu 原子团簇（Cu Atomic Ensembles, Cu AEs）： 由高负载量Cu单原子（N配位）在电化学条件下动态重构形成位点结构：Cu-Cu原子间距≈2.6 Å，N配位环境（标记为(CuN4)2.6Å）对比催化剂： Cu纳米颗粒（Cu NPs）：传统Cu(111) 晶面主导孤立Cu单原子（Cu SAs）：Cu-Cu间距>14.8 Å CO至乙酸的"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "核心催化剂 Cu 原子团簇（Cu Atomic Ensembles, Cu AE",
+              "reaction": "",
+              "site_structure": "Cu-Cu原子间距≈2.6 Å，N配位环境（标记为(CuN4)2.6Å）对比催化剂： Cu纳米颗粒（Cu NPs）：传统Cu(111) 晶面主导孤立Cu单原子（Cu SAs）：Cu-Cu间距>14.8 Å CO至乙酸的完整",
+              "energetics": [],
+              "notes": "核心催化剂 Cu 原子团簇（Cu Atomic Ensembles, Cu AEs）： 由高负载量Cu单原子（N配位）在电化学条件下动态重构形成位点结构：Cu-Cu原子间距≈2.6 Å，N配位环境（标记为(CuN4)2.6Å）对比催化剂： Cu纳米颗粒（Cu NPs）：传统Cu(111) 晶面主导孤立Cu单原子（Cu SAs）：Cu-Cu间距>14.8 Å CO至乙酸的完整反应路径"
+            },
+            {
+              "step_index": 2,
+              "title": "步骤1：CO吸附活化反应：CO(g) + * → *CO位点结构类型： Cu A",
+              "reaction": "CO(g) + * → *CO",
+              "site_structure": "Cu AEs: (CuN4)2.6Å 团簇位点（双Cu协同吸附）Cu NPs: Cu(111) 表面多种位点（桥位/顶位）配位数：未明确给",
+              "energetics": [],
+              "notes": "步骤1：CO吸附活化反应：CO(g) + * → *CO位点结构类型： Cu AEs: (CuN4)2.6Å 团簇位点（双Cu协同吸附）Cu NPs: Cu(111) 表面多种位点（桥位/顶位）配位数：未明确给出反应能 & 能垒: 未明确给出中间体吸附能： *CO 在 Cu AEs 吸附更强（PDOS显示强Cu3d-C2p轨道杂化）出处：图1e, 原位红外检测到多种*CO吸附构型"
+            },
+            {
+              "step_index": 3,
+              "title": "步骤2：C-C耦合（速率决定步骤, RDS）反应：*CO + *CO → *OC",
+              "reaction": "*CO + *CO → *OCCO（或 *OCCOH） 机制差异： Cu AEs：直接*CO-*CO耦合 Cu NPs：*CO + *CO → *CHO-COH（需预质子化）",
+              "site_structure": "Cu AEs: (CuN4)2.6Å 双原子位点 6",
+              "energetics": [
+                {
+                  "value": "0.33",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.31",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "步骤2：C-C耦合（速率决定步骤, RDS）反应：*CO + *CO → *OCCO（或 *OCCOH） 机制差异： Cu AEs：直接*CO-*CO耦合 Cu NPs：*CO + *CO → *CHO-COH（需预质子化）位点结构类型： Cu AEs: (CuN4)2.6Å 双原子位点 6反应能： *CO-*CO 在 (CuN4)2.6Å 的吉布斯自由能垒最低（图1c-d）反应能垒 & 中间体吸附能：未明确数值出处：正文反应路径分析，图1c-d关键分支点：*OCCOH 的选择性转化反应: *OCCOH → *CCO（乙酸路径）或 *HOCCOH（乙醇/乙烯路径）位点调控机制： 催化剂主导路径能量优势Cu AEs*OCCOH → *CCO自由能降低 0.33 eV（热力学有利）Cu NPs*OCCOH → *HOCCOH能垒低 0.31 eV（动力学有利）关键证据： 原位红外：Cu AEs 检测到 酮烯中间体 *CCO（2120/2170 cm-1）DFT计算：*CCO 在 Cu-N 位点更强吸附（Bader电荷转移 0.84|e|）出处：图1g, 图4a, 机理部分"
+            },
+            {
+              "step_index": 4,
+              "title": "步骤3：酮烯路径生成乙酸反应：*CCO + H+ + e- → *CHCO →",
+              "reaction": "*CCO + H+ + e- → *CHCO → … → CH3COO-",
+              "site_structure": "Cu AEs 的 (CuN4)2.6Å 团簇",
+              "energetics": [],
+              "notes": "步骤3：酮烯路径生成乙酸反应：*CCO + H+ + e- → *CHCO → … → CH3COO-位点结构类型：Cu AEs 的 (CuN4)2.6Å 团簇反应能 & 能垒: 自由能连续下降（图4e），无热力学障碍 中间体吸附能：未明确给出分步数据氧源验证：H218O 同位素实验证实乙酸的氧原子源自水出处：反应路径图（图1a/4e）, 同位素实验"
+            }
+          ],
+          "step_count": 4
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CO",
+          "乙烯",
+          "乙酸",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.33",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.31",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "速率决定步骤, RDS）反应：*CO + *CO → *OCCO（或 *OCCOH） 机制差异： Cu AEs：直接*CO-*CO耦合 Cu NPs：*CO + *CO → *CHO-COH（需预质子化）位点结构类型： Cu AEs: (CuN4)2.",
+            "unit": "rds_description",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "f80e467b341b85aca440cffe6e75747d2397727e9ebe31de6179d504ccd3a0e8",
+        "step_count": 4,
+        "product_count": 4
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "乙烯",
+              "乙酸",
+              "乙醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 4,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.33"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.31"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_017",
+      "folder_id": 17,
+      "status": "ok",
+      "source": {
+        "folder": "17",
+        "docx_path": "17/新建 Microsoft Word 文档.docx",
+        "pdf_path": "17/Chen 等 - 2018 - Tailoring the Selectivity of Bimetallic Copper–Palladium Nanoalloys for Electrocatalytic Reduction o.pdf",
+        "docx_sha256": "0ce1cd7d22149abbc5c59766b1aecb00dfad7687f642cfa5b302ecab1a75eaf4",
+        "raw_text_sha256": "dafa4a4c59c1be8e59e1b1f271a1acfda1a90e4dd5657920b6d1445922086f46"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\nCu-Pd双金属纳米合金： 形貌调控：球形、凹立方形、树枝状（通过置换反应合成）组分调控：不同Cu/Pd摩尔比（1/0.1, 1/0.3, 1/0.8）的球形纳米合金晶面特征未明确晶面信息：催化剂负载于碳基体，未提及其暴露的特定晶面从CO₂到CO的完整反应路径步骤1：CO₂吸附与活化生成*COOH反应：CO₂(g) + * + H⁺ + e⁻ → *COOH位点结构类型：Cu-Pd合金表面（未明确活性位点原子结构）配位数：文献未提供反应能 & 能垒：未提供具体数值中间体吸附能：未提供*COOH吸附能数据关键说明： *COOH形成是速率决定步骤之一，受催化剂d带中心调控。Cu-Pd合金化降低Pd的d带中心，优化*COOH结合强度。出处：（三步路径机制）步骤2：COOH还原生成CO反应：*COOH + H⁺ + e⁻ → *CO + H₂O位点结构类型：Cu-Pd合金表面配位数：未明确反应能 & 能垒：未提供具体数值中间体吸附能： *CO吸附强度受组分调控：Cu-Pd-0.3（1/0.3摩尔比） 最弱，有利于CO脱附。出处：（反应路径描述）*步骤3：CO脱附生成CO(g)反应：*CO → CO(g) + *位点结构类型：Cu-Pd合金表面配位数：未明确反应能 & 能垒：未提供具体数值关键说明： CO脱附是另一速率决定步骤，强*CO吸附抑制产物释放。Cu-Pd-0.3 因最弱*CO吸附（XPS与CO脱附实验验证）实现最优性能。出处：（速率决定步骤分析），图5a（CO脱附曲线）\n",
+        "excerpt_chars": 645
+      },
+      "ground_truth": {
+        "paper_title": "Chen 等 - 2018 - Tailoring the Selectivity of Bimetallic Copper–Palladium Nanoalloys for Electrocatalytic Reduction o.pdf",
+        "catalyst_system": {
+          "materials": [
+            "催化剂负载于碳基体",
+            "未提及其暴露的特定晶面从CO₂到CO的完整反应路径步骤1：CO₂吸附与活化生成*COOH反应：CO₂(g) + * + H⁺ + e⁻ → *COOH位点结构类型：Cu-Pd合金表面（未明确活性位点原子结构）配位数：文献未提供反应能 & 能",
+            "受催化剂d带中心调控"
+          ],
+          "facets": [],
+          "active_sites": [],
+          "raw": "催化剂负载于碳基体，未提及其暴露的特定晶面从CO₂到CO的完整反应路径步骤1：CO₂吸附与活化生成*COOH反应：CO₂(g) + * + H⁺ + e⁻ → *COOH位点结构类型：Cu-Pd合金表面（未明确活性位点原子结构）配位数：文献未提供反应能 & 能垒：未提供具体数值中间体吸附能：未提供*COOH吸附能数据关键说明： *COOH形成是速率决定步骤之一，受催化剂d带中心调控"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "Cu-Pd双金属纳米合金： 形貌调控：球形、凹立方形、树枝状（通过置换反应合成）",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "Cu-Pd双金属纳米合金： 形貌调控：球形、凹立方形、树枝状（通过置换反应合成）组分调控：不同Cu/Pd摩尔比（1/0.1, 1/0.3, 1/0.8）的球形纳米合金晶面特征未明确晶面信息：催化剂负载于碳基体，未提及其暴露的特定晶面从CO₂到CO的完整反应路径"
+            },
+            {
+              "step_index": 2,
+              "title": "步骤1：CO₂吸附与活化生成*COOH反应：CO₂(g) + * + H⁺ +",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+              "site_structure": "Cu-Pd合金表面（未明确活性位点原子结构）配位数：文献未提供",
+              "energetics": [],
+              "notes": "步骤1：CO₂吸附与活化生成*COOH反应：CO₂(g) + * + H⁺ + e⁻ → *COOH位点结构类型：Cu-Pd合金表面（未明确活性位点原子结构）配位数：文献未提供反应能 & 能垒：未提供具体数值中间体吸附能：未提供*COOH吸附能数据关键说明： *COOH形成是速率决定步骤之一，受催化剂d带中心调控。Cu-Pd合金化降低Pd的d带中心，优化*COOH结合强度。出处：（三步路径机制）"
+            },
+            {
+              "step_index": 3,
+              "title": "步骤2：COOH还原生成CO反应：*COOH + H⁺ + e⁻ → *CO +",
+              "reaction": "*COOH + H⁺ + e⁻ → *CO + H₂O",
+              "site_structure": "Cu-Pd合金表面配位数：未明确",
+              "energetics": [],
+              "notes": "步骤2：COOH还原生成CO反应：*COOH + H⁺ + e⁻ → *CO + H₂O位点结构类型：Cu-Pd合金表面配位数：未明确反应能 & 能垒：未提供具体数值中间体吸附能： *CO吸附强度受组分调控：Cu-Pd-0.3（1/0.3摩尔比） 最弱，有利于CO脱附。出处：（反应路径描述）*"
+            },
+            {
+              "step_index": 4,
+              "title": "步骤3：CO脱附生成CO(g)反应：*CO → CO(g) + *位点结构类型：",
+              "reaction": "*CO → CO(g) + *",
+              "site_structure": "Cu-Pd合金表面配位数：未明确",
+              "energetics": [],
+              "notes": "步骤3：CO脱附生成CO(g)反应：*CO → CO(g) + *位点结构类型：Cu-Pd合金表面配位数：未明确反应能 & 能垒：未提供具体数值关键说明： CO脱附是另一速率决定步骤，强*CO吸附抑制产物释放。Cu-Pd-0.3 因最弱*CO吸附（XPS与CO脱附实验验证）实现最优性能。出处：（速率决定步骤分析），图5a（CO脱附曲线）"
+            }
+          ],
+          "step_count": 4
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CO"
+        ],
+        "key_energetics": [
+          {
+            "value": "速率决定步骤之一，受催化剂d带中心调控",
+            "unit": "rds_description",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "dafa4a4c59c1be8e59e1b1f271a1acfda1a90e4dd5657920b6d1445922086f46",
+        "step_count": 4,
+        "product_count": 1
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 4,
+            "tolerance": 2
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_018",
+      "folder_id": 18,
+      "status": "ok",
+      "source": {
+        "folder": "18",
+        "docx_path": "18/新建 Microsoft Word 文档.docx",
+        "pdf_path": "18/Koshy 等 - 2020 - Understanding the Origin of Highly Selective CO2 Electroreduction to CO on Ni,N‐doped Car.pdf",
+        "docx_sha256": "72e3d3c54964172f6443236411e3cd82da8d6dedfd93e848de1b2ce9b267f696",
+        "raw_text_sha256": "0cb7246c9fbf36c952860c4ab6b8a9f9f9b8355495731c7e7c7dfce011965669"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n材料体系： Ni,N掺杂碳催化剂（Ni-PACN）活性位点：氮配位的单原子Ni位点（Ni-Nₓ），以扭曲正方形平面几何结构存在，类似金属卟啉Ni负载量优化：2 wt%（超过此值活性饱和）晶面信息： 不涉及特定晶面（非金属表面催化剂，载体为碳基材料）CO₂至CO的完整反应路径步骤1：CO₂吸附活化生成*COOH反应：CO₂(g) + * + H⁺ + e⁻ → *COOH位点结构类型：Ni-Nₓ单原子位点配位数：未明确给出反应能/能垒：未明确给出中间体吸附能：未提供数值活性位点关键证据： X射线光谱证实吡咯氮选择性结合Ni，形成类卟啉结构Ni-Nₓ位点与分子金属卟啉催化剂高度相似出处：正文活性位点分析（反应路径描述）步骤2：COOH还原生成CO反应：*COOH + H⁺ + e⁻ → *CO + H₂O位点结构类型：Ni-Nₓ单原子位点配位数：未明确给出反应能/能垒：未明确给出中间体吸附能：弱*CO吸附是高性能关键（有利于CO脱附）关键调控机制： Ni-Nₓ位点电子结构：优化COOH形成与CO脱附的平衡对比实验：Ni游离的PACN几乎无CO生成出处：反应路径描述18，图3A-B性能验证*步骤3：CO脱附生成CO反应：*CO → CO(g) + *位点结构类型：Ni-Nₓ单原子位点配位数：未明确给出反应能/能垒：未明确给出速率决定步骤（RDS）： CO脱附是关键限速步（强吸附抑制产物释放）性能证据： Ni-PACN-low催化剂（2 wt% Ni）： 在**-0.8 V vs RHE**下，CO选择性>95%，H₂选择性<5%电流密度达14 mA/cm²（图3C）超高选择性归因于单原子分散的Ni活性位点出处：图3A-C性能数据68，活性位点结论\n",
+        "excerpt_chars": 732
+      },
+      "ground_truth": {
+        "paper_title": "Koshy 等 - 2020 - Understanding the Origin of Highly Selective CO2 Electroreduction to CO on Ni,N‐doped Car.pdf",
+        "catalyst_system": {
+          "materials": [
+            "N掺杂碳催化剂（Ni-PACN）活性位点：氮配位的单原子Ni位点（Ni-Nₓ）",
+            "以扭曲正方形平面几何结构存在",
+            "类似金属卟啉Ni负载量优化：2 wt%（超过此值活性饱和）晶面信息： 不涉及特定晶面（非金属表面催化剂",
+            "载体为碳基材料）CO₂至CO的"
+          ],
+          "facets": [],
+          "active_sites": [],
+          "raw": "Ni,N掺杂碳催化剂（Ni-PACN）活性位点：氮配位的单原子Ni位点（Ni-Nₓ），以扭曲正方形平面几何结构存在，类似金属卟啉Ni负载量优化：2 wt%（超过此值活性饱和）晶面信息： 不涉及特定晶面（非金属表面催化剂，载体为碳基材料）CO₂至CO的"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "材料体系： Ni,N掺杂碳催化剂（Ni-PACN）活性位点：氮配位的单原子Ni位",
+              "reaction": "",
+              "site_structure": "氮配位的单原子Ni位点（Ni-Nₓ），以扭曲正方形平面几何结构存在，类似金属卟啉Ni负载",
+              "energetics": [],
+              "notes": "材料体系： Ni,N掺杂碳催化剂（Ni-PACN）活性位点：氮配位的单原子Ni位点（Ni-Nₓ），以扭曲正方形平面几何结构存在，类似金属卟啉Ni负载量优化：2 wt%（超过此值活性饱和）晶面信息： 不涉及特定晶面（非金属表面催化剂，载体为碳基材料）CO₂至CO的完整反应路径"
+            },
+            {
+              "step_index": 2,
+              "title": "步骤1：CO₂吸附活化生成*COOH反应：CO₂(g) + * + H⁺ + e",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+              "site_structure": "Ni-Nₓ单原子位点配位数：未明确给",
+              "energetics": [],
+              "notes": "步骤1：CO₂吸附活化生成*COOH反应：CO₂(g) + * + H⁺ + e⁻ → *COOH位点结构类型：Ni-Nₓ单原子位点配位数：未明确给出反应能/能垒：未明确给出中间体吸附能：未提供数值活性位点关键证据： X射线光谱证实吡咯氮选择性结合Ni，形成类卟啉结构Ni-Nₓ位点与分子金属卟啉催化剂高度相似出处：正文活性位点分析（反应路径描述）"
+            },
+            {
+              "step_index": 3,
+              "title": "步骤2：COOH还原生成CO反应：*COOH + H⁺ + e⁻ → *CO +",
+              "reaction": "*COOH + H⁺ + e⁻ → *CO + H₂O",
+              "site_structure": "Ni-Nₓ单原子位点配位数：未明确给",
+              "energetics": [],
+              "notes": "步骤2：COOH还原生成CO反应：*COOH + H⁺ + e⁻ → *CO + H₂O位点结构类型：Ni-Nₓ单原子位点配位数：未明确给出反应能/能垒：未明确给出中间体吸附能：弱*CO吸附是高性能关键（有利于CO脱附）关键调控机制： Ni-Nₓ位点电子结构：优化COOH形成与CO脱附的平衡对比实验：Ni游离的PACN几乎无CO生成出处：反应路径描述18，图3A-B性能验证*"
+            },
+            {
+              "step_index": 4,
+              "title": "步骤3：CO脱附生成CO反应：*CO → CO(g) + *位点结构类型：Ni-",
+              "reaction": "*CO → CO(g) + *",
+              "site_structure": "Ni-Nₓ单原子位点配位数：未明确给",
+              "energetics": [
+                {
+                  "value": "-0.8",
+                  "unit": "V_vs_RHE"
+                },
+                {
+                  "value": "14",
+                  "unit": "current_density_mA_cm2"
+                }
+              ],
+              "notes": "步骤3：CO脱附生成CO反应：*CO → CO(g) + *位点结构类型：Ni-Nₓ单原子位点配位数：未明确给出反应能/能垒：未明确给出速率决定步骤（RDS）： CO脱附是关键限速步（强吸附抑制产物释放）性能证据： Ni-PACN-low催化剂（2 wt% Ni）： 在**-0.8 V vs RHE**下，CO选择性>95%，H₂选择性<5%电流密度达14 mA/cm²（图3C）超高选择性归因于单原子分散的Ni活性位点出处：图3A-C性能数据68，活性位点结论"
+            }
+          ],
+          "step_count": 4
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CO"
+        ],
+        "key_energetics": [
+          {
+            "value": "-0.8",
+            "unit": "V_vs_RHE",
+            "context": ""
+          },
+          {
+            "value": "14",
+            "unit": "current_density_mA_cm2",
+            "context": ""
+          },
+          {
+            "value": "速率决定步骤（RDS）： CO脱附是关键限速步（强吸附抑制产物释放）性能证据： Ni-PACN-low催化剂（2 wt% Ni）： 在**-0.8 V vs RHE**下，CO选择性>95%，H₂选择性<5%电流密度达14 mA/cm²（图3C）超高选",
+            "unit": "rds_description",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "0cb7246c9fbf36c952860c4ab6b8a9f9f9b8355495731c7e7c7dfce011965669",
+        "step_count": 4,
+        "product_count": 1
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 4,
+            "tolerance": 2
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_019",
+      "folder_id": 19,
+      "status": "ok",
+      "source": {
+        "folder": "19",
+        "docx_path": "19/新建 Microsoft Word 文档.docx",
+        "pdf_path": "19/Chen 等 - 2025 - Turning the Selectivity of CO Electroreduction from Acetate to Ethanol by Alloying FCC-Phased Cu wit.pdf",
+        "docx_sha256": "2f3c96fd0fb2ff494ada7d0f795a04bd5c22ebe608bcfe37e720913c3b4db486",
+        "raw_text_sha256": "562e64db082512049634d5d4527ebdd825e04baa6e013265f1aa77892e7c5ad0"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n根据提供的上下文内容，该文献研究的是**CO电还原（COER）至乙醇的路径**，而非CO₂还原（CO₂RR）。催化剂为**锰-铜单原子合金（Mn₃Cu₉₇ SAA）**，主要作用于**fcc-Cu(111)晶面**。反应路径及关键信息如下：---### **Mn₃Cu₉₇ SAA催化CO至乙醇的反应路径**#### **1. 第一步：CO吸附与活化（从CO起始）** - **反应**：CO(g) → *CO - **位点结构**： - *CO吸附在Cu(111)表面（Mn原子修饰的Cu位点） - 原子级分散的Mn提供协同位点，增强*CO吸附强度 - **反应能**：未直接提供 - **中间体吸附能特点**：Mn₃Cu₉₇对比纯Cu增强*CO吸附（趋势明确，无具体数值） #### **2. 第二步：C–C耦合（速率决定步骤，RDS）** - **反应**：*CO + *CO → *COCO（对称偶联路径） - **位点结构**： - Cu(111)表面Mn-Cu协同位点（Mn原子调制电子结构） - 主导路径为*CO–*CO偶联（非*CO–*CHO路径） - **反应能垒（ΔG）**： - 纯Cu（FCC-Cu）：**0.74 eV** - Mn₃Cu₉₇：**0.43 eV**（降低0.31 eV） - **关键证据**：原位红外光谱检测到*COCO中间体（1561 cm⁻¹） #### **3. 第三步：*COCO逐步还原至乙醇中间体** - **反应路径**： *COCO → *COCH → *COHCOH → *CHCHOH → *CH₂CHOH → *CH₃CHOH → *CH₃CH₂OH[15] - **位点结构**：Cu(111)表面（Mn调控吸附强度） - **选择性机制**： - *COCOH分支后，*COHCOH更倾向于形成乙醇（乙酸路径ΔG更高） - *COHCOH在Mn₃Cu₉₇上吸附更强（自由能更低） #### **4. 第四步：乙醇形成路径（C–O键保留）** - **反应终点**：*CH₃CH₂OH脱附 → C₂H₅OH(l) - **位点结构**：Cu(111)表面 - **关键中间体吸附能**（Mn₃Cu₉₇对比纯Cu）： - *COCO：吸附增强（负值更大） - *COHCOH：吸附增强（负值更大） - *CHCHOH：吸附增强（趋势明确，无具体数值） ---### **催化剂电子结构调控机制**1. **协同位点作用**： - Mn原子分散在Cu晶格中，形成**Mn-Cu协同活性位点**，促进对称*CO–*CO偶联。 2. **电子结构调制**： - Mn向Cu转移电子 → Cu位点电子密度升高 → **d带中心上移** → 增强关键中间体吸附。 - 电荷密度差异图显示Mn→Cu电子转移（图4g）。 ---### **性能总结**- **乙醇选择性**：69% FE（600 mA/cm²） - **稳定性**：>100小时连续电解 - **关键对比**：乙醇/乙酸FE比率提升8.8倍（对比纯Cu）\n",
+        "excerpt_chars": 1288
+      },
+      "ground_truth": {
+        "paper_title": "Chen 等 - 2025 - Turning the Selectivity of CO Electroreduction from Acetate to Ethanol by Alloying FCC-Phased Cu wit.pdf",
+        "catalyst_system": {
+          "materials": [
+            "催化剂为**锰-铜单原子合金（Mn₃Cu₉₇ SAA）**",
+            "主要作用于**fcc-Cu(111)晶面**"
+          ],
+          "facets": [
+            "Cu(111)"
+          ],
+          "active_sites": [],
+          "raw": "催化剂为**锰-铜单原子合金（Mn₃Cu₉₇ SAA）**，主要作用于**fcc-Cu(111)晶面**"
+        },
+        "reaction_type": "COER",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "根据提供的上下文内容，该文献研究的是**CO电还原（COER）至乙醇的路径**，",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "根据提供的上下文内容，该文献研究的是**CO电还原（COER）至乙醇的路径**，而非CO₂还原（CO₂RR）。催化剂为**锰-铜单原子合金（Mn₃Cu₉₇ SAA）**，主要作用于**fcc-Cu(111)晶面**。反应路径及关键信息如下：---### **Mn₃Cu₉₇ SAA催化CO至乙醇的反应路径**#### **1."
+            },
+            {
+              "step_index": 2,
+              "title": "第一步：CO吸附与活化（从CO起始）** - **反应**：CO(g) → *CO - **位点结构**： - *CO吸附在Cu(111)表面（Mn原子修饰的C",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "第一步：CO吸附与活化（从CO起始）** - **反应**：CO(g) → *CO - **位点结构**： - *CO吸附在Cu(111)表面（Mn原子修饰的Cu位点） - 原子级分散的Mn提供协同位点，增强*CO吸附强度 - **反应能**：未直接提供 - **中间体吸附能特点**：Mn₃Cu₉₇对比纯Cu增强*CO吸附（趋势明确，无具体数值） #### **2."
+            },
+            {
+              "step_index": 3,
+              "title": "第二步：C–C耦合（速率决定步骤，RDS）** - **反应**：*CO + *CO → *COCO（对称偶联路径） - **位点结构**： - Cu(111)",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [
+                {
+                  "value": "0.74",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.43",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.31",
+                  "unit": "eV"
+                }
+              ],
+              "notes": "第二步：C–C耦合（速率决定步骤，RDS）** - **反应**：*CO + *CO → *COCO（对称偶联路径） - **位点结构**： - Cu(111)表面Mn-Cu协同位点（Mn原子调制电子结构） - 主导路径为*CO–*CO偶联（非*CO–*CHO路径） - **反应能垒（ΔG）**： - 纯Cu（FCC-Cu）：**0.74 eV** - Mn₃Cu₉₇：**0.43 eV**（降低0.31 eV） - **关键证据**：原位红外光谱检测到*COCO中间体（1561 cm⁻¹） #### **3."
+            },
+            {
+              "step_index": 4,
+              "title": "第三步：*COCO逐步还原至乙醇中间体** - **反应路径**： *COCO → *COCH → *COHCOH → *CHCHOH → *CH₂CHOH →",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [],
+              "notes": "第三步：*COCO逐步还原至乙醇中间体** - **反应路径**： *COCO → *COCH → *COHCOH → *CHCHOH → *CH₂CHOH → *CH₃CHOH → *CH₃CH₂OH[15] - **位点结构**：Cu(111)表面（Mn调控吸附强度） - **选择性机制**： - *COCOH分支后，*COHCOH更倾向于形成乙醇（乙酸路径ΔG更高） - *COHCOH在Mn₃Cu₉₇上吸附更强（自由能更低） #### **4."
+            },
+            {
+              "step_index": 5,
+              "title": "第四步：乙醇形成路径（C–O键保留）** - **反应终点**：*CH₃CH₂OH脱附 → C₂H₅OH(l) - **位点结构**：Cu(111)表面 - *",
+              "reaction": "",
+              "site_structure": "",
+              "energetics": [
+                {
+                  "value": "600",
+                  "unit": "current_density_mA_cm2"
+                }
+              ],
+              "notes": "第四步：乙醇形成路径（C–O键保留）** - **反应终点**：*CH₃CH₂OH脱附 → C₂H₅OH(l) - **位点结构**：Cu(111)表面 - **关键中间体吸附能**（Mn₃Cu₉₇对比纯Cu）： - *COCO：吸附增强（负值更大） - *COHCOH：吸附增强（负值更大） - *CHCHOH：吸附增强（趋势明确，无具体数值） ---### **催化剂电子结构调控机制**1. **协同位点作用**： - Mn原子分散在Cu晶格中，形成**Mn-Cu协同活性位点**，促进对称*CO–*CO偶联。 2. **电子结构调制**： - Mn向Cu转移电子 → Cu位点电子密度升高 → **d带中心上移** → 增强关键中间体吸附。 - 电荷密度差异图显示Mn→Cu电子转移（图4g）。 ---### **性能总结**- **乙醇选择性**：69% FE（600 mA/cm²） - **稳定性**：>100小时连续电解 - **关键对比**：乙醇/乙酸FE比率提升8.8倍（对比纯Cu）"
+            }
+          ],
+          "step_count": 5
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CO",
+          "C₂H₅OH",
+          "乙酸",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.74",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.43",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "0.31",
+            "unit": "eV",
+            "context": ""
+          },
+          {
+            "value": "600",
+            "unit": "current_density_mA_cm2",
+            "context": ""
+          },
+          {
+            "value": "速率决定步骤，RDS）** - **反应**：*CO + *CO → *COCO（对称偶联路径） - **位点结构**： - Cu(111)表面Mn-Cu协同位点（Mn原子调制电子结构） - 主导路径为*CO–*CO偶联（非*CO–*CHO路径） - ",
+            "unit": "rds_description",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "562e64db082512049634d5d4527ebdd825e04baa6e013265f1aa77892e7c5ad0",
+        "step_count": 5,
+        "product_count": 4
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "C₂H₅OH",
+              "乙酸",
+              "乙醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "COER"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 5,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(111)"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.74"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.43"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "field": "key_energetics",
+            "expected_substring": "0.31"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    },
+    {
+      "id": "co2rr_eval_020",
+      "folder_id": 20,
+      "status": "ok",
+      "source": {
+        "folder": "20",
+        "docx_path": "20/Electrochemical CO₂ Reduction Classifying Cu Facets.docx",
+        "pdf_path": "20/electrochemical-co2-reduction-classifying-cu-facets.pdf",
+        "docx_sha256": "dc7fd23e9cefb3c7a3410ed8d0d122b8ec6dd8e515c98c757491ed8cc3ffe41d",
+        "raw_text_sha256": "d25f4b8590514098feaac12ec61e3d24a72e74c0b7059b7bf4b87248f7235d13"
+      },
+      "input": {
+        "task_type": "co2rr_pathway_structuring",
+        "prompt": "你是一位电催化领域的专家。请根据下面给出的 CO2RR/COER 文献反应路径摘录，输出**严格 JSON**（不要 Markdown 代码块），结构如下：\n\n{\n  \"paper_title\": \"string\",\n  \"reaction_type\": \"CO2RR | COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"...\"],\n    \"facets\": [\"...\"],\n    \"active_sites\": [\"...\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"步骤名称\",\n        \"reaction\": \"反应式或描述\",\n        \"site_structure\": \"位点/晶面\",\n        \"energetics\": [{\"value\": \"0.45\", \"unit\": \"eV\"}]\n      }\n    ]\n  },\n  \"branching_paths\": [{\"label\": \"...\", \"description\": \"...\"}],\n  \"major_products\": [\"乙烯\", \"乙醇\"],\n  \"key_energetics\": [{\"value\": \"...\", \"unit\": \"eV|rds_description|FE_percent\"}]\n}\n\n要求：\n1. 仅依据摘录内容填写；未给出的数值用 null，不要编造。\n2. 保留 RDS、分叉路径、主要产物等关键信息。\n3. 输出必须是可被 json.loads 解析的单个 JSON 对象。\n\n【文献摘录】\n完整路径 标题：Electrochemical CO₂ Reduction: Classifying Cu Facets 催化剂：M-Cu单原子合金（M = Rh, Ir, Ru, Pd, Ag, Au） 晶面：Cu(100)主导 反应路径： CO₂活化吸附 • 反应：CO₂(g) + * + H⁺ + e⁻ → *COOH • 位点：Cu₄或Cu₃M（M掺杂位点） • 吸附能/能垒：未提供 7 COOH还原为CO • 反应：*COOH + H⁺ + e⁻ → *CO + H₂O • *CO强吸附利于C-C耦合 7 C-C耦合（RDS） • 反应：2*CO + H⁺ + e⁻ → *COCOH • 能垒：未定量 7 **COCOH → CH₂CHO • 反应：四步PCET还原 • *CH₂CHO吸附能（eV）： Ru-Cu: -0.71 | Rh-Cu: -0.57 | Pd-Cu: +0.03 7 乙烯路径（C-O键断裂） • 反应：*CH₂CHO + H⁺ + e⁻ → C₂H₄ + *O • 活化能（eV）：Rh-Cu最低（0.41）7 • *O吸附能（eV）：Rh-Cu: -0.25 [7] 乙醇路径（C-O键保留） • 反应：*CH₂CHO → *CH₃CHO • ΔG（eV）：Rh-Cu: -0.62\n",
+        "excerpt_chars": 565
+      },
+      "ground_truth": {
+        "paper_title": "Electrochemical CO₂ Reduction: Classifying Cu Facets",
+        "catalyst_system": {
+          "materials": [
+            "M-Cu单原子合金（M = Rh",
+            "Au） 晶面：Cu(100)主导"
+          ],
+          "facets": [
+            "Cu(100)"
+          ],
+          "active_sites": [],
+          "raw": "M-Cu单原子合金（M = Rh, Ir, Ru, Pd, Ag, Au） 晶面：Cu(100)主导"
+        },
+        "reaction_type": "CO2RR",
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "完整路径 标题：Electrochemical CO₂ Reduction: C",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+              "site_structure": "Cu₄或Cu₃M（M掺杂位点）",
+              "energetics": [],
+              "notes": "完整路径 标题：Electrochemical CO₂ Reduction: Classifying Cu Facets 催化剂：M-Cu单原子合金（M = Rh, Ir, Ru, Pd, Ag, Au） 晶面：Cu(100)主导 反应路径： CO₂活化吸附 • 反应：CO₂(g) + * + H⁺ + e⁻ → *COOH • 位点：Cu₄或Cu₃M（M掺杂位点） • 吸附能/能垒：未提供 7 COOH还原为CO • 反应：*COOH + H⁺ + e⁻ → *CO + H₂O • *CO强吸附利于C-C耦合 7 C-C耦合（RDS） • 反应：2*CO + H⁺ + e⁻ → *COCOH • 能垒：未定量 7 **COCOH → CH₂CHO • 反应：四步PCET还原 • *CH₂CHO吸附能（eV）： Ru-Cu: -0.71 | Rh-Cu: -0.57 | Pd-Cu: +0.03 7 乙烯路径（C-O键断裂） • 反应：*CH₂CHO + H⁺ + e⁻ → C₂H₄ + *O • 活化能（eV）：Rh-Cu最低（0.41）7 • *O吸附能（eV）：Rh-Cu: -0.25 [7] 乙醇路径（C-O键保留） • 反应：*CH₂CHO → *CH₃CHO • ΔG（eV）：Rh-Cu: -0.62"
+            }
+          ],
+          "step_count": 1
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CO",
+          "C₂H₄",
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "RDS） • 反应：2*CO + H⁺ + e⁻ → *COCOH • 能垒：未定量 7 **COCOH → CH₂CHO • 反应：四步PCET还原 • *CH₂CHO吸附能（eV）： Ru-Cu: -0.71 | Rh-Cu: -0.57 |",
+            "unit": "rds_description",
+            "context": ""
+          }
+        ]
+      },
+      "ground_truth_digest": {
+        "raw_text_sha256": "d25f4b8590514098feaac12ec61e3d24a72e74c0b7059b7bf4b87248f7235d13",
+        "step_count": 1,
+        "product_count": 4
+      },
+      "verification": {
+        "checks": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "field": "major_products",
+            "min_recall": 0.5,
+            "ground_truth": [
+              "CO",
+              "C₂H₄",
+              "乙烯",
+              "乙醇"
+            ]
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "field": "reaction_type",
+            "expected": "CO2RR"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "field": "reaction_pathway.step_count",
+            "expected": 1,
+            "tolerance": 2
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "field": "catalyst_system.facets",
+            "expected_substring": "Cu(100)"
+          }
+        ],
+        "min_pass_ratio": 0.6
+      }
+    }
+  ]
+}

@@ -1,0 +1,3118 @@
+{
+  "eval_set": "/Users/maxindian/work_path/材料学大模型智能体/CO2RR-Skill/path_analysis/co2rr_eval.json",
+  "model": "deepseek-v4-flash",
+  "thinking": false,
+  "timestamp": "2026-05-28T16:26:37.577774+00:00",
+  "total": 20,
+  "completed": 19,
+  "passed": 15,
+  "pass_rate": 0.7894736842105263,
+  "avg_pass_ratio": 0.7277360066833751,
+  "results": [
+    {
+      "id": "co2rr_eval_001",
+      "folder_id": 1,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 5.36,
+      "usage": {
+        "prompt_tokens": 721,
+        "completion_tokens": 554,
+        "total_tokens": 1275
+      },
+      "prediction": {
+        "paper_title": null,
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Ag",
+            "Cu"
+          ],
+          "facets": [
+            "Cu(111)"
+          ],
+          "active_sites": [
+            "Ag位点",
+            "CuAg边界",
+            "Cu位点"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO₂活化吸附",
+              "reaction": "CO₂(g) → *COOH",
+              "site_structure": "Ag位点",
+              "energetics": []
+            },
+            {
+              "step_index": 2,
+              "title": "COOH还原为CO",
+              "reaction": "COOH → CO",
+              "site_structure": "Ag位点",
+              "energetics": []
+            },
+            {
+              "step_index": 3,
+              "title": "C-C耦合（RDS替代路径）",
+              "reaction": "*CH + *CO → *CHCO 或 *CH₂ + *CO → *CH₂CO",
+              "site_structure": "CuAg边界",
+              "energetics": [
+                {
+                  "value": "0.70",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.71",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 4,
+              "title": "CHxCO还原至乙醛中间体",
+              "reaction": "*CHCO → ... → *CH₃CHO",
+              "site_structure": "Cu(111)",
+              "energetics": []
+            },
+            {
+              "step_index": 5,
+              "title": "乙醇生成",
+              "reaction": "*CH₃CHO → C₂H₅OH",
+              "site_structure": "Cu位点",
+              "energetics": []
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "传统CO二聚路径",
+            "description": "CO-CO二聚，能垒高，被抑制"
+          }
+        ],
+        "major_products": [
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.70",
+            "unit": "eV"
+          },
+          {
+            "value": "0.71",
+            "unit": "eV"
+          },
+          {
+            "value": "0.17",
+            "unit": "eV"
+          },
+          {
+            "value": "-0.39",
+            "unit": "eV"
+          },
+          {
+            "value": "0.37",
+            "unit": "eV"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": null,\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Ag\", \"Cu\"],\n    \"facets\": [\"Cu(111)\"],\n    \"active_sites\": [\"Ag位点\", \"CuAg边界\", \"Cu位点\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO₂活化吸附\",\n        \"reaction\": \"CO₂(g) → *COOH\",\n        \"site_structure\": \"Ag位点\",\n        \"energetics\": []\n      },\n      {\n        \"step_index\": 2,\n        \"title\": \"COOH还原为CO\",\n        \"reaction\": \"COOH → CO\",\n        \"sit",
+      "score": {
+        "checks_passed": 8,
+        "checks_total": 9,
+        "pass_ratio": 0.8888888888888888,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.25"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈4±2, got=5"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(111)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.17' in field"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '-0.39' in field"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.70' in field"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.71' in field"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.37' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_002",
+      "folder_id": 2,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 6.84,
+      "usage": {
+        "prompt_tokens": 1038,
+        "completion_tokens": 771,
+        "total_tokens": 1809
+      },
+      "prediction": {
+        "paper_title": "C₄O₄-Cu and C₆O₆-Cu coordination polymers for CO2RR",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "C₄O₄-Cu",
+            "C₆O₆-Cu"
+          ],
+          "facets": [
+            "Cu(111)"
+          ],
+          "active_sites": [
+            "金属铜位点（有机基质修饰）"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO₂活化吸附",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+              "site_structure": "C₄O₄-Cu：金属铜位点（有机基质修饰）；C₆O₆-Cu：金属铜位点（有机基质修饰）",
+              "energetics": [
+                {
+                  "value": null,
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 2,
+              "title": "COOH还原为CO",
+              "reaction": "*COOH → *CO + H₂O",
+              "site_structure": "同上",
+              "energetics": [
+                {
+                  "value": "-0.82",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-1.09",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 3,
+              "title": "C-C耦合（RDS）",
+              "reaction": "*2*CO → COCHO",
+              "site_structure": "Cu(111) 表面",
+              "energetics": [
+                {
+                  "value": "0.45",
+                  "unit": "eV"
+                },
+                {
+                  "value": "2.77",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 4,
+              "title": "COCHO质子化生成C₂⁺前驱体",
+              "reaction": "*COCHO → … → C₂⁺前驱体",
+              "site_structure": "Cu(111) 表面",
+              "energetics": [
+                {
+                  "value": "-3.09",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-1.14",
+                  "unit": "eV"
+                }
+              ]
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "C₂⁺路径（C₄O₄-Cu主导）",
+            "description": "最终产物：乙烯（C₂H₄）、乙醇（C₂H₅OH）、正丙醇（C₃H₇OH）；总C₂⁺法拉第效率：65.8%（1.0 V vs. RHE）"
+          },
+          {
+            "label": "C₁路径（C₆O₆-Cu主导）",
+            "description": "最终产物：CO, HCOOH, CH₄；总C₁法拉第效率：63.7%（0.6 V vs. RHE）"
+          }
+        ],
+        "major_products": [
+          "乙烯",
+          "乙醇",
+          "正丙醇",
+          "CO",
+          "HCOOH",
+          "CH₄"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.45",
+            "unit": "eV"
+          },
+          {
+            "value": "2.77",
+            "unit": "eV"
+          },
+          {
+            "value": "65.8",
+            "unit": "FE_percent"
+          },
+          {
+            "value": "63.7",
+            "unit": "FE_percent"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"C₄O₄-Cu and C₆O₆-Cu coordination polymers for CO2RR\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"C₄O₄-Cu\", \"C₆O₆-Cu\"],\n    \"facets\": [\"Cu(111)\"],\n    \"active_sites\": [\"金属铜位点（有机基质修饰）\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO₂活化吸附\",\n        \"reaction\": \"CO₂(g) + * + H⁺ + e⁻ → *COOH\",\n        \"site_structure\": \"C₄O₄-Cu：金属铜位点（有机基质修饰）；C₆O₆-Cu：金属铜位点（有机基质修饰）\",\n        \"energetics\": [{\"value\": null, ",
+      "score": {
+        "checks_passed": 7,
+        "checks_total": 10,
+        "pass_ratio": 0.7,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": true,
+            "detail": "recall=0.67"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈5±2, got=4"
+          },
+          {
+            "id": "facet_(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '(111)' in field"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(111)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '-0.82' in field"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '-1.09' in field"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.45' in field"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '2.77' in field"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '-3.09' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_003",
+      "folder_id": 3,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 6.89,
+      "usage": {
+        "prompt_tokens": 1119,
+        "completion_tokens": 703,
+        "total_tokens": 1822
+      },
+      "prediction": {
+        "paper_title": "Ag₁Cu NW and AgCu NW for CO2RR",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Ag₁Cu NW",
+            "AgCu NW"
+          ],
+          "facets": [
+            null
+          ],
+          "active_sites": [
+            "paired Cu atoms adjacent to single Ag atoms",
+            "Ag nanoparticles",
+            "Cu sites"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO₂活化吸附",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+              "site_structure": "Ag₁Cu NW: single Ag site; AgCu NW: Ag nanoparticle site",
+              "energetics": [
+                {
+                  "value": null,
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 2,
+              "title": "COOH还原为CO",
+              "reaction": "*COOH + H⁺ + e⁻ → *CO + H₂O",
+              "site_structure": "Ag₁Cu NW: single Ag site; AgCu NW: Ag nanoparticle site",
+              "energetics": [
+                {
+                  "value": null,
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 3,
+              "title": "C-C耦合 (RDS)",
+              "reaction": "AgCu NW: *2*CO → COCO; Ag₁Cu NW: *CO + *CHO → COCHO",
+              "site_structure": "Ag₁Cu NW: HO-Ag₁-Cu-Cu; AgCu NW: pure Cu sites",
+              "energetics": [
+                {
+                  "value": "0.37",
+                  "unit": "eV lower for CO-CHO vs CO-CO"
+                }
+              ]
+            },
+            {
+              "step_index": 4,
+              "title": "中间体转化",
+              "reaction": "Ag₁Cu NW: *COCHO → ... → C₂H₅OH; AgCu NW: *COCO → ... → C₂H₄",
+              "site_structure": "Ag₁Cu NW: HO-Ag₁-Cu-Cu; AgCu NW: pure Cu sites",
+              "energetics": [
+                {
+                  "value": null,
+                  "unit": "eV"
+                }
+              ]
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "乙醇路径",
+            "description": "Ag₁Cu NW: *CO-*CHO coupling, low barrier, FE=56.3%"
+          },
+          {
+            "label": "乙烯路径",
+            "description": "AgCu NW: *CO-*CO coupling, high CO coverage, FE=54.9%"
+          }
+        ],
+        "major_products": [
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.37",
+            "unit": "eV lower for CO-CHO vs CO-CO"
+          },
+          {
+            "value": "56.3",
+            "unit": "FE_percent for ethanol on Ag₁Cu NW"
+          },
+          {
+            "value": "54.9",
+            "unit": "FE_percent for ethylene on AgCu NW"
+          },
+          {
+            "value": "172.8",
+            "unit": "mA cm⁻² for ethanol path on Ag₁Cu NW"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"Ag₁Cu NW and AgCu NW for CO2RR\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Ag₁Cu NW\", \"AgCu NW\"],\n    \"facets\": [null],\n    \"active_sites\": [\"paired Cu atoms adjacent to single Ag atoms\", \"Ag nanoparticles\", \"Cu sites\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO₂活化吸附\",\n        \"reaction\": \"CO₂(g) + * + H⁺ + e⁻ → *COOH\",\n        \"site_structure\": \"Ag₁Cu NW: single Ag site; AgCu NW: Ag nanopartic",
+      "score": {
+        "checks_passed": 3,
+        "checks_total": 4,
+        "pass_ratio": 0.75,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.40"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈6±2, got=4"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.37' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_004",
+      "folder_id": 4,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 6.84,
+      "usage": {
+        "prompt_tokens": 770,
+        "completion_tokens": 700,
+        "total_tokens": 1470
+      },
+      "prediction": {
+        "paper_title": "RuO2(110) surface CO2 reduction pathway study",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "RuO2",
+            "Cu"
+          ],
+          "facets": [
+            "RuO2(110)",
+            "Cu(211)"
+          ],
+          "active_sites": [
+            "RuO2(110) surface",
+            "Cu(211) surface"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO2 to formate (OCHO*)",
+              "reaction": "CO2 + H+ + e- -> OCHO*",
+              "site_structure": "RuO2(110)",
+              "energetics": null
+            },
+            {
+              "step_index": 2,
+              "title": "Formate to formic acid (low CO coverage)",
+              "reaction": "OCHO* + H+ + e- -> HCOOH*",
+              "site_structure": "RuO2(110) with 0.25 ML CO",
+              "energetics": [
+                {
+                  "value": "-0.43",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 3,
+              "title": "Formic acid protonation (high CO coverage)",
+              "reaction": "HCOOH* + H+ + e- -> H2COOH*",
+              "site_structure": "RuO2(110) with 0.50 ML CO",
+              "energetics": [
+                {
+                  "value": "-0.25",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 4,
+              "title": "Formic acid to methoxy",
+              "reaction": "H2COOH* -> CH3O* + H2O",
+              "site_structure": "RuO2(110)",
+              "energetics": null
+            },
+            {
+              "step_index": 5,
+              "title": "Methoxy to methanol",
+              "reaction": "CH3O* + H+ + e- -> CH3OH",
+              "site_structure": "RuO2(110)",
+              "energetics": null
+            },
+            {
+              "step_index": 6,
+              "title": "Methoxy to methane",
+              "reaction": "CH3O* + H+ + e- -> CH4 + O*",
+              "site_structure": "RuO2(110)",
+              "energetics": null
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "Methanol path",
+            "description": "CH3O* -> CH3OH (thermodynamically favorable)"
+          },
+          {
+            "label": "Methane path",
+            "description": "CH3O* -> CH4"
+          }
+        ],
+        "major_products": [
+          "methanol",
+          "methane",
+          "formic acid"
+        ],
+        "key_energetics": [
+          {
+            "value": "-0.43",
+            "unit": "eV"
+          },
+          {
+            "value": "-0.25",
+            "unit": "eV"
+          },
+          {
+            "value": "0.7",
+            "unit": "eV"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"RuO2(110) surface CO2 reduction pathway study\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"RuO2\", \"Cu\"],\n    \"facets\": [\"RuO2(110)\", \"Cu(211)\"],\n    \"active_sites\": [\"RuO2(110) surface\", \"Cu(211) surface\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO2 to formate (OCHO*)\",\n        \"reaction\": \"CO2 + H+ + e- -> OCHO*\",\n        \"site_structure\": \"RuO2(110)\",\n        \"energetics\": null\n      },\n      ",
+      "score": {
+        "checks_passed": 4,
+        "checks_total": 6,
+        "pass_ratio": 0.6666666666666666,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.00"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": false,
+            "detail": "expected≈1±2, got=6"
+          },
+          {
+            "id": "facet_(110)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '(110)' in field"
+          },
+          {
+            "id": "facet_Cu(211)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(211)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.7' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_005",
+      "folder_id": 5,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 7.8,
+      "usage": {
+        "prompt_tokens": 1111,
+        "completion_tokens": 783,
+        "total_tokens": 1894
+      },
+      "prediction": {
+        "paper_title": "Chlorine-modified Ag/Cu composite for CO2 electroreduction",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Cl-Ag/Cu",
+            "Ag",
+            "Cu2O"
+          ],
+          "facets": [
+            "Cl-Ag(111)",
+            "Cl-Ag/Cu(111)"
+          ],
+          "active_sites": [
+            "Ag/AgCl surface",
+            "Cl-Ag/Cu(111) interface"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO2活化吸附",
+              "reaction": "CO2(g) + * → *COOH (C-bound) or *OCHO (O-bound)",
+              "site_structure": "Cl-Ag(111) for *COOH; Cl-Ag/Cu(111) for *OCHO",
+              "energetics": null
+            },
+            {
+              "step_index": 2,
+              "title": "中间体转化（气态路径：CO生成）",
+              "reaction": "*COOH + H+ + e- → *CO + H2O",
+              "site_structure": "Ag/AgCl surface",
+              "energetics": null
+            },
+            {
+              "step_index": 3,
+              "title": "中间体转化（液态路径：甲酸/乙醇生成）",
+              "reaction": "*OCHO + H+ + e- → HCOOH (formate); *OCHO → ethanol (steps not specified)",
+              "site_structure": "Cl-Ag/Cu(111) interface",
+              "energetics": null
+            },
+            {
+              "step_index": 4,
+              "title": "C2产物（乙醇）形成与耦合机制",
+              "reaction": "*CO → C-C coupling → ethanol (pathway not fully described)",
+              "site_structure": "Ag/Cu interface with Cl doping",
+              "energetics": null
+            },
+            {
+              "step_index": 5,
+              "title": "速率决速步与能垒数据",
+              "reaction": "RDS for CO: *COOH formation (ΔG lowered by 0.12 eV); RDS for formate: *H adsorption (ΔG lowered by 0.05 eV)",
+              "site_structure": "Cl-Ag(111) for CO; Cl-Ag/Cu(111) for formate",
+              "energetics": [
+                {
+                  "value": "0.12",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.05",
+                  "unit": "eV"
+                }
+              ]
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "气态产物路径",
+            "description": "CO2 → *COOH → *CO → CO (gas)"
+          },
+          {
+            "label": "液态产物路径",
+            "description": "CO2 → *OCHO → HCOOH (formate) or ethanol"
+          }
+        ],
+        "major_products": [
+          "CO",
+          "HCOOH",
+          "ethanol"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.12",
+            "unit": "eV"
+          },
+          {
+            "value": "0.05",
+            "unit": "eV"
+          },
+          {
+            "value": ">95",
+            "unit": "FE_percent"
+          },
+          {
+            "value": ">90",
+            "unit": "FE_percent"
+          },
+          {
+            "value": "13.2",
+            "unit": "FE_percent"
+          },
+          {
+            "value": "83.1",
+            "unit": "FE_percent"
+          },
+          {
+            "value": "150",
+            "unit": "mA/cm2"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"Chlorine-modified Ag/Cu composite for CO2 electroreduction\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Cl-Ag/Cu\", \"Ag\", \"Cu2O\"],\n    \"facets\": [\"Cl-Ag(111)\", \"Cl-Ag/Cu(111)\"],\n    \"active_sites\": [\"Ag/AgCl surface\", \"Cl-Ag/Cu(111) interface\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO2活化吸附\",\n        \"reaction\": \"CO2(g) + * → *COOH (C-bound) or *OCHO (O-bound)\",\n        \"site_structure\": \"Cl-Ag(",
+      "score": {
+        "checks_passed": 7,
+        "checks_total": 7,
+        "pass_ratio": 1.0,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": true,
+            "detail": "recall=0.50"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈4±2, got=5"
+          },
+          {
+            "id": "facet_(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '(111)' in field"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(111)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.12' in field"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.05' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_006",
+      "folder_id": 6,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 7.03,
+      "usage": {
+        "prompt_tokens": 964,
+        "completion_tokens": 742,
+        "total_tokens": 1706
+      },
+      "prediction": {
+        "paper_title": "CO2RR/COER reaction pathway on Cu",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Cu"
+          ],
+          "facets": [
+            "Cu(100)",
+            "Cu(111)"
+          ],
+          "active_sites": [
+            "Cu(100)顶位",
+            "Cu(100)空穴位"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO吸附",
+              "reaction": "*CO吸附于Cu(100)顶位",
+              "site_structure": "Cu(100)顶位",
+              "energetics": null
+            },
+            {
+              "step_index": 2,
+              "title": "CO还原为CHO",
+              "reaction": "*CO + H⁺ + e⁻ → *CHO",
+              "site_structure": "Cu(100)/Cu(111)",
+              "energetics": [
+                {
+                  "value": "0.65",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.29",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 3,
+              "title": "C-C耦合（路径A）",
+              "reaction": "2*CO → *COCO → *COCHO",
+              "site_structure": "Cu(100)空穴位",
+              "energetics": [
+                {
+                  "value": "0.05",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 4,
+              "title": "C-C耦合（路径B）",
+              "reaction": "*CO → *CHO → *COCHO",
+              "site_structure": "Cu(111)",
+              "energetics": null
+            },
+            {
+              "step_index": 5,
+              "title": "乙烯路径",
+              "reaction": "*COCHO → *COCHOH → ... → C₂H₄",
+              "site_structure": null,
+              "energetics": [
+                {
+                  "value": "0.36",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 6,
+              "title": "乙醇路径",
+              "reaction": "*COCHO → 乙二醛 → 乙醛 → C₂H₅OH",
+              "site_structure": null,
+              "energetics": [
+                {
+                  "value": "0.58",
+                  "unit": "eV"
+                }
+              ]
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "路径A",
+            "description": "Cu(100)上2*CO二聚生成*COCO，再生成*COCHO"
+          },
+          {
+            "label": "路径B",
+            "description": "Cu(111)或高电位下*CO先还原为*CHO，再与*CO耦合生成*COCHO"
+          }
+        ],
+        "major_products": [
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.65",
+            "unit": "eV"
+          },
+          {
+            "value": "-0.29",
+            "unit": "eV"
+          },
+          {
+            "value": "0.05",
+            "unit": "eV"
+          },
+          {
+            "value": "0.36",
+            "unit": "eV"
+          },
+          {
+            "value": "0.58",
+            "unit": "eV"
+          },
+          {
+            "value": "30:1",
+            "unit": "FE_percent"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"CO2RR/COER reaction pathway on Cu\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Cu\"],\n    \"facets\": [\"Cu(100)\", \"Cu(111)\"],\n    \"active_sites\": [\"Cu(100)顶位\", \"Cu(100)空穴位\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO吸附\",\n        \"reaction\": \"*CO吸附于Cu(100)顶位\",\n        \"site_structure\": \"Cu(100)顶位\",\n        \"energetics\": null\n      },\n      {\n        \"step_index\": 2,\n        \"title\": \"CO还原为CHO\",\n    ",
+      "score": {
+        "checks_passed": 7,
+        "checks_total": 10,
+        "pass_ratio": 0.7,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.33"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": false,
+            "detail": "expected≈3±2, got=6"
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(100)' in field"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(111)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.65' in field"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '-0.29' in field"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.05' in field"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '0.75' in field"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.36' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_007",
+      "folder_id": 7,
+      "status": "skipped",
+      "reason": "missing_docx"
+    },
+    {
+      "id": "co2rr_eval_008",
+      "folder_id": 8,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 6.65,
+      "usage": {
+        "prompt_tokens": 1098,
+        "completion_tokens": 699,
+        "total_tokens": 1797
+      },
+      "prediction": {
+        "paper_title": "CO2RR/COER 文献反应路径摘录",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Cu-1",
+            "Cu-3"
+          ],
+          "facets": [
+            "非单一主导晶面"
+          ],
+          "active_sites": [
+            "低配位缺陷",
+            "中配位缺陷"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO₂活化吸附",
+              "reaction": "CO₂(g) + * + H⁺/e⁻ → *COOH",
+              "site_structure": "缺陷铜表面",
+              "energetics": []
+            },
+            {
+              "step_index": 2,
+              "title": "COOH还原为CO",
+              "reaction": "*COOH + H⁺/e⁻ → *CO + H₂O",
+              "site_structure": "缺陷铜表面",
+              "energetics": []
+            },
+            {
+              "step_index": 3,
+              "title": "CO生成至CH₂CHO（核心整合步骤）",
+              "reaction": "*CO + H⁺/e⁻ → *CHO; *CHO + *CO → *CH₂CHO",
+              "site_structure": "强吸附位（非晶Cu-3）或弱吸附位（晶界Cu-1）",
+              "energetics": [
+                {
+                  "value": "-0.71",
+                  "unit": "eV"
+                },
+                {
+                  "value": "+0.05",
+                  "unit": "eV"
+                }
+              ]
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "路径A：乙烯生成",
+            "description": "C-O断裂，*CH₂CHO + H⁺/e⁻ → C₂H₄(g) + *O，*O + 2H⁺ + 2e⁻ → H₂O，位点：非晶Cu-3，*O脱附能垒=0.53 eV，FE~77.5% (H-cell), 63.4% (MEA, 12.5A)"
+          },
+          {
+            "label": "路径B：乙醇生成",
+            "description": "C-O保留，*CH₂CHO + H⁺/e⁻ → *CH₃CHO，*CH₃CHO + H⁺/e⁻ → C₂H₅OH(g)，位点：晶界Cu-1，FE~52.0% (H-cell)，全电池能量效率29.0%"
+          }
+        ],
+        "major_products": [
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "-0.71",
+            "unit": "eV"
+          },
+          {
+            "value": "+0.05",
+            "unit": "eV"
+          },
+          {
+            "value": "0.53",
+            "unit": "eV"
+          },
+          {
+            "value": "77.5",
+            "unit": "FE_percent"
+          },
+          {
+            "value": "63.4",
+            "unit": "FE_percent"
+          },
+          {
+            "value": "52.0",
+            "unit": "FE_percent"
+          },
+          {
+            "value": "29.0",
+            "unit": "FE_percent"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"CO2RR/COER 文献反应路径摘录\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Cu-1\", \"Cu-3\"],\n    \"facets\": [\"非单一主导晶面\"],\n    \"active_sites\": [\"低配位缺陷\", \"中配位缺陷\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO₂活化吸附\",\n        \"reaction\": \"CO₂(g) + * + H⁺/e⁻ → *COOH\",\n        \"site_structure\": \"缺陷铜表面\",\n        \"energetics\": []\n      },\n      {\n        \"step_index\": 2,\n        \"title\": \"COOH还原为CO\",\n        \"reaction\":",
+      "score": {
+        "checks_passed": 5,
+        "checks_total": 6,
+        "pass_ratio": 0.8333333333333334,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.40"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈3±2, got=3"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '-0.71' in field"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.05' in field"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.53' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_009",
+      "folder_id": 9,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 8.19,
+      "usage": {
+        "prompt_tokens": 1223,
+        "completion_tokens": 944,
+        "total_tokens": 2167
+      },
+      "prediction": {
+        "paper_title": "Cu及掺杂金属的Cu基催化剂（M = Rh, Ir, Ru, Pd, Ag, Au）",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Cu",
+            "Rh-Cu",
+            "Ir-Cu",
+            "Ru-Cu",
+            "Pd-Cu",
+            "Ag-Cu",
+            "Au-Cu"
+          ],
+          "facets": [
+            "Cu(100)"
+          ],
+          "active_sites": [
+            "Cu(100)表面",
+            "Cu₃M位点",
+            "Cu₄位点"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO₂活化吸附",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+              "site_structure": "Cu(100)表面",
+              "energetics": null
+            },
+            {
+              "step_index": 2,
+              "title": "*COOH还原为CO",
+              "reaction": "*COOH + H⁺ + e⁻ → *CO + H₂O",
+              "site_structure": "Cu(100)表面",
+              "energetics": null
+            },
+            {
+              "step_index": 3,
+              "title": "C-C耦合（RDS）",
+              "reaction": "2*CO → *CO-CO⁻（或 *CO-COH）",
+              "site_structure": "Cu(100)表面",
+              "energetics": [
+                {
+                  "value": "低于Cu(111)",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 4,
+              "title": "*CO-COH逐步还原至*CH₂CHO（SDI）",
+              "reaction": "*CO-COH + 4(H⁺ + e⁻) → *CH₂CHO",
+              "site_structure": "亲氧M-Cu（Rh/Ir/Ru）：Cu₃M位点；疏氧M-Cu（Pd/Ag/Au）：Cu₄位点",
+              "energetics": [
+                {
+                  "value": "-0.71",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.57",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.57",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0",
+                  "unit": "eV"
+                },
+                {
+                  "value": "+0.03",
+                  "unit": "eV"
+                },
+                {
+                  "value": "+0.05/+0.06",
+                  "unit": "eV"
+                }
+              ]
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "乙烯路径（C-O键断裂）",
+            "description": "*CH₂CHO + H⁺ + e⁻ → C₂H₄(g) + *O，*O还原脱附：*O + H⁺ + e⁻ → *OH → H₂O + *"
+          },
+          {
+            "label": "乙醇路径（C-O键保留）",
+            "description": "*CH₂CHO + H⁺ + e⁻ → *CH₃CHO，*CH₃CHO + 2H⁺ + 2e⁻ → C₂H₅OH(l) + *"
+          }
+        ],
+        "major_products": [
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.61",
+            "unit": "eV"
+          },
+          {
+            "value": "0.41",
+            "unit": "eV"
+          },
+          {
+            "value": "0.42",
+            "unit": "eV"
+          },
+          {
+            "value": "0.53",
+            "unit": "eV"
+          },
+          {
+            "value": "0.44",
+            "unit": "eV"
+          },
+          {
+            "value": "0.38",
+            "unit": "eV"
+          },
+          {
+            "value": "0.31",
+            "unit": "eV"
+          },
+          {
+            "value": "-0.78",
+            "unit": "eV"
+          },
+          {
+            "value": "-0.74",
+            "unit": "eV"
+          },
+          {
+            "value": "-0.72",
+            "unit": "eV"
+          },
+          {
+            "value": "-0.60",
+            "unit": "eV"
+          },
+          {
+            "value": "-0.62",
+            "unit": "eV"
+          },
+          {
+            "value": "-0.58",
+            "unit": "eV"
+          },
+          {
+            "value": "-0.52",
+            "unit": "eV"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"Cu及掺杂金属的Cu基催化剂（M = Rh, Ir, Ru, Pd, Ag, Au）\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Cu\", \"Rh-Cu\", \"Ir-Cu\", \"Ru-Cu\", \"Pd-Cu\", \"Ag-Cu\", \"Au-Cu\"],\n    \"facets\": [\"Cu(100)\"],\n    \"active_sites\": [\"Cu(100)表面\", \"Cu₃M位点\", \"Cu₄位点\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO₂活化吸附\",\n        \"reaction\": \"CO₂(g) + * + H⁺ + e⁻ → *COOH\",\n        \"site_structure\": \"Cu(100)表面\",\n        \"energetics\": null\n  ",
+      "score": {
+        "checks_passed": 2,
+        "checks_total": 6,
+        "pass_ratio": 0.3333333333333333,
+        "passed": false,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.40"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": false,
+            "detail": "expected≈1±2, got=4"
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(100)' in field"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring 'Cu(111)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '0.2' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_010",
+      "folder_id": 10,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 9.6,
+      "usage": {
+        "prompt_tokens": 2243,
+        "completion_tokens": 1154,
+        "total_tokens": 3397
+      },
+      "prediction": {
+        "paper_title": "未提供",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Cu"
+          ],
+          "facets": [
+            "Cu(100)",
+            "Cu(111)"
+          ],
+          "active_sites": [
+            "Cu(100) surface",
+            "Cu(111) surface",
+            "M-Cu (M = Rh, Ir, Ru, Pd, Ag, Au)"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO2活化吸附",
+              "reaction": "CO2(g) + * + H+ + e- → *COOH",
+              "site_structure": "Cu(100) surface",
+              "energetics": null
+            },
+            {
+              "step_index": 2,
+              "title": "COOH还原为CO",
+              "reaction": "*COOH + H+ + e- → *CO + H2O",
+              "site_structure": "Cu(100) surface",
+              "energetics": null
+            },
+            {
+              "step_index": 3,
+              "title": "C-C耦合 (RDS)",
+              "reaction": "2*CO → *COCOH (或 *CO + *CO + H+/e- → COCOH)",
+              "site_structure": "Cu(100) surface, M-Cu",
+              "energetics": null
+            },
+            {
+              "step_index": 4,
+              "title": "COCOH逐步质子-电子转移生成CH2CHO",
+              "reaction": "*COCOH + 4(H+ + e-) → *CH2CHO",
+              "site_structure": "Cu(100) and M-Cu surfaces",
+              "energetics": [
+                {
+                  "value": "-0.71",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.57",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.57",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0",
+                  "unit": "eV"
+                },
+                {
+                  "value": "+0.03",
+                  "unit": "eV"
+                },
+                {
+                  "value": "+0.05",
+                  "unit": "eV"
+                },
+                {
+                  "value": "+0.06",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 5,
+              "title": "乙烯路径 (C-O键断裂)",
+              "reaction": "*CH2CHO + H+ + e- → C2H4(g) + *O",
+              "site_structure": "Cu(100) and M-Cu surfaces",
+              "energetics": [
+                {
+                  "value": "-0.78",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.74",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.72",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.60",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 6,
+              "title": "*O还原脱附 (乙烯路径续)",
+              "reaction": "*O + H+ + e- → *OH; *OH + H+ + e- → H2O(l) + *",
+              "site_structure": "Cu(100) and M-Cu surfaces",
+              "energetics": [
+                {
+                  "value": "0.50",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.44",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.38",
+                  "unit": "eV"
+                },
+                {
+                  "value": "0.31",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 7,
+              "title": "乙醇路径 (C-O键保留)",
+              "reaction": "*CH2CHO + H+ + e- → *CH3CHO",
+              "site_structure": "Cu(100) and M-Cu surfaces",
+              "energetics": [
+                {
+                  "value": "-0.52",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.62",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.58",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-0.52",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 8,
+              "title": "*CH3CHO还原为乙醇",
+              "reaction": "*CH3CHO + 2H+ + 2e- → C2H5OH(l) + *",
+              "site_structure": "Cu(100) surface",
+              "energetics": null
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "乙烯路径",
+            "description": "C-O键断裂，生成C2H4"
+          },
+          {
+            "label": "乙醇路径",
+            "description": "C-O键保留，生成C2H5OH"
+          }
+        ],
+        "major_products": [
+          "乙烯",
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "RDS: C-C coupling",
+            "unit": "rds_description"
+          },
+          {
+            "value": "0.61",
+            "unit": "eV"
+          },
+          {
+            "value": "0.41",
+            "unit": "eV"
+          },
+          {
+            "value": "0.42",
+            "unit": "eV"
+          },
+          {
+            "value": "0.53",
+            "unit": "eV"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"未提供\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Cu\"],\n    \"facets\": [\"Cu(100)\", \"Cu(111)\"],\n    \"active_sites\": [\"Cu(100) surface\", \"Cu(111) surface\", \"M-Cu (M = Rh, Ir, Ru, Pd, Ag, Au)\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO2活化吸附\",\n        \"reaction\": \"CO2(g) + * + H+ + e- → *COOH\",\n        \"site_structure\": \"Cu(100) surface\",\n        \"energetics\": null\n      },\n      {\n        \"step_inde",
+      "score": {
+        "checks_passed": 5,
+        "checks_total": 10,
+        "pass_ratio": 0.5,
+        "passed": false,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.40"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈9±3, got=8"
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(100)' in field"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(111)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '-0.71' in field"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '-0.57' in field"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '-0.57' in field"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0' in field"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '0.03' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_011",
+      "folder_id": 11,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 4.92,
+      "usage": {
+        "prompt_tokens": 1076,
+        "completion_tokens": 514,
+        "total_tokens": 1590
+      },
+      "prediction": {
+        "paper_title": "CO2RR/COER reaction pathway analysis on Cu catalysts",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Cu"
+          ],
+          "facets": [
+            "Cu(111)"
+          ],
+          "active_sites": [
+            "high CN Cu",
+            "low CN Cu"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO adsorption",
+              "reaction": "CO2(g) → *CO",
+              "site_structure": "Cu surface (high CN or low CN)",
+              "energetics": [
+                {
+                  "value": null,
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 2,
+              "title": "C-C coupling (C2+ path)",
+              "reaction": "2*CO → *OCCHO",
+              "site_structure": "high CN Cu",
+              "energetics": [
+                {
+                  "value": null,
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 3,
+              "title": "CO protonation (CH4 path)",
+              "reaction": "*CO → *CHO → ... → CH4",
+              "site_structure": "low CN Cu",
+              "energetics": [
+                {
+                  "value": null,
+                  "unit": "eV"
+                }
+              ]
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "C2+ path",
+            "description": "C-C coupling leading to C2H4 and EtOH, favored on high CN Cu"
+          },
+          {
+            "label": "CH4 path",
+            "description": "CO protonation leading to CH4, favored on low CN Cu"
+          }
+        ],
+        "major_products": [
+          "C2H4",
+          "EtOH",
+          "CH4"
+        ],
+        "key_energetics": [
+          {
+            "value": "ΔG_OCCHO more negative on high CN Cu",
+            "unit": "rds_description"
+          },
+          {
+            "value": "ΔG_CHO more negative on low CN Cu",
+            "unit": "rds_description"
+          },
+          {
+            "value": "ΔG_CHO - ΔG_OCCHO > 0 for high CN",
+            "unit": "rds_description"
+          },
+          {
+            "value": "ΔG_CHO - ΔG_OCCHO < 0 for low CN",
+            "unit": "rds_description"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"CO2RR/COER reaction pathway analysis on Cu catalysts\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Cu\"],\n    \"facets\": [\"Cu(111)\"],\n    \"active_sites\": [\"high CN Cu\", \"low CN Cu\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO adsorption\",\n        \"reaction\": \"CO2(g) → *CO\",\n        \"site_structure\": \"Cu surface (high CN or low CN)\",\n        \"energetics\": [{\"value\": null, \"unit\": \"eV\"}]\n      },\n    ",
+      "score": {
+        "checks_passed": 3,
+        "checks_total": 4,
+        "pass_ratio": 0.75,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.00"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈2±2, got=3"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(111)' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_012",
+      "folder_id": 12,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 6.73,
+      "usage": {
+        "prompt_tokens": 817,
+        "completion_tokens": 778,
+        "total_tokens": 1595
+      },
+      "prediction": {
+        "paper_title": "未提供",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Cu"
+          ],
+          "facets": [
+            "(111)"
+          ],
+          "active_sites": [
+            "atop",
+            "bidentate atop",
+            "hcp hollow",
+            "fcc-hcp",
+            "bridge"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO生成",
+              "reaction": "CO2(g) + * → *COOH → *CO",
+              "site_structure": "未指定",
+              "energetics": null
+            },
+            {
+              "step_index": 2,
+              "title": "CO加氢生成C1中间体",
+              "reaction": "*CO + H+ + e- → *CHO 或 *CO + H+ + e- → *COH",
+              "site_structure": "*CHO: bidentate atop; *COH: hcp hollow",
+              "energetics": [
+                {
+                  "value": "0.6",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 3,
+              "title": "C-C耦合（路径1）",
+              "reaction": "*CHO + *COH → *COH-CHO",
+              "site_structure": "*CHO: bidentate atop, *COH: hcp hollow, *COH-CHO: bridge",
+              "energetics": [
+                {
+                  "value": "0.31",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-1.46",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 4,
+              "title": "C-C耦合（路径2）",
+              "reaction": "*COH + *COH → COH-COH",
+              "site_structure": "fcc-hcp",
+              "energetics": [
+                {
+                  "value": "0.46",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-1.24",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 5,
+              "title": "C-C耦合（路径3）",
+              "reaction": "*CHO + *CHO → OCH-OCH",
+              "site_structure": "fcc-hcp",
+              "energetics": [
+                {
+                  "value": "0.51",
+                  "unit": "eV"
+                },
+                {
+                  "value": "-2.45",
+                  "unit": "eV"
+                }
+              ]
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "路径1",
+            "description": "*CHO + *COH → COH-CHO，最优路径，能垒0.31 eV"
+          },
+          {
+            "label": "路径2",
+            "description": "*COH + *COH → COH-COH，能垒0.46 eV"
+          },
+          {
+            "label": "路径3",
+            "description": "*CHO + *CHO → OCH-OCH，能垒0.51 eV，可能生成乙烯前体"
+          }
+        ],
+        "major_products": [
+          "甲烷"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.6",
+            "unit": "eV"
+          },
+          {
+            "value": "0.31",
+            "unit": "eV"
+          },
+          {
+            "value": "-1.46",
+            "unit": "eV"
+          },
+          {
+            "value": "0.46",
+            "unit": "eV"
+          },
+          {
+            "value": "-1.24",
+            "unit": "eV"
+          },
+          {
+            "value": "0.51",
+            "unit": "eV"
+          },
+          {
+            "value": "-2.45",
+            "unit": "eV"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"未提供\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Cu\"],\n    \"facets\": [\"(111)\"],\n    \"active_sites\": [\"atop\", \"bidentate atop\", \"hcp hollow\", \"fcc-hcp\", \"bridge\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO生成\",\n        \"reaction\": \"CO2(g) + * → *COOH → *CO\",\n        \"site_structure\": \"未指定\",\n        \"energetics\": null\n      },\n      {\n        \"step_index\": 2,\n        \"title\": \"CO加氢生成C1中间体\",\n       ",
+      "score": {
+        "checks_passed": 7,
+        "checks_total": 10,
+        "pass_ratio": 0.7,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.25"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": false,
+            "detail": "expected≈1±2, got=5"
+          },
+          {
+            "id": "facet_(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '(111)' in field"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring 'Cu(111)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.6' in field"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.31' in field"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '-1.46' in field"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.46' in field"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '-1.24' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_013",
+      "folder_id": 13,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 5.66,
+      "usage": {
+        "prompt_tokens": 1063,
+        "completion_tokens": 615,
+        "total_tokens": 1678
+      },
+      "prediction": {
+        "paper_title": "混合配位铜催化剂用于CO2RR生成n-丙醇",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "MCN-Cu",
+            "HCN-Cu",
+            "LCN-Cu"
+          ],
+          "facets": [
+            "Cu(100)",
+            "Cu(111)"
+          ],
+          "active_sites": [
+            "HCN-Cu",
+            "LCN-Cu"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO2吸附与活化",
+              "reaction": "CO2(g) + H+ + e- → *COOH → *CO → CO(g) (HCN-Cu位点)",
+              "site_structure": "HCN-Cu",
+              "energetics": []
+            },
+            {
+              "step_index": 2,
+              "title": "CO预质子化形成COH",
+              "reaction": "*CO + H+ + e- → *COH",
+              "site_structure": "LCN-Cu",
+              "energetics": [
+                {
+                  "value": "0.98",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 3,
+              "title": "C-C耦合",
+              "reaction": "*COH + *CO → *OCCOH",
+              "site_structure": "LCN-Cu阶梯位点 (Cu(100)/Cu(111))",
+              "energetics": []
+            },
+            {
+              "step_index": 4,
+              "title": "C2中间体深度加氢",
+              "reaction": "*OCCOH → [加氢步骤] → *OCHCH2 → [加氢步骤] → C3中间体",
+              "site_structure": "LCN-Cu",
+              "energetics": []
+            },
+            {
+              "step_index": 5,
+              "title": "n-丙醇生成",
+              "reaction": "C3中间体 → n-C3H7OH(g)",
+              "site_structure": "LCN-Cu",
+              "energetics": []
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "传统*CO-*CO耦合路径",
+            "description": "能垒1.63 eV，被预质子化路径替代"
+          },
+          {
+            "label": "C2产物竞争路径",
+            "description": "预质子化路径抑制C2产物生成"
+          }
+        ],
+        "major_products": [
+          "n-丙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.98",
+            "unit": "eV"
+          },
+          {
+            "value": "1.63",
+            "unit": "eV"
+          },
+          {
+            "value": "17.6",
+            "unit": "FE_percent"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"混合配位铜催化剂用于CO2RR生成n-丙醇\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"MCN-Cu\", \"HCN-Cu\", \"LCN-Cu\"],\n    \"facets\": [\"Cu(100)\", \"Cu(111)\"],\n    \"active_sites\": [\"HCN-Cu\", \"LCN-Cu\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO2吸附与活化\",\n        \"reaction\": \"CO2(g) + H+ + e- → *COOH → *CO → CO(g) (HCN-Cu位点)\",\n        \"site_structure\": \"HCN-Cu\",\n        \"energetics\": []\n      },\n      {\n        \"step_index\"",
+      "score": {
+        "checks_passed": 7,
+        "checks_total": 10,
+        "pass_ratio": 0.7,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.33"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈6±2, got=5"
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(100)' in field"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(111)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '1.63' in field"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.98' in field"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.98' in field"
+          },
+          {
+            "id": "energy_ev_3",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '1.21' in field"
+          },
+          {
+            "id": "energy_ev_4",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '0.81' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_014",
+      "folder_id": 14,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 5.93,
+      "usage": {
+        "prompt_tokens": 1711,
+        "completion_tokens": 576,
+        "total_tokens": 2287
+      },
+      "prediction": {
+        "paper_title": "CO2RR on Cu-based nanofibers with polypyrrole coating",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Cu",
+            "Cu2+1O",
+            "polypyrrole"
+          ],
+          "facets": [],
+          "active_sites": [
+            "Cu/Cu2+1O surface",
+            "bridge site for *CO"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO2 activation and adsorption",
+              "reaction": "CO2(g) + H+ + e- → *COOH → *CO",
+              "site_structure": "Cu/Cu2+1O surface",
+              "energetics": []
+            },
+            {
+              "step_index": 2,
+              "title": "CO reduction to *CO intermediate",
+              "reaction": "*COOH → *CO + H2O",
+              "site_structure": "Cu/Cu2+1O surface, *CObridge on dual Cu sites",
+              "energetics": []
+            },
+            {
+              "step_index": 3,
+              "title": "C-C coupling (branching step)",
+              "reaction": "For ethylene: 2*CO → *CCH; For ethanol: *CO + *CHO → *CHCHOH",
+              "site_structure": "Cu/Cu2+1O surface",
+              "energetics": []
+            },
+            {
+              "step_index": 4,
+              "title": "Final product formation",
+              "reaction": "Ethylene: *CCH → C2H4; Ethanol: *CHCHOH → *OC2H5 → C2H5OH",
+              "site_structure": "Cu/Cu2+1O surface",
+              "energetics": []
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "ethylene path",
+            "description": "Cu/Cu2+1O/NC catalyst, hydrophobic surface, 2*CO coupling, Tafel slope 130 mV dec-1"
+          },
+          {
+            "label": "ethanol path",
+            "description": "Cu/Cu2+1O/SHNC catalyst, superhydrophobic surface, *CO + *CHO coupling, Tafel slope 61 mV dec-1"
+          }
+        ],
+        "major_products": [
+          "ethylene",
+          "ethanol"
+        ],
+        "key_energetics": [
+          {
+            "value": "130",
+            "unit": "mV dec-1"
+          },
+          {
+            "value": "61",
+            "unit": "mV dec-1"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"CO2RR on Cu-based nanofibers with polypyrrole coating\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Cu\", \"Cu2+1O\", \"polypyrrole\"],\n    \"facets\": [],\n    \"active_sites\": [\"Cu/Cu2+1O surface\", \"bridge site for *CO\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO2 activation and adsorption\",\n        \"reaction\": \"CO2(g) + H+ + e- → *COOH → *CO\",\n        \"site_structure\": \"Cu/Cu2+1O surface\",\n        \"ene",
+      "score": {
+        "checks_passed": 2,
+        "checks_total": 5,
+        "pass_ratio": 0.4,
+        "passed": false,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.00"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈5±2, got=4"
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring 'Cu(100)' in field"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring 'Cu(111)' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_015",
+      "folder_id": 15,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 5.32,
+      "usage": {
+        "prompt_tokens": 1027,
+        "completion_tokens": 593,
+        "total_tokens": 1620
+      },
+      "prediction": {
+        "paper_title": "CuO衍生的铜（CuOD-Cu）与Cu₂O衍生的铜（Cu₂OD-Cu）的CO₂RR路径研究",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "CuOD-Cu",
+            "Cu₂OD-Cu"
+          ],
+          "facets": [
+            "Cu(100)",
+            "Cu(110)",
+            "Cu(111)"
+          ],
+          "active_sites": [
+            "低配位Cu₇C位点（配位数≈9.1）",
+            "高配位Cu位点（配位数≈10.2）"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO₂活化吸附",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+              "site_structure": "低配位Cu₇C位点（CuOD-Cu）",
+              "energetics": null
+            },
+            {
+              "step_index": 2,
+              "title": "COOH还原为CO",
+              "reaction": "*COOH + H⁺ + e⁻ → *CO + H₂O",
+              "site_structure": "低配位Cu₇C位点（CuOD-Cu）",
+              "energetics": null
+            },
+            {
+              "step_index": 3,
+              "title": "C-C耦合",
+              "reaction": "*CO + *HOCCOH → *C₃中间体",
+              "site_structure": "Cu₇C位点（低配位Cu）",
+              "energetics": [
+                {
+                  "value": "-1.13",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 4,
+              "title": "C₃中间体逐步质子化生成正丙醇",
+              "reaction": "*HOCCOH → ⋯ → n-C₃H₇OH",
+              "site_structure": "低配位Cu₇C位点（CuOD-Cu）",
+              "energetics": null
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "C₂路径",
+            "description": "2*CO → C₂中间体（如CCH₂）"
+          },
+          {
+            "label": "C₃路径（主导）",
+            "description": "*CO + *C₂ → *C₃中间体（CO与HOCCOH耦合）"
+          }
+        ],
+        "major_products": [
+          "正丙醇",
+          "甲酸盐"
+        ],
+        "key_energetics": [
+          {
+            "value": "-1.13",
+            "unit": "eV"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"CuO衍生的铜（CuOD-Cu）与Cu₂O衍生的铜（Cu₂OD-Cu）的CO₂RR路径研究\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"CuOD-Cu\", \"Cu₂OD-Cu\"],\n    \"facets\": [\"Cu(100)\", \"Cu(110)\", \"Cu(111)\"],\n    \"active_sites\": [\"低配位Cu₇C位点（配位数≈9.1）\", \"高配位Cu位点（配位数≈10.2）\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO₂活化吸附\",\n        \"reaction\": \"CO₂(g) + * + H⁺ + e⁻ → *COOH\",\n        \"site_structure\": \"低配位Cu₇C位点（CuOD-Cu）\",\n        \"energetics\":",
+      "score": {
+        "checks_passed": 6,
+        "checks_total": 7,
+        "pass_ratio": 0.8571428571428571,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.25"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈5±2, got=4"
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(100)' in field"
+          },
+          {
+            "id": "facet_Cu(110)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(110)' in field"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(111)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '-1.13' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_016",
+      "folder_id": 16,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 4.83,
+      "usage": {
+        "prompt_tokens": 1034,
+        "completion_tokens": 499,
+        "total_tokens": 1533
+      },
+      "prediction": {
+        "paper_title": "CO2RR/COER 文献反应路径摘录",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Cu"
+          ],
+          "facets": [
+            "Cu(111)"
+          ],
+          "active_sites": [
+            "Cu AEs: (CuN4)2.6Å",
+            "Cu NPs: Cu(111) surface",
+            "Cu SAs: Cu-Cu distance >14.8 Å"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO吸附活化",
+              "reaction": "CO(g) + * → *CO",
+              "site_structure": "Cu AEs: (CuN4)2.6Å; Cu NPs: Cu(111) surface",
+              "energetics": null
+            },
+            {
+              "step_index": 2,
+              "title": "C-C耦合 (RDS)",
+              "reaction": "*CO + *CO → *OCCO (or *OCCOH)",
+              "site_structure": "Cu AEs: (CuN4)2.6Å; Cu NPs: Cu(111) surface",
+              "energetics": null
+            },
+            {
+              "step_index": 3,
+              "title": "酮烯路径生成乙酸",
+              "reaction": "*CCO + H+ + e- → *CHCO → ... → CH3COO-",
+              "site_structure": "Cu AEs: (CuN4)2.6Å",
+              "energetics": null
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "*OCCOH → *CCO (乙酸路径)",
+            "description": "Cu AEs主导，自由能降低0.33 eV"
+          },
+          {
+            "label": "*OCCOH → *HOCCOH (乙醇/乙烯路径)",
+            "description": "Cu NPs主导，能垒低0.31 eV"
+          }
+        ],
+        "major_products": [
+          "乙酸"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.33",
+            "unit": "eV"
+          },
+          {
+            "value": "0.31",
+            "unit": "eV"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"CO2RR/COER 文献反应路径摘录\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Cu\"],\n    \"facets\": [\"Cu(111)\"],\n    \"active_sites\": [\"Cu AEs: (CuN4)2.6Å\", \"Cu NPs: Cu(111) surface\", \"Cu SAs: Cu-Cu distance >14.8 Å\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO吸附活化\",\n        \"reaction\": \"CO(g) + * → *CO\",\n        \"site_structure\": \"Cu AEs: (CuN4)2.6Å; Cu NPs: Cu(111) surface\",\n        \"energetics\": null\n      },",
+      "score": {
+        "checks_passed": 5,
+        "checks_total": 6,
+        "pass_ratio": 0.8333333333333334,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.25"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈4±2, got=3"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(111)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.33' in field"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.31' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_017",
+      "folder_id": 17,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 3.18,
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 336,
+        "total_tokens": 1107
+      },
+      "prediction": {
+        "paper_title": "Cu-Pd双金属纳米合金",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Cu",
+            "Pd"
+          ],
+          "facets": [],
+          "active_sites": [
+            "Cu-Pd合金表面"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO₂吸附与活化生成*COOH",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+              "site_structure": "Cu-Pd合金表面",
+              "energetics": []
+            },
+            {
+              "step_index": 2,
+              "title": "COOH还原生成CO",
+              "reaction": "*COOH + H⁺ + e⁻ → *CO + H₂O",
+              "site_structure": "Cu-Pd合金表面",
+              "energetics": []
+            },
+            {
+              "step_index": 3,
+              "title": "CO脱附生成CO(g)",
+              "reaction": "*CO → CO(g) + *",
+              "site_structure": "Cu-Pd合金表面",
+              "energetics": []
+            }
+          ]
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CO"
+        ],
+        "key_energetics": [
+          {
+            "value": "*COOH形成",
+            "unit": "rds_description"
+          },
+          {
+            "value": "CO脱附",
+            "unit": "rds_description"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"Cu-Pd双金属纳米合金\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Cu\", \"Pd\"],\n    \"facets\": [],\n    \"active_sites\": [\"Cu-Pd合金表面\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO₂吸附与活化生成*COOH\",\n        \"reaction\": \"CO₂(g) + * + H⁺ + e⁻ → *COOH\",\n        \"site_structure\": \"Cu-Pd合金表面\",\n        \"energetics\": []\n      },\n      {\n        \"step_index\": 2,\n        \"title\": \"COOH还原生成CO\",\n        \"reaction\": \"*COOH + ",
+      "score": {
+        "checks_passed": 3,
+        "checks_total": 3,
+        "pass_ratio": 1.0,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": true,
+            "detail": "recall=1.00"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈4±2, got=3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_018",
+      "folder_id": 18,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 3.64,
+      "usage": {
+        "prompt_tokens": 823,
+        "completion_tokens": 371,
+        "total_tokens": 1194
+      },
+      "prediction": {
+        "paper_title": "Ni,N掺杂碳催化剂（Ni-PACN）CO2RR反应路径",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "Ni-PACN"
+          ],
+          "facets": [],
+          "active_sites": [
+            "Ni-Nₓ单原子位点"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO₂吸附活化生成*COOH",
+              "reaction": "CO₂(g) + * + H⁺ + e⁻ → *COOH",
+              "site_structure": "Ni-Nₓ单原子位点",
+              "energetics": []
+            },
+            {
+              "step_index": 2,
+              "title": "COOH还原生成CO",
+              "reaction": "*COOH + H⁺ + e⁻ → *CO + H₂O",
+              "site_structure": "Ni-Nₓ单原子位点",
+              "energetics": []
+            },
+            {
+              "step_index": 3,
+              "title": "CO脱附生成CO",
+              "reaction": "*CO → CO(g) + *",
+              "site_structure": "Ni-Nₓ单原子位点",
+              "energetics": []
+            }
+          ]
+        },
+        "branching_paths": [],
+        "major_products": [
+          "CO"
+        ],
+        "key_energetics": [
+          {
+            "value": "-0.8",
+            "unit": "V vs RHE"
+          },
+          {
+            "value": ">95",
+            "unit": "FE_percent"
+          },
+          {
+            "value": "14",
+            "unit": "mA/cm²"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"Ni,N掺杂碳催化剂（Ni-PACN）CO2RR反应路径\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"Ni-PACN\"],\n    \"facets\": [],\n    \"active_sites\": [\"Ni-Nₓ单原子位点\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO₂吸附活化生成*COOH\",\n        \"reaction\": \"CO₂(g) + * + H⁺ + e⁻ → *COOH\",\n        \"site_structure\": \"Ni-Nₓ单原子位点\",\n        \"energetics\": []\n      },\n      {\n        \"step_index\": 2,\n        \"title\": \"COOH还原生成CO\",\n        \"reac",
+      "score": {
+        "checks_passed": 3,
+        "checks_total": 3,
+        "pass_ratio": 1.0,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": true,
+            "detail": "recall=1.00"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈4±2, got=3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_019",
+      "folder_id": 19,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 4.24,
+      "usage": {
+        "prompt_tokens": 1125,
+        "completion_tokens": 512,
+        "total_tokens": 1637
+      },
+      "prediction": {
+        "paper_title": "Mn-Cu单原子合金催化CO电还原至乙醇的反应路径",
+        "reaction_type": "COER",
+        "catalyst_system": {
+          "materials": [
+            "Mn",
+            "Cu"
+          ],
+          "facets": [
+            "fcc-Cu(111)"
+          ],
+          "active_sites": [
+            "Mn-Cu协同位点"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO吸附与活化",
+              "reaction": "CO(g) → *CO",
+              "site_structure": "Cu(111)表面Mn原子修饰的Cu位点",
+              "energetics": null
+            },
+            {
+              "step_index": 2,
+              "title": "C–C耦合（RDS）",
+              "reaction": "*CO + *CO → *COCO",
+              "site_structure": "Cu(111)表面Mn-Cu协同位点",
+              "energetics": [
+                {
+                  "value": "0.43",
+                  "unit": "eV"
+                }
+              ]
+            },
+            {
+              "step_index": 3,
+              "title": "*COCO逐步还原至乙醇中间体",
+              "reaction": "*COCO → *COCH → *COHCOH → *CHCHOH → *CH₂CHOH → *CH₃CHOH → *CH₃CH₂OH",
+              "site_structure": "Cu(111)表面",
+              "energetics": null
+            },
+            {
+              "step_index": 4,
+              "title": "乙醇形成",
+              "reaction": "*CH₃CH₂OH脱附 → C₂H₅OH(l)",
+              "site_structure": "Cu(111)表面",
+              "energetics": null
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "乙酸路径",
+            "description": "*COCOH分支后，*COHCOH更倾向于形成乙醇，乙酸路径ΔG更高"
+          }
+        ],
+        "major_products": [
+          "乙醇"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.43",
+            "unit": "eV"
+          },
+          {
+            "value": "0.74",
+            "unit": "eV"
+          },
+          {
+            "value": "69",
+            "unit": "FE_percent"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"Mn-Cu单原子合金催化CO电还原至乙醇的反应路径\",\n  \"reaction_type\": \"COER\",\n  \"catalyst_system\": {\n    \"materials\": [\"Mn\", \"Cu\"],\n    \"facets\": [\"fcc-Cu(111)\"],\n    \"active_sites\": [\"Mn-Cu协同位点\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO吸附与活化\",\n        \"reaction\": \"CO(g) → *CO\",\n        \"site_structure\": \"Cu(111)表面Mn原子修饰的Cu位点\",\n        \"energetics\": null\n      },\n      {\n        \"step_index\": 2,\n        \"title\": \"C–C耦合（RDS）\",\n        \"reactio",
+      "score": {
+        "checks_passed": 5,
+        "checks_total": 7,
+        "pass_ratio": 0.7142857142857143,
+        "passed": true,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.25"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='COER', got='COER'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": true,
+            "detail": "expected≈5±2, got=4"
+          },
+          {
+            "id": "facet_Cu(111)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(111)' in field"
+          },
+          {
+            "id": "energy_ev_0",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.74' in field"
+          },
+          {
+            "id": "energy_ev_1",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring '0.43' in field"
+          },
+          {
+            "id": "energy_ev_2",
+            "type": "substring",
+            "passed": false,
+            "detail": "substring '0.31' in field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "co2rr_eval_020",
+      "folder_id": 20,
+      "status": "completed",
+      "model": "deepseek-v4-flash",
+      "latency_sec": 6.51,
+      "usage": {
+        "prompt_tokens": 692,
+        "completion_tokens": 801,
+        "total_tokens": 1493
+      },
+      "prediction": {
+        "paper_title": "Electrochemical CO₂ Reduction: Classifying Cu Facets",
+        "reaction_type": "CO2RR",
+        "catalyst_system": {
+          "materials": [
+            "M-Cu single atom alloy (M = Rh, Ir, Ru, Pd, Ag, Au)"
+          ],
+          "facets": [
+            "Cu(100)"
+          ],
+          "active_sites": [
+            "Cu4",
+            "Cu3M (M doped site)"
+          ]
+        },
+        "reaction_pathway": {
+          "steps": [
+            {
+              "step_index": 1,
+              "title": "CO2 activation and adsorption",
+              "reaction": "CO2(g) + * + H+ + e- → *COOH",
+              "site_structure": "Cu4 or Cu3M",
+              "energetics": null
+            },
+            {
+              "step_index": 2,
+              "title": "COOH reduction to CO",
+              "reaction": "*COOH + H+ + e- → *CO + H2O",
+              "site_structure": null,
+              "energetics": null
+            },
+            {
+              "step_index": 3,
+              "title": "C-C coupling (RDS)",
+              "reaction": "2*CO + H+ + e- → *COCOH",
+              "site_structure": null,
+              "energetics": null
+            },
+            {
+              "step_index": 4,
+              "title": "COCOH to CH2CHO",
+              "reaction": "Four-step PCET reduction",
+              "site_structure": null,
+              "energetics": [
+                {
+                  "value": "-0.71",
+                  "unit": "eV",
+                  "label": "Ru-Cu *CH2CHO adsorption energy"
+                },
+                {
+                  "value": "-0.57",
+                  "unit": "eV",
+                  "label": "Rh-Cu *CH2CHO adsorption energy"
+                },
+                {
+                  "value": "0.03",
+                  "unit": "eV",
+                  "label": "Pd-Cu *CH2CHO adsorption energy"
+                }
+              ]
+            },
+            {
+              "step_index": 5,
+              "title": "Ethylene path (C-O bond cleavage)",
+              "reaction": "*CH2CHO + H+ + e- → C2H4 + *O",
+              "site_structure": null,
+              "energetics": [
+                {
+                  "value": "0.41",
+                  "unit": "eV",
+                  "label": "Rh-Cu activation energy"
+                },
+                {
+                  "value": "-0.25",
+                  "unit": "eV",
+                  "label": "Rh-Cu *O adsorption energy"
+                }
+              ]
+            },
+            {
+              "step_index": 6,
+              "title": "Ethanol path (C-O bond retention)",
+              "reaction": "*CH2CHO → *CH3CHO",
+              "site_structure": null,
+              "energetics": [
+                {
+                  "value": "-0.62",
+                  "unit": "eV",
+                  "label": "Rh-Cu ΔG"
+                }
+              ]
+            }
+          ]
+        },
+        "branching_paths": [
+          {
+            "label": "Ethylene path",
+            "description": "C-O bond cleavage, *CH2CHO + H+ + e- → C2H4 + *O"
+          },
+          {
+            "label": "Ethanol path",
+            "description": "C-O bond retention, *CH2CHO → *CH3CHO"
+          }
+        ],
+        "major_products": [
+          "ethylene",
+          "ethanol"
+        ],
+        "key_energetics": [
+          {
+            "value": "0.41",
+            "unit": "eV",
+            "label": "Rh-Cu activation energy for ethylene path"
+          },
+          {
+            "value": "-0.62",
+            "unit": "eV",
+            "label": "Rh-Cu ΔG for ethanol path"
+          }
+        ]
+      },
+      "raw_response_preview": "{\n  \"paper_title\": \"Electrochemical CO₂ Reduction: Classifying Cu Facets\",\n  \"reaction_type\": \"CO2RR\",\n  \"catalyst_system\": {\n    \"materials\": [\"M-Cu single atom alloy (M = Rh, Ir, Ru, Pd, Ag, Au)\"],\n    \"facets\": [\"Cu(100)\"],\n    \"active_sites\": [\"Cu4\", \"Cu3M (M doped site)\"]\n  },\n  \"reaction_pathway\": {\n    \"steps\": [\n      {\n        \"step_index\": 1,\n        \"title\": \"CO2 activation and adsorption\",\n        \"reaction\": \"CO2(g) + * + H+ + e- → *COOH\",\n        \"site_structure\": \"Cu4 or Cu3M\",\n  ",
+      "score": {
+        "checks_passed": 2,
+        "checks_total": 4,
+        "pass_ratio": 0.5,
+        "passed": false,
+        "check_results": [
+          {
+            "id": "major_products_overlap",
+            "type": "set_overlap",
+            "passed": false,
+            "detail": "recall=0.00"
+          },
+          {
+            "id": "reaction_type",
+            "type": "exact",
+            "passed": true,
+            "detail": "expected='CO2RR', got='CO2RR'"
+          },
+          {
+            "id": "step_count_tolerance",
+            "type": "numeric_tolerance",
+            "passed": false,
+            "detail": "expected≈1±2, got=6"
+          },
+          {
+            "id": "facet_Cu(100)",
+            "type": "substring",
+            "passed": true,
+            "detail": "substring 'Cu(100)' in field"
+          }
+        ]
+      }
+    }
+  ]
+}
