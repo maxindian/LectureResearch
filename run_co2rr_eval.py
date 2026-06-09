@@ -184,7 +184,7 @@ def run_eval(args: argparse.Namespace) -> dict:
         raise RuntimeError("请安装 openai: pip install openai")
 
     api_key = args.api_key or os.getenv("DEEPSEEK_API_KEY")
-    # sk-a2e9ca823b714d0e99a8d8c12c008613
+
     if not api_key:
         raise RuntimeError("请设置环境变量 DEEPSEEK_API_KEY 或使用 --api-key")
 
